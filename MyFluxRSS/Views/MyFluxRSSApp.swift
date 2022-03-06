@@ -11,7 +11,7 @@ import SwiftUI
 struct MyFluxRSSApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: ContentViewModel.init())
         }
     }
 }
