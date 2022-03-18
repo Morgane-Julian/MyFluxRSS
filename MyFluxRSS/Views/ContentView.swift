@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
    
-     var viewModel: ContentViewModel
+    @StateObject var viewModel: ContentViewModel
     
     var body: some View {
         VStack {
@@ -22,12 +22,12 @@ struct ContentView: View {
                     .frame(height: 70)
             }
             VStack {
-                TextField("Identifiant", text: viewModel.$userName)
+                TextField("Identifiant", text: $viewModel.userName)
                     .padding()
                     .background(ColorManager.lightGray)
                     .cornerRadius(5.0)
                     .padding()
-                SecureField("Mot de passe", text: viewModel.$password)
+                SecureField("Mot de passe", text: $viewModel.password)
                     .padding()
                     .background(ColorManager.lightGray)
                     .cornerRadius(5.0)
@@ -42,6 +42,11 @@ struct ContentView: View {
                     Text("Mémoriser mes identifiants")
                         .padding()
                 }
+                HStack {
+                    Button("Pas encore inscrit ? C'est par ici") {
+                        viewModel.inscription()
+                    }
+                }
                 Spacer()
             }
             VStack {
@@ -50,7 +55,7 @@ struct ContentView: View {
                 }
                 .padding()
                 .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-                .cornerRadius(5.0)
+                .cornerRadius(80.0)
                 Spacer()
                     .frame(height: 20)
             }

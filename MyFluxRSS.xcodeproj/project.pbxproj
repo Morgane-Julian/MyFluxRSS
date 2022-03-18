@@ -12,6 +12,8 @@
 		910FFB3327E333BD0059D045 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB3227E333BD0059D045 /* BookmarkView.swift */; };
 		910FFB3527E333CF0059D045 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB3427E333CF0059D045 /* BookmarkViewModel.swift */; };
 		910FFB3727E345710059D045 /* FluxListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB3627E345710059D045 /* FluxListView.swift */; };
+		910FFB3927E479C20059D045 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB3827E479C20059D045 /* RegisterView.swift */; };
+		910FFB3B27E47C300059D045 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB3A27E47C300059D045 /* RegisterViewModel.swift */; };
 		9197684127D4AD3600F2F679 /* MyFluxRSSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197684027D4AD3600F2F679 /* MyFluxRSSApp.swift */; };
 		9197684327D4AD3600F2F679 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197684227D4AD3600F2F679 /* ContentView.swift */; };
 		9197684527D4AD3700F2F679 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197684427D4AD3700F2F679 /* Assets.xcassets */; };
@@ -51,6 +53,8 @@
 		910FFB3227E333BD0059D045 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		910FFB3427E333CF0059D045 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		910FFB3627E345710059D045 /* FluxListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxListView.swift; sourceTree = "<group>"; };
+		910FFB3827E479C20059D045 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		910FFB3A27E47C300059D045 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		9197683D27D4AD3600F2F679 /* MyFluxRSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFluxRSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9197684027D4AD3600F2F679 /* MyFluxRSSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFluxRSSApp.swift; sourceTree = "<group>"; };
 		9197684227D4AD3600F2F679 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				910FFB3227E333BD0059D045 /* BookmarkView.swift */,
 				910FFB2E27E327CB0059D045 /* ParametersView.swift */,
 				910FFB3627E345710059D045 /* FluxListView.swift */,
+				910FFB3827E479C20059D045 /* RegisterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				9197687927D4BF2100F2F679 /* FillViewModel.swift */,
 				910FFB3027E328220059D045 /* ParametersViewModel.swift */,
 				910FFB3427E333CF0059D045 /* BookmarkViewModel.swift */,
+				910FFB3A27E47C300059D045 /* RegisterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -327,8 +333,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				910FFB3727E345710059D045 /* FluxListView.swift in Sources */,
+				910FFB3B27E47C300059D045 /* RegisterViewModel.swift in Sources */,
 				910FFB3527E333CF0059D045 /* BookmarkViewModel.swift in Sources */,
 				9197687027D4AEA400F2F679 /* ContentViewModel.swift in Sources */,
+				910FFB3927E479C20059D045 /* RegisterView.swift in Sources */,
 				9197687627D4BBD100F2F679 /* ColorManager.swift in Sources */,
 				910FFB3127E328220059D045 /* ParametersViewModel.swift in Sources */,
 				9197684327D4AD3600F2F679 /* ContentView.swift in Sources */,

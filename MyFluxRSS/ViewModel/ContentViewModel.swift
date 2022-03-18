@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
-    @State public var userName: String = ""
-    @State public var password: String = ""
+    @Published public var userName: String = ""
+    @Published public var password: String = ""
     
     func connect() {
         
@@ -18,6 +18,10 @@ class ContentViewModel: ObservableObject {
     
     func keepMeLog() {
         
+    }
+    
+    func inscription() {
+       
     }
     
     
