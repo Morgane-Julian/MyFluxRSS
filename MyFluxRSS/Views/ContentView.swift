@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-   
+    
     @StateObject var viewModel: ContentViewModel
     
     var body: some View {
+        NavigationView {
         VStack {
             VStack {
                 Image("logo")
                     .resizable()
                     .frame(width: 200, height: 200, alignment: .center)
-                    .padding()
-                    Spacer()
+                    .padding(10)
+                Spacer()
                     .frame(height: 70)
             }
             VStack {
-                TextField("Identifiant", text: $viewModel.userName)
+                TextField("Adresse mail", text: $viewModel.userMail)
                     .padding()
                     .background(ColorManager.lightGray)
                     .cornerRadius(5.0)
@@ -43,8 +44,8 @@ struct ContentView: View {
                         .padding()
                 }
                 HStack {
-                    Button("Pas encore inscrit ? C'est par ici") {
-                        viewModel.inscription()
+                    NavigationLink(destination: RegisterView(showModal: .constant(true), registerViewModel: RegisterViewModel())) {
+                        Text("Pas encore inscrit ? C'est par ici")
                     }
                 }
                 Spacer()
@@ -52,6 +53,7 @@ struct ContentView: View {
             VStack {
                 Button("CONNEXION") {
                     viewModel.connect()
+                    // Présenter FillView
                 }
                 .padding()
                 .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
@@ -62,6 +64,7 @@ struct ContentView: View {
         }
     }
 }
+}
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
@@ -70,7 +73,7 @@ struct ContentView_Previews: PreviewProvider {
             ContentView(viewModel: ContentViewModel.init())
                 .previewDevice(.init(rawValue: $0))
                 .previewDisplayName($0)
-//                .preferredColorScheme(.dark)
+            //                .preferredColorScheme(.dark)
         }
     }
 }

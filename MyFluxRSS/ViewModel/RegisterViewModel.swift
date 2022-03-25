@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 class RegisterViewModel: ObservableObject {
     @Published var firstName = ""
@@ -14,5 +15,15 @@ class RegisterViewModel: ObservableObject {
     @Published var password = ""
     @Published var birthday : Date = .init()
     @Published var passwordSecurity = ""
+    
+    func inscription() {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+            } else {
+                print("success")
+            }
+        }
+    }
     
 }

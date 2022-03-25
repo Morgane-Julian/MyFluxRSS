@@ -13,31 +13,35 @@ struct RegisterView: View {
     @StateObject var registerViewModel: RegisterViewModel
     
     var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    self.showModal.toggle()
-                }) { Label("", systemImage: "multiply")
-                        .foregroundColor(Color.purple)
+        NavigationView {
+            VStack {
+                HStack {
+                    Button(action: {
+                        self.showModal.toggle()
+                    }) { Label("", systemImage: "multiply")
+                            .foregroundColor(Color.purple)
+                    }
+                }.frame(width: UIScreen.main.bounds.size.width, height: 50, alignment: .trailing)
+                Spacer()
+                Form {
+                    TextField("Nom", text: $registerViewModel.firstName)
+                    TextField("Prénom", text: $registerViewModel.lastName)
+                    DatePicker("Date de naissance", selection: $registerViewModel.birthday, displayedComponents: .date)
+                    TextField("Email", text: $registerViewModel.email)
+                    TextField("Mot de passe", text: $registerViewModel.password)
+                    TextField("Confirmer le mot de passe", text: $registerViewModel.passwordSecurity)
                 }
-            }.frame(width: UIScreen.main.bounds.size.width, height: 50, alignment: .trailing)
-            Spacer()
-            Form {
-                TextField("Nom", text: $registerViewModel.firstName)
-                TextField("Prénom", text: $registerViewModel.lastName)
-                DatePicker("Date de naissance", selection: $registerViewModel.birthday, displayedComponents: .date)
-                TextField("Email", text: $registerViewModel.email)
-                TextField("Mot de passe", text: $registerViewModel.password)
-                TextField("Confirmer le mot de passe", text: $registerViewModel.passwordSecurity)
+                Button("INSCRIPTION") {
+                    registerViewModel.inscription()
+                    self.showModal.toggle()
+                    // Revenir à l'écran de connexion
+                }
+                .padding()
+                .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(80.0)
+                Spacer()
+                    .frame(height: 20)
             }
-            Button("INSCRIPTION") {
-                self.showModal.toggle()
-            }
-            .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-            .cornerRadius(80.0)
-            Spacer()
-            .frame(height: 20)
         }
     }
 }
