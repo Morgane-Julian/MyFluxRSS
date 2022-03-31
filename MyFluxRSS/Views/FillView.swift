@@ -25,22 +25,20 @@ struct FillView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                       //Ajoute un lien direct de flux rss ou refresh la liste ?
+                       //refresh la liste
                     }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                             .foregroundColor(Color.purple)
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                       //Affiche les favoris
-                    }) { Label("", systemImage: "star.fill")
+                    NavigationLink(destination: BookmarkView(bookmarkViewModel: BookmarkViewModel())) {
+                        Image(systemName: "star.fill")
                             .foregroundColor(Color.purple)
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                       //Affiche la parametersView
-                    }) { Label("", systemImage: "gear")
+                    NavigationLink(destination: ParametersView(parametersViewModel: ParametersViewModel())) {
+                        Image(systemName: "gear")
                             .foregroundColor(Color.purple)
                     }
                 }
@@ -48,13 +46,13 @@ struct FillView: View {
                     Text("MyFluxRSS").font(.title)
                 }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
     
 #if DEBUG
     struct FillView_Previews: PreviewProvider {
         static var previews: some View {
-            ForEach(["iPhone SE (2nd generation)", "iPhone 13 Pro Max"], id: \.self) {
+            ForEach(["iPhone SE (3rd generation)", "iPhone 13 Pro Max"], id: \.self) {
                 FillView(fillViewModel: FillViewModel())
                     .previewDevice(.init(rawValue: $0))
                     .previewDisplayName($0)

@@ -9,6 +9,8 @@ import Foundation
 
 class ParametersViewModel: ObservableObject {
   
+    var model = Model()
+    
     @Published var theme = ["dark", "light", "system"]
     @Published var myFlux = [Flux()]
     @Published var urlString = ""
@@ -19,10 +21,11 @@ class ParametersViewModel: ObservableObject {
     @Published var notifications = true
     @Published var previewOptions = ["Always", "When Unlocked", "Never"]
     
-    func addNewFlux(link: String) {
+    func addNewFlux() {
         let myNewFlux : Flux = Flux()
-        myNewFlux.flux = link
+        myNewFlux.flux = urlString
         self.myFlux.append(myNewFlux)
+        model.getArticles()
         }
     }
 

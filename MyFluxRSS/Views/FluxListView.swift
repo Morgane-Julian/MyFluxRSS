@@ -22,6 +22,11 @@ struct FluxListView: View {
 
 struct FluxListView_Previews: PreviewProvider {
     static var previews: some View {
-        FluxListView(parametersViewModel: ParametersViewModel())
+        ForEach(["iPhone SE (3rd generation)", "iPhone 13 Pro Max"], id: \.self) {
+            FluxListView(parametersViewModel: ParametersViewModel())
+                .previewDevice(.init(rawValue: $0))
+                .previewDisplayName($0)
+            //                .preferredColorScheme(.dark)
+        }
     }
 }

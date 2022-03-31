@@ -10,13 +10,12 @@ import SwiftUI
 struct BookmarkView: View {
     
     let bookmarkViewModel: BookmarkViewModel
-    var favArticle: Article
     
     var body: some View {
         NavigationView {
             List {
                 ForEach(bookmarkViewModel.bookmarks) { item in
-                    BookmarkView(bookmarkViewModel: bookmarkViewModel, favArticle: item)
+                    ArticleView(article: item)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -31,8 +30,8 @@ struct BookmarkView: View {
 
 struct BookmarkView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (2nd generation)", "iPhone 13 Pro Max"], id: \.self) {
-            BookmarkView(bookmarkViewModel: BookmarkViewModel(), favArticle: Article())
+        ForEach(["iPhone SE (3rd generation)", "iPhone 13 Pro Max"], id: \.self) {
+            BookmarkView(bookmarkViewModel: BookmarkViewModel())
                 .previewDevice(.init(rawValue: $0))
                 .previewDisplayName($0)
             //                .preferredColorScheme(.dark)

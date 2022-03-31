@@ -44,7 +44,12 @@ struct ParametersView: View {
                     }
                 }
                 Section(header: Text("Flux")) {
-                    TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString)
+                    TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString, onEditingChanged: { changed in
+                       //TODO: le flux apparait vide et se rempli seulement si on en rentre un nouveau
+                        if changed {
+                            parametersViewModel.addNewFlux()
+                        }
+                    })
                     NavigationLink("Mes flux", destination: FluxListView(parametersViewModel: parametersViewModel))
                 }
                 .navigationTitle("Paramètres")
@@ -59,7 +64,7 @@ struct ParametersView: View {
 #if DEBUG
 struct ParametersView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (2nd generation)", "iPhone 13 Pro Max"], id: \.self) {
+        ForEach(["iPhone SE (3rd generation)", "iPhone 13 Pro Max"], id: \.self) {
             ParametersView(parametersViewModel: ParametersViewModel())
                 .previewDevice(.init(rawValue: $0))
                 .previewDisplayName($0)

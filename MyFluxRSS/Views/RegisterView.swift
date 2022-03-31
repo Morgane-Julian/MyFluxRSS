@@ -8,46 +8,51 @@
 import SwiftUI
 
 struct RegisterView: View {
-    // 1.
-    @Binding var showModal: Bool
+    
     @StateObject var registerViewModel: RegisterViewModel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State private var isShowingDetailView = false
     
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Button(action: {
-                        self.showModal.toggle()
-                    }) { Label("", systemImage: "multiply")
-                            .foregroundColor(Color.purple)
-                    }
-                }.frame(width: UIScreen.main.bounds.size.width, height: 50, alignment: .trailing)
-                Spacer()
                 Form {
                     TextField("Nom", text: $registerViewModel.firstName)
                     TextField("Prénom", text: $registerViewModel.lastName)
                     DatePicker("Date de naissance", selection: $registerViewModel.birthday, displayedComponents: .date)
                     TextField("Email", text: $registerViewModel.email)
-                    TextField("Mot de passe", text: $registerViewModel.password)
-                    TextField("Confirmer le mot de passe", text: $registerViewModel.passwordSecurity)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                    SecureField("Mot de passe", text: $registerViewModel.password)
+                    SecureField("Confirmer le mot de passe", text: $registerViewModel.passwordSecurity)
                 }
+                Spacer()
+                    
+                NavigationLink(destination: FillView(fillViewModel: FillViewModel()), isActive: $isShowingDetailView) { EmptyView() }
+                
                 Button("INSCRIPTION") {
                     registerViewModel.inscription()
-                    self.showModal.toggle()
-                    // Revenir à l'écran de connexion
-                }
-                .padding()
-                .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-                .cornerRadius(80.0)
+                    if registerViewModel.isSignedIn {
+                        isShowingDetailView = true
+                    }
+                } .padding(20)
+                    .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
+                    .cornerRadius(80.0)
                 Spacer()
-                    .frame(height: 20)
+                    .frame(width: 20, height: 50, alignment: .center)
             }
+            .background(Color.gray.opacity(0.1))
         }
     }
 }
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView(showModal: .constant(true), registerViewModel: RegisterViewModel())
+        ForEach(["iPhone SE (3rd generation)", "iPhone 13 Pro Max"], id: \.self) {
+            RegisterView(registerViewModel: RegisterViewModel())
+                .previewDevice(.init(rawValue: $0))
+                .previewDisplayName($0)
+            //                .preferredColorScheme(.dark)
+        }
     }
 }

@@ -41,6 +41,11 @@ struct ArticleView: View {
 
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleView(article: Article())
+        ForEach(["iPhone SE (3rd generation)", "iPhone 13 Pro Max"], id: \.self) {
+            ArticleView(article: Article())
+                .previewDevice(.init(rawValue: $0))
+                .previewDisplayName($0)
+            //                .preferredColorScheme(.dark)
+        }
     }
 }

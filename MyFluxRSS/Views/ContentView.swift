@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var viewModel: ContentViewModel
+    @StateObject var contentViewModel: ContentViewModel
+    @State private var isShowingDetailView = false
     
     var body: some View {
         NavigationView {
@@ -19,23 +20,25 @@ struct ContentView: View {
                     .resizable()
                     .frame(width: 200, height: 200, alignment: .center)
                     .padding(10)
-                Spacer()
                     .frame(height: 70)
+                Spacer()
             }
             VStack {
-                TextField("Adresse mail", text: $viewModel.userMail)
+                TextField("Adresse mail", text: $contentViewModel.userMail)
                     .padding()
                     .background(ColorManager.lightGray)
                     .cornerRadius(5.0)
                     .padding()
-                SecureField("Mot de passe", text: $viewModel.password)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                SecureField("Mot de passe", text: $contentViewModel.password)
                     .padding()
                     .background(ColorManager.lightGray)
                     .cornerRadius(5.0)
                     .padding()
                 HStack {
                     Button("") {
-                        viewModel.keepMeLog()
+                        contentViewModel.keepMeLog()
                     }
                     .padding()
                     .border(.purple, width: 3)
@@ -44,20 +47,24 @@ struct ContentView: View {
                         .padding()
                 }
                 HStack {
-                    NavigationLink(destination: RegisterView(showModal: .constant(true), registerViewModel: RegisterViewModel())) {
+                    NavigationLink(destination: RegisterView(registerViewModel: RegisterViewModel())) {
                         Text("Pas encore inscrit ? C'est par ici")
                     }
+                    .padding()
                 }
                 Spacer()
             }
             VStack {
+                NavigationLink(destination: FillView(fillViewModel: FillViewModel()), isActive: $isShowingDetailView) { EmptyView() }
+                
                 Button("CONNEXION") {
-                    viewModel.connect()
-                    // Présenter FillView
-                }
-                .padding()
-                .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-                .cornerRadius(80.0)
+                    contentViewModel.connect()
+                    if contentViewModel.isSignedIn == true {
+                        isShowingDetailView = true
+                    }
+                } .padding()
+                    .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
+                    .cornerRadius(80.0)
                 Spacer()
                     .frame(height: 20)
             }
@@ -69,8 +76,8 @@ struct ContentView: View {
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (2nd generation)", "iPhone 13 Pro Max"], id: \.self) {
-            ContentView(viewModel: ContentViewModel.init())
+        ForEach(["iPhone SE (3rd generation)", "iPhone 13 Pro Max"], id: \.self) {
+            ContentView(contentViewModel: ContentViewModel.init())
                 .previewDevice(.init(rawValue: $0))
                 .previewDisplayName($0)
             //                .preferredColorScheme(.dark)

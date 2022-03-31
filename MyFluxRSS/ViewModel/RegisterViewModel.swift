@@ -16,12 +16,22 @@ class RegisterViewModel: ObservableObject {
     @Published var birthday : Date = .init()
     @Published var passwordSecurity = ""
     
+    let auth = Auth.auth()
+    
+    var isSignedIn : Bool {
+        return auth.currentUser != nil
+    }
+    
     func inscription() {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if error != nil {
-                print(error?.localizedDescription ?? "")
-            } else {
-                print("success")
+        auth.createUser(withEmail: email, password: password) { authResult, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    print("Une erreur s'est produite, veuillez réessayer.")
+                } else {
+                    print("Félicitations vous êtes enregistré ! Vérifiez vos mails.")
+                    
+                }
             }
         }
     }

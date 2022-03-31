@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		910DB90427F5D74A00C816A9 /* RssParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910DB90327F5D74A00C816A9 /* RssParser.swift */; };
+		910DB90627F60FEE00C816A9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910DB90527F60FEE00C816A9 /* Model.swift */; };
 		910FFB2F27E327CB0059D045 /* ParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB2E27E327CB0059D045 /* ParametersView.swift */; };
 		910FFB3127E328220059D045 /* ParametersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB3027E328220059D045 /* ParametersViewModel.swift */; };
 		910FFB3327E333BD0059D045 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FFB3227E333BD0059D045 /* BookmarkView.swift */; };
@@ -24,7 +26,6 @@
 		9197685227D4AD3700F2F679 /* MyFluxRSSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197685127D4AD3700F2F679 /* MyFluxRSSTests.swift */; };
 		9197685C27D4AD3700F2F679 /* MyFluxRSSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197685B27D4AD3700F2F679 /* MyFluxRSSUITests.swift */; };
 		9197685E27D4AD3700F2F679 /* MyFluxRSSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197685D27D4AD3700F2F679 /* MyFluxRSSUITestsLaunchTests.swift */; };
-		9197686E27D4AE7400F2F679 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197686D27D4AE7400F2F679 /* Service.swift */; };
 		9197687027D4AEA400F2F679 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197686F27D4AEA400F2F679 /* ContentViewModel.swift */; };
 		9197687427D4BAC400F2F679 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197687327D4BAC400F2F679 /* Colors.xcassets */; };
 		9197687627D4BBD100F2F679 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687527D4BBD100F2F679 /* ColorManager.swift */; };
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		910DB90327F5D74A00C816A9 /* RssParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssParser.swift; sourceTree = "<group>"; };
+		910DB90527F60FEE00C816A9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		910FFB2E27E327CB0059D045 /* ParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersView.swift; sourceTree = "<group>"; };
 		910FFB3027E328220059D045 /* ParametersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersViewModel.swift; sourceTree = "<group>"; };
 		910FFB3227E333BD0059D045 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
@@ -69,7 +72,6 @@
 		9197685727D4AD3700F2F679 /* MyFluxRSSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFluxRSSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9197685B27D4AD3700F2F679 /* MyFluxRSSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFluxRSSUITests.swift; sourceTree = "<group>"; };
 		9197685D27D4AD3700F2F679 /* MyFluxRSSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFluxRSSUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		9197686D27D4AE7400F2F679 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		9197686F27D4AEA400F2F679 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		9197687327D4BAC400F2F679 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9197687527D4BBD100F2F679 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
@@ -178,12 +180,12 @@
 			children = (
 				9197684027D4AD3600F2F679 /* MyFluxRSSApp.swift */,
 				9197684227D4AD3600F2F679 /* ContentView.swift */,
+				910FFB3827E479C20059D045 /* RegisterView.swift */,
 				9197687D27D4FCEC00F2F679 /* ArticleView.swift */,
 				9197687B27D4C02500F2F679 /* FillView.swift */,
 				910FFB3227E333BD0059D045 /* BookmarkView.swift */,
 				910FFB2E27E327CB0059D045 /* ParametersView.swift */,
 				910FFB3627E345710059D045 /* FluxListView.swift */,
-				910FFB3827E479C20059D045 /* RegisterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,10 +194,10 @@
 			isa = PBXGroup;
 			children = (
 				9197686F27D4AEA400F2F679 /* ContentViewModel.swift */,
+				910FFB3A27E47C300059D045 /* RegisterViewModel.swift */,
 				9197687927D4BF2100F2F679 /* FillViewModel.swift */,
 				910FFB3027E328220059D045 /* ParametersViewModel.swift */,
 				910FFB3427E333CF0059D045 /* BookmarkViewModel.swift */,
-				910FFB3A27E47C300059D045 /* RegisterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -203,7 +205,8 @@
 		91D290EF27DB7F000079CFBD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9197686D27D4AE7400F2F679 /* Service.swift */,
+				910DB90327F5D74A00C816A9 /* RssParser.swift */,
+				910DB90527F60FEE00C816A9 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,11 +357,12 @@
 				910FFB3927E479C20059D045 /* RegisterView.swift in Sources */,
 				9197687627D4BBD100F2F679 /* ColorManager.swift in Sources */,
 				910FFB3127E328220059D045 /* ParametersViewModel.swift in Sources */,
+				910DB90627F60FEE00C816A9 /* Model.swift in Sources */,
 				9197684327D4AD3600F2F679 /* ContentView.swift in Sources */,
 				9197687E27D4FCEC00F2F679 /* ArticleView.swift in Sources */,
 				9197684127D4AD3600F2F679 /* MyFluxRSSApp.swift in Sources */,
-				9197686E27D4AE7400F2F679 /* Service.swift in Sources */,
 				9197687C27D4C02500F2F679 /* FillView.swift in Sources */,
+				910DB90427F5D74A00C816A9 /* RssParser.swift in Sources */,
 				910FFB3327E333BD0059D045 /* BookmarkView.swift in Sources */,
 				9197687A27D4BF2100F2F679 /* FillViewModel.swift in Sources */,
 				910FFB2F27E327CB0059D045 /* ParametersView.swift in Sources */,
