@@ -10,9 +10,11 @@ import SwiftUI
 struct ParametersView: View {
     
     @StateObject var parametersViewModel: ParametersViewModel
+    @State private var isShowingDetailView = false
     
     var body: some View {
         NavigationView {
+            VStack {
             Form {
                 Section(header: Text("Général")) {
                     Toggle(isOn: $parametersViewModel.notifications) {
@@ -54,6 +56,13 @@ struct ParametersView: View {
                 }
                 .navigationTitle("Paramètres")
             }
+                NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingDetailView) { EmptyView() }
+                Button("Déconnexion") {
+                    parametersViewModel.disconnect()
+                    isShowingDetailView = true
+                }.padding()
+                
+            }  .background(Color.gray.opacity(0.1))
         }
     }
 }

@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Firebase
 
 class ParametersViewModel: ObservableObject {
-  
+    
     var model = Model()
     
     @Published var theme = ["dark", "light", "system"]
@@ -26,8 +27,12 @@ class ParametersViewModel: ObservableObject {
         myNewFlux.flux = urlString
         self.myFlux.append(myNewFlux)
         model.getArticles()
-        }
     }
+    func disconnect() {
+        do { try Auth.auth().signOut() }
+        catch { print("already logged out") }
+    }
+}
 
 class Flux: Identifiable {
     var flux = "unfluxdequalité"

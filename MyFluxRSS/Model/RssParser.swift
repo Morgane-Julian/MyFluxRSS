@@ -62,3 +62,5 @@ class RssParser: NSObject, XMLParserDelegate {
         }
     }
 }
+
+

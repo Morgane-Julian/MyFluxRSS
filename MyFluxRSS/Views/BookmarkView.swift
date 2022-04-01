@@ -24,7 +24,7 @@ struct BookmarkView: View {
                     Text("My Favorite Articles").font(.title)
                 }
             }
-        }
+        } .navigationBarHidden(true)
     }
 }
 

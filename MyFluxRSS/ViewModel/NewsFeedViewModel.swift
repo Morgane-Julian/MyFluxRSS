@@ -1,5 +1,5 @@
 //
-//  FillViewModel.swift
+//  NewsFeedViewModel.swift
 //  MyFluxRSS
 //
 //  Created by Morgane Julian on 06/03/2022.
@@ -7,8 +7,9 @@
 
 import Foundation
 
-class FillViewModel: ObservableObject {
+class NewsFeedViewModel: ObservableObject {
     
+    let authService = AuthService()
     @Published var articles : [Article] = []
     
     // non utilisé j'ai oublié à quoi ça sert ^^
@@ -19,6 +20,10 @@ class FillViewModel: ObservableObject {
     
     subscript(index: Int) -> Article {
         return articles[index]
+    }
+    
+    func alrealyLoggedIn() {
+       
     }
 }
 

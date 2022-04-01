@@ -28,7 +28,7 @@ struct RegisterView: View {
                 }
                 Spacer()
                     
-                NavigationLink(destination: FillView(fillViewModel: FillViewModel()), isActive: $isShowingDetailView) { EmptyView() }
+                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingDetailView) { EmptyView() }
                 
                 Button("INSCRIPTION") {
                     registerViewModel.inscription()
@@ -42,7 +42,7 @@ struct RegisterView: View {
                     .frame(width: 20, height: 50, alignment: .center)
             }
             .background(Color.gray.opacity(0.1))
-        }
+        } .navigationBarHidden(true)
     }
 }
 

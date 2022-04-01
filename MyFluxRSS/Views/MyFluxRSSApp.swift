@@ -17,7 +17,7 @@ struct MyFluxRSSApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(contentViewModel: ContentViewModel.init())
+            NewsFeedView(newsFeedViewModel: NewsFeedViewModel.init())
         }
     }
 }
