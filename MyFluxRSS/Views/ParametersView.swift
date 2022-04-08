@@ -11,10 +11,10 @@ struct ParametersView: View {
     
     @StateObject var parametersViewModel: ParametersViewModel
     @State private var isShowingDetailView = false
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
-        NavigationView {
-            VStack {
+        VStack {
             Form {
                 Section(header: Text("Général")) {
                     Toggle(isOn: $parametersViewModel.notifications) {
@@ -47,7 +47,7 @@ struct ParametersView: View {
                 }
                 Section(header: Text("Flux")) {
                     TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString, onEditingChanged: { changed in
-                       //TODO: le flux apparait vide et se rempli seulement si on en rentre un nouveau
+                        //TODO: le flux apparait vide et se rempli seulement si on en rentre un nouveau
                         if changed {
                             parametersViewModel.addNewFlux()
                         }
@@ -56,14 +56,12 @@ struct ParametersView: View {
                 }
                 .navigationTitle("Paramètres")
             }
-                NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingDetailView) { EmptyView() }
-                Button("Déconnexion") {
-                    parametersViewModel.disconnect()
-                    isShowingDetailView = true
-                }.padding()
-                
-            }  .background(Color.gray.opacity(0.1))
-        }
+            Button("Déconnexion") {
+                parametersViewModel.disconnect()
+                self.appState.moveToDashboard = true
+            }.padding()
+            
+        }  .background(Color.gray.opacity(0.1))
     }
 }
 

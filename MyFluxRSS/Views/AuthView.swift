@@ -11,7 +11,8 @@ struct AuthView: View {
     
     @StateObject var contentViewModel: AuthViewModel
     @State private var isShowingDetailView = false
-    
+    @EnvironmentObject var appState: AppState
+
     var body: some View {
         NavigationView {
             VStack {
@@ -37,22 +38,19 @@ struct AuthView: View {
                         .background(ColorManager.lightGray)
                         .cornerRadius(5.0)
                         .padding()
-//                    HStack {
-//                        Button("") {
-//                            contentViewModel.keepMeLog()
-//                        }
-//                        .padding()
-//                        .border(.purple, width: 3)
-//                        .frame(width: 3, height: 3, alignment: .trailing)
-//                        Text("Mémoriser mes identifiants")
-//                            .padding()
-//                    }
                     HStack {
                         NavigationLink(destination: RegisterView(registerViewModel: RegisterViewModel())) {
                             Text("Pas encore inscrit ? C'est par ici")
-                        }
+                        }.isDetailLink(false)
                         .padding()
                     }
+                    .onReceive(self.appState.$moveToDashboard) { moveToDashboard in
+                                    if moveToDashboard {
+                                        print("Move to dashboard: \(moveToDashboard)")
+                                        self.isShowingDetailView = false
+                                        self.appState.moveToDashboard = false
+                                    }
+                                }
                     Spacer()
                 }
                 VStack {
@@ -60,6 +58,7 @@ struct AuthView: View {
                     
                     Button("CONNEXION") {
                         contentViewModel.connect()
+                        // attendre que la requête de connexion soit faite
                         if contentViewModel.isSignedIn {
                             isShowingDetailView = true
                         }
@@ -70,7 +69,10 @@ struct AuthView: View {
                         .frame(height: 20)
                 }
             }
+        }.onAppear {
+            isShowingDetailView = contentViewModel.keepMeLog()
         }
+        .navigationBarHidden(true)
     }
 }
 

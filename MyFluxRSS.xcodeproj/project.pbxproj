@@ -33,6 +33,7 @@
 		9197687A27D4BF2100F2F679 /* NewsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687927D4BF2100F2F679 /* NewsFeedViewModel.swift */; };
 		9197687C27D4C02500F2F679 /* NewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687B27D4C02500F2F679 /* NewsFeedView.swift */; };
 		9197687E27D4FCEC00F2F679 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687D27D4FCEC00F2F679 /* ArticleView.swift */; };
+		91ACC4EA28002DA60028E9CB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ACC4E928002DA60028E9CB /* AppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		9197687927D4BF2100F2F679 /* NewsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewModel.swift; sourceTree = "<group>"; };
 		9197687B27D4C02500F2F679 /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
 		9197687D27D4FCEC00F2F679 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
+		91ACC4E928002DA60028E9CB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				9197687927D4BF2100F2F679 /* NewsFeedViewModel.swift */,
 				910FFB3027E328220059D045 /* ParametersViewModel.swift */,
 				910FFB3427E333CF0059D045 /* BookmarkViewModel.swift */,
+				91ACC4E928002DA60028E9CB /* AppState.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				910FFB3727E345710059D045 /* FluxListView.swift in Sources */,
 				910FFB3B27E47C300059D045 /* RegisterViewModel.swift in Sources */,
 				910FFB3527E333CF0059D045 /* BookmarkViewModel.swift in Sources */,
+				91ACC4EA28002DA60028E9CB /* AppState.swift in Sources */,
 				9197687027D4AEA400F2F679 /* AuthViewModel.swift in Sources */,
 				910FFB3927E479C20059D045 /* RegisterView.swift in Sources */,
 				9197687627D4BBD100F2F679 /* ColorManager.swift in Sources */,

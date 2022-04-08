@@ -11,13 +11,16 @@ import Firebase
 @main
 struct MyFluxRSSApp: App {
     
+    let appState = AppState()
+    
     init() {
         FirebaseApp.configure()
     }
     
     var body: some Scene {
         WindowGroup {
-            NewsFeedView(newsFeedViewModel: NewsFeedViewModel.init())
+            AuthView(contentViewModel: AuthViewModel.init())
+                .environmentObject(appState)
         }
     }
 }

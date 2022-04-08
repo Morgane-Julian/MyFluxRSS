@@ -20,13 +20,15 @@ class AuthViewModel: ObservableObject {
     @Published public var password: String = ""
     
     func connect() {
-        authService.connect(userMail: self.userMail, password: self.password)
+        self.authService.connect(userMail: self.userMail, password: self.password)
     }
     
-    func keepMeLog() {
-        
+    func keepMeLog() -> Bool {
+        if isSignedIn == true {
+            return true
+        }
+        return false
     }
-    
    
 }
 
