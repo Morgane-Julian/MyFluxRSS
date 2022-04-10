@@ -19,11 +19,14 @@ class AuthViewModel: ObservableObject {
     @Published public var userMail: String = ""
     @Published public var password: String = ""
     
-    func connect() {
-        self.authService.connect(userMail: self.userMail, password: self.password)
+    func connect() async throws {
+        do { try await authService.connect(userMail: userMail, password: password)
+        } catch {
+            throw error
+        }
     }
     
-    func keepMeLog() -> Bool {
+    func isUserAlreadyLog() -> Bool {
         if isSignedIn == true {
             return true
         }

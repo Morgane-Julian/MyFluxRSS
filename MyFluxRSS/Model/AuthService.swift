@@ -13,25 +13,24 @@ class AuthService {
     //MARK: - Properties
     let auth = Auth.auth()
     
-    //pour le keepMeLog
-//    let userDefault = UserDefaults.standard
-//    let launchedBefore = UserDefaults.standard.bool(forKey: "usersignedin")
-    
     //MARK: - Sign in/out Functions
-    func connect(userMail: String, password: String) {
+    func connect(userMail: String, password: String) async throws {
         if auth.currentUser?.email != userMail {
             do { try Auth.auth().signOut() }
             catch { print("already logged out") }
-            auth.signIn(withEmail: userMail, password: password) { result, error in
-                DispatchQueue.main.async {
-                    if error != nil {
-                        print(error?.localizedDescription ?? "")
-                        //pop-up erreur
-                    } else {
-                        print("success")
-                    }
-                }
+            do {
+                _ = try await auth.signIn(withEmail: userMail, password: password)
+            } catch {
+                throw error
+            }
+//                DispatchQueue.main.async {
+//                    if error != nil {
+//                        print(error?.localizedDescription ?? "")
+//                        //pop-up erreur
+//                    } else {
+//                        print("success")
+//                    }
+//                }
             }
         }
     }
-}

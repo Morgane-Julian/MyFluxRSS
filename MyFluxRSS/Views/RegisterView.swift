@@ -20,9 +20,11 @@ struct RegisterView: View {
                     TextField("Nom", text: $registerViewModel.firstName)
                     TextField("Prénom", text: $registerViewModel.lastName)
                     DatePicker("Date de naissance", selection: $registerViewModel.birthday, displayedComponents: .date)
+                        .keyboardType(.numbersAndPunctuation)
                     TextField("Email", text: $registerViewModel.email)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
                     SecureField("Mot de passe", text: $registerViewModel.password)
                     SecureField("Confirmer le mot de passe", text: $registerViewModel.passwordSecurity)
                 }

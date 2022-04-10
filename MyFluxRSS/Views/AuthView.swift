@@ -12,7 +12,7 @@ struct AuthView: View {
     @StateObject var contentViewModel: AuthViewModel
     @State private var isShowingDetailView = false
     @EnvironmentObject var appState: AppState
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -33,6 +33,7 @@ struct AuthView: View {
                         .padding()
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
                     SecureField("Mot de passe", text: $contentViewModel.password)
                         .padding()
                         .background(ColorManager.lightGray)
@@ -42,26 +43,26 @@ struct AuthView: View {
                         NavigationLink(destination: RegisterView(registerViewModel: RegisterViewModel())) {
                             Text("Pas encore inscrit ? C'est par ici")
                         }.isDetailLink(false)
-                        .padding()
+                            .padding()
                     }
                     .onReceive(self.appState.$moveToDashboard) { moveToDashboard in
-                                    if moveToDashboard {
-                                        print("Move to dashboard: \(moveToDashboard)")
-                                        self.isShowingDetailView = false
-                                        self.appState.moveToDashboard = false
-                                    }
-                                }
+                        if moveToDashboard {
+                            print("Move to dashboard: \(moveToDashboard)")
+                            self.isShowingDetailView = false
+                            self.appState.moveToDashboard = false
+                        }
+                    }
                     Spacer()
                 }
                 VStack {
                     NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingDetailView) { EmptyView() }
                     
                     Button("CONNEXION") {
-                        contentViewModel.connect()
-                        // attendre que la requête de connexion soit faite
-                        if contentViewModel.isSignedIn {
-                            isShowingDetailView = true
+                        Task {
+                            try await contentViewModel.connect()
+                            self.isShowingDetailView = true
                         }
+                            
                     } .padding()
                         .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
                         .cornerRadius(80.0)
@@ -70,7 +71,7 @@ struct AuthView: View {
                 }
             }
         }.onAppear {
-            isShowingDetailView = contentViewModel.keepMeLog()
+            isShowingDetailView = contentViewModel.isUserAlreadyLog()
         }
         .navigationBarHidden(true)
     }
