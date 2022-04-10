@@ -23,14 +23,6 @@ class AuthService {
             } catch {
                 throw error
             }
-//                DispatchQueue.main.async {
-//                    if error != nil {
-//                        print(error?.localizedDescription ?? "")
-//                        //pop-up erreur
-//                    } else {
-//                        print("success")
-//                    }
-//                }
-            }
         }
     }
+}
