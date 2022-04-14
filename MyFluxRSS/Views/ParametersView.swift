@@ -52,6 +52,7 @@ struct ParametersView: View {
                             parametersViewModel.addNewFlux()
                         }
                     }).keyboardType(.URL)
+                        .disableAutocorrection(true)
                     NavigationLink("Mes flux", destination: FluxListView(parametersViewModel: parametersViewModel))
                 }
                 .navigationTitle("Paramètres")

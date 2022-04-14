@@ -175,6 +175,7 @@
 				9197684427D4AD3700F2F679 /* Assets.xcassets */,
 				9197687327D4BAC400F2F679 /* Colors.xcassets */,
 				9197687527D4BBD100F2F679 /* ColorManager.swift */,
+				91ACC4E928002DA60028E9CB /* AppState.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -202,7 +203,6 @@
 				9197687927D4BF2100F2F679 /* NewsFeedViewModel.swift */,
 				910FFB3027E328220059D045 /* ParametersViewModel.swift */,
 				910FFB3427E333CF0059D045 /* BookmarkViewModel.swift */,
-				91ACC4E928002DA60028E9CB /* AppState.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

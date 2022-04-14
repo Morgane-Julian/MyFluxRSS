@@ -26,8 +26,8 @@ class ParametersViewModel: ObservableObject {
         let myNewFlux : Flux = Flux()
         myNewFlux.flux = urlString
         self.myFlux.append(myNewFlux)
-        model.getArticles()
     }
+    
     func disconnect() {
         do { try Auth.auth().signOut() }
         catch { print("already logged out") }
@@ -35,5 +35,5 @@ class ParametersViewModel: ObservableObject {
 }
 
 class Flux: Identifiable {
-    var flux = "unfluxdequalité"
+    var flux = "https://www.hackingwithswift.com/articles/rss"
 }

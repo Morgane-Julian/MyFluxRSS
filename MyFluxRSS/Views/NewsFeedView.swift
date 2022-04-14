@@ -16,20 +16,23 @@ struct NewsFeedView: View {
         NavigationView {
             VStack {
                 NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingAuthView) { EmptyView() }
-                
                 List {
                     ForEach(newsFeedViewModel.articles) { item in
                         ArticleView(article: item)
+                        // récupérer l'id de l'article cliqué pour ouvrir son url
                     }
                 }
+                .onAppear {
+                    newsFeedViewModel.parseArticle()
+                }
                 .refreshable {
-                    //ajout la fonction qui permettra de récupérer la liste des articles
+                    newsFeedViewModel.parseArticle()
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            //refresh la liste
+                            newsFeedViewModel.parseArticle()
                         }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                 .foregroundColor(Color.purple)
                         }

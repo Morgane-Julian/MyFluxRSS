@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ArticleView: View {
     
-    var article: Article
+    var article = Article()
     
     var body: some View {
         HStack {
+            // article.image est une string il faut déjà aller dl l'image liée
             Image(article.image)
                 .renderingMode(.original)
                 .resizable()
@@ -25,7 +26,7 @@ struct ArticleView: View {
                         .fontWeight(.bold)
                     Spacer()
                     Button(action: {
-                       //Ajoute l'article aux favoris
+                       //TODO: Ajoute l'article aux favoris
                     }) { Label("", systemImage: "star")
                             .foregroundColor(Color.purple)
                     }
