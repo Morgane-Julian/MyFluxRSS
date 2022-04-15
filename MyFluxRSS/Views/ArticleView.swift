@@ -10,19 +10,26 @@ import SwiftUI
 struct ArticleView: View {
     
     var article = Article()
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         HStack {
-            // article.image est une string il faut déjà aller dl l'image liée
-            Image(article.image)
-                .renderingMode(.original)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 80, height: 80, alignment: .center)
+            AsyncImage(url: URL(string: "\(article.image)")) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 80, height: 80)
+                .clipShape(Circle())
+//            AsyncImage(url: URL(string: "\(article.image)"))
+//                .scaledToFit()
+//                .frame(width: 50, height: 50, alignment: .center)
             VStack(alignment: .leading, spacing: 5) {
                 HStack {
                     Text("\(article.title)")
-                        .font(.title2)
+                        .font(.title3)
                         .fontWeight(.bold)
                     Spacer()
                     Button(action: {
@@ -37,6 +44,9 @@ struct ArticleView: View {
             }
         }
         .padding()
+        .onTapGesture {
+            openURL(URL(string: article.link)!)
+        }
     }
 }
 

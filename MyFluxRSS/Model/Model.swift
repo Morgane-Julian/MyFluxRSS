@@ -22,7 +22,7 @@ class Model {
             let data = rssParser.parsedData
             for _ in data {
                 finalArticle = rssParser.parsedData.map {
-                    Article(id: UUID.init(), title: $0["title"] ?? "", image: $0["image"] ?? "logo", description: $0["description"] ?? "", date: $0["pubDate"] ?? "", from: $0["author"] ?? "", link: $0["url"] ?? "")
+                    Article(id: UUID.init(), title: $0["title"] ?? "", image: $0["image"] ?? "https://zupimages.net/up/22/15/hcop.png", description: $0["description"] ?? "", date: $0["pubDate"] ?? "", from: $0["author"] ?? "", link: $0["link"] ?? "")
                 }
             }
         }
