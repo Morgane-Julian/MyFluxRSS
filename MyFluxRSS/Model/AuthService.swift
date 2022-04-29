@@ -8,12 +8,18 @@
 import Foundation
 import Firebase
 
-class AuthService {
+class AuthService: ObservableObject {
     
     //MARK: - Properties
     let auth = Auth.auth()
+    @Published var user: User?
+    private var authenticationStateHandler: AuthStateDidChangeListenerHandle?
     
-    //MARK: - Sign in/out Functions
+    init() {
+        addListeners()
+    }
+    
+    //MARK: - Sign in Functions
     func connect(userMail: String, password: String) async throws {
         if auth.currentUser?.email != userMail {
             do { try Auth.auth().signOut() }
@@ -24,5 +30,15 @@ class AuthService {
                 throw error
             }
         }
+    }
+    
+    func addListeners() {
+        if let handle = authenticationStateHandler {
+            Auth.auth().removeStateDidChangeListener(handle)
+        }
+        authenticationStateHandler = Auth.auth()
+            .addStateDidChangeListener { _, user in
+                self.user = user
+            }
     }
 }

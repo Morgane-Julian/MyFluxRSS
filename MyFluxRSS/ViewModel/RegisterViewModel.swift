@@ -9,13 +9,7 @@ import Foundation
 import Firebase
 
 class RegisterViewModel: ObservableObject {
-    @Published var firstName = ""
-    @Published var lastName = ""
-    @Published var email = ""
-    @Published var password = ""
-    @Published var birthday : Date = .init()
-    @Published var passwordSecurity = ""
-    
+    var user = InternalUser()
     let auth = Auth.auth()
     
     var isSignedIn : Bool {
@@ -23,7 +17,7 @@ class RegisterViewModel: ObservableObject {
     }
     
     func inscription() {
-        auth.createUser(withEmail: email, password: password) { authResult, error in
+        auth.createUser(withEmail: user.email, password: user.password) { authResult, error in
             DispatchQueue.main.async {
                 if error != nil {
                     print(error?.localizedDescription ?? "")

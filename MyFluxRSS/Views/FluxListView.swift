@@ -13,7 +13,7 @@ struct FluxListView: View {
     
     var body: some View {
         List {
-            ForEach(parametersViewModel.myFlux) { item in
+            ForEach(parametersViewModel.fluxRepository.fluxDatabase) { item in
                 Text("\(item.flux)")
             }
         }

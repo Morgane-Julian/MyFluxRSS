@@ -17,16 +17,16 @@ struct RegisterView: View {
         NavigationView {
             VStack {
                 Form {
-                    TextField("Nom", text: $registerViewModel.firstName)
-                    TextField("Prénom", text: $registerViewModel.lastName)
-                    DatePicker("Date de naissance", selection: $registerViewModel.birthday, displayedComponents: .date)
+                    TextField("Nom", text: $registerViewModel.user.firstName)
+                    TextField("Prénom", text: $registerViewModel.user.lastName)
+                    DatePicker("Date de naissance", selection: $registerViewModel.user.birthday, displayedComponents: .date)
                         .keyboardType(.numbersAndPunctuation)
-                    TextField("Email", text: $registerViewModel.email)
+                    TextField("Email", text: $registerViewModel.user.email)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
-                    SecureField("Mot de passe", text: $registerViewModel.password)
-                    SecureField("Confirmer le mot de passe", text: $registerViewModel.passwordSecurity)
+                    SecureField("Mot de passe", text: $registerViewModel.user.password)
+                    SecureField("Confirmer le mot de passe", text: $registerViewModel.user.passwordSecurity)
                 }
                 Spacer()
                     

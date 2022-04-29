@@ -11,9 +11,9 @@ import Firebase
 class ParametersViewModel: ObservableObject {
     
     var model = Model()
-    
+    @Published var fluxRepository = FluxRepository()
     @Published var theme = ["dark", "light", "system"]
-    @Published var myFlux = [Flux()]
+//    @Published var myFlux = [Flux()]
     @Published var urlString = ""
     @Published var facebook = true
     @Published var reddit = false
@@ -25,7 +25,7 @@ class ParametersViewModel: ObservableObject {
     func addNewFlux() {
         let myNewFlux : Flux = Flux()
         myNewFlux.flux = urlString
-        self.myFlux.append(myNewFlux)
+        fluxRepository.add(myNewFlux)
     }
     
     func disconnect() {
@@ -34,6 +34,7 @@ class ParametersViewModel: ObservableObject {
     }
 }
 
-class Flux: Identifiable {
+class Flux: Identifiable, Codable {
     var flux = "https://www.hackingwithswift.com/articles/rss"
+    var userId = ""
 }

@@ -20,6 +20,11 @@
 		9134180127EDB58C00C1E9E0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9134180027EDB58C00C1E9E0 /* FirebaseAuth */; };
 		9134180327EDB58C00C1E9E0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9134180227EDB58C00C1E9E0 /* FirebaseDatabase */; };
 		916F4F3627F73BA700A71152 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916F4F3527F73BA700A71152 /* AuthService.swift */; };
+		9183B667281B3BAE00D732B6 /* FluxRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B666281B3BAE00D732B6 /* FluxRepository.swift */; };
+		9183B669281BD24900D732B6 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B668281BD24900D732B6 /* UserRepository.swift */; };
+		9183B66A281BD24900D732B6 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B668281BD24900D732B6 /* UserRepository.swift */; };
+		9183B66C281BD2D900D732B6 /* InternalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B66B281BD2D900D732B6 /* InternalUser.swift */; };
+		9183B66D281BD2D900D732B6 /* InternalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B66B281BD2D900D732B6 /* InternalUser.swift */; };
 		9197684127D4AD3600F2F679 /* MyFluxRSSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197684027D4AD3600F2F679 /* MyFluxRSSApp.swift */; };
 		9197684327D4AD3600F2F679 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197684227D4AD3600F2F679 /* AuthView.swift */; };
 		9197684527D4AD3700F2F679 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197684427D4AD3700F2F679 /* Assets.xcassets */; };
@@ -34,6 +39,10 @@
 		9197687C27D4C02500F2F679 /* NewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687B27D4C02500F2F679 /* NewsFeedView.swift */; };
 		9197687E27D4FCEC00F2F679 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687D27D4FCEC00F2F679 /* ArticleView.swift */; };
 		91ACC4EA28002DA60028E9CB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ACC4E928002DA60028E9CB /* AppState.swift */; };
+		91DEAA832812CCC8003E0BC9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA822812CCC8003E0BC9 /* FirebaseFirestore */; };
+		91DEAA852812CCC8003E0BC9 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA842812CCC8003E0BC9 /* FirebaseFirestoreCombine-Community */; };
+		91DEAA872812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA862812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta */; };
+		91DEAA8A2812CCF5003E0BC9 /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +74,9 @@
 		910FFB3A27E47C300059D045 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		913417FD27EDB38600C1E9E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		916F4F3527F73BA700A71152 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		9183B666281B3BAE00D732B6 /* FluxRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxRepository.swift; sourceTree = "<group>"; };
+		9183B668281BD24900D732B6 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		9183B66B281BD2D900D732B6 /* InternalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUser.swift; sourceTree = "<group>"; };
 		9197683D27D4AD3600F2F679 /* MyFluxRSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFluxRSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9197684027D4AD3600F2F679 /* MyFluxRSSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFluxRSSApp.swift; sourceTree = "<group>"; };
 		9197684227D4AD3600F2F679 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -82,6 +94,7 @@
 		9197687B27D4C02500F2F679 /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
 		9197687D27D4FCEC00F2F679 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		91ACC4E928002DA60028E9CB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +103,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9134180327EDB58C00C1E9E0 /* FirebaseDatabase in Frameworks */,
+				91DEAA852812CCC8003E0BC9 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				91DEAA872812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				9134180127EDB58C00C1E9E0 /* FirebaseAuth in Frameworks */,
+				91DEAA832812CCC8003E0BC9 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +150,7 @@
 		9197683F27D4AD3600F2F679 /* MyFluxRSS */ = {
 			isa = PBXGroup;
 			children = (
+				91DEAA882812CCDE003E0BC9 /* Repository */,
 				91D290EF27DB7F000079CFBD /* Model */,
 				9197686C27D4AE5300F2F679 /* ViewModel */,
 				9197686B27D4AE4500F2F679 /* Views */,
@@ -213,8 +230,19 @@
 				916F4F3527F73BA700A71152 /* AuthService.swift */,
 				910DB90527F60FEE00C816A9 /* Model.swift */,
 				910DB90327F5D74A00C816A9 /* RssParser.swift */,
+				9183B66B281BD2D900D732B6 /* InternalUser.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		91DEAA882812CCDE003E0BC9 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */,
+				9183B668281BD24900D732B6 /* UserRepository.swift */,
+				9183B666281B3BAE00D732B6 /* FluxRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +264,9 @@
 			packageProductDependencies = (
 				9134180027EDB58C00C1E9E0 /* FirebaseAuth */,
 				9134180227EDB58C00C1E9E0 /* FirebaseDatabase */,
+				91DEAA822812CCC8003E0BC9 /* FirebaseFirestore */,
+				91DEAA842812CCC8003E0BC9 /* FirebaseFirestoreCombine-Community */,
+				91DEAA862812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta */,
 			);
 			productName = MyFluxRSS;
 			productReference = 9197683D27D4AD3600F2F679 /* MyFluxRSS.app */;
@@ -311,6 +342,7 @@
 			mainGroup = 9197683427D4AD3600F2F679;
 			packageReferences = (
 				913417FF27EDB58C00C1E9E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				91DEAA812812CCC8003E0BC9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 9197683E27D4AD3600F2F679 /* Products */;
 			projectDirPath = "";
@@ -366,6 +398,7 @@
 				910FFB3127E328220059D045 /* ParametersViewModel.swift in Sources */,
 				910DB90627F60FEE00C816A9 /* Model.swift in Sources */,
 				9197684327D4AD3600F2F679 /* AuthView.swift in Sources */,
+				9183B66C281BD2D900D732B6 /* InternalUser.swift in Sources */,
 				9197687E27D4FCEC00F2F679 /* ArticleView.swift in Sources */,
 				9197684127D4AD3600F2F679 /* MyFluxRSSApp.swift in Sources */,
 				9197687C27D4C02500F2F679 /* NewsFeedView.swift in Sources */,
@@ -373,6 +406,9 @@
 				910FFB3327E333BD0059D045 /* BookmarkView.swift in Sources */,
 				916F4F3627F73BA700A71152 /* AuthService.swift in Sources */,
 				9197687A27D4BF2100F2F679 /* NewsFeedViewModel.swift in Sources */,
+				9183B669281BD24900D732B6 /* UserRepository.swift in Sources */,
+				91DEAA8A2812CCF5003E0BC9 /* ArticleRepository.swift in Sources */,
+				9183B667281B3BAE00D732B6 /* FluxRepository.swift in Sources */,
 				910FFB2F27E327CB0059D045 /* ParametersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,7 +417,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9183B66A281BD24900D732B6 /* UserRepository.swift in Sources */,
 				9197685227D4AD3700F2F679 /* MyFluxRSSTests.swift in Sources */,
+				9183B66D281BD2D900D732B6 /* InternalUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +748,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		91DEAA812812CCC8003E0BC9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -722,6 +768,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 913417FF27EDB58C00C1E9E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		91DEAA822812CCC8003E0BC9 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 913417FF27EDB58C00C1E9E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		91DEAA842812CCC8003E0BC9 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 913417FF27EDB58C00C1E9E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		91DEAA862812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 913417FF27EDB58C00C1E9E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

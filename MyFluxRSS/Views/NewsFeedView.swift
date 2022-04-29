@@ -13,26 +13,25 @@ struct NewsFeedView: View {
     @State var isShowingAuthView = false
     
     var body: some View {
-        NavigationView {
+         NavigationView {
             VStack {
                 NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingAuthView) { EmptyView() }
                 List {
                     ForEach(newsFeedViewModel.articles) { item in
-                        ArticleView(article: item)
-                        // récupérer l'id de l'article cliqué pour ouvrir son url
+                        ArticleView(article: item, newsFeedViewModel: NewsFeedViewModel())
                     }
                 }
                 .onAppear {
-                    newsFeedViewModel.parseArticle()
+                    newsFeedViewModel.parseArticleFromDatabase()
                 }
                 .refreshable {
-                    newsFeedViewModel.parseArticle()
+                   newsFeedViewModel.parseArticleFromDatabase()
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            newsFeedViewModel.parseArticle()
+                            newsFeedViewModel.parseArticleFromDatabase()
                         }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                 .foregroundColor(Color.purple)
                         }

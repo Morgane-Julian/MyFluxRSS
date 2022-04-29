@@ -12,19 +12,29 @@ struct BookmarkView: View {
     let bookmarkViewModel: BookmarkViewModel
     
     var body: some View {
-        NavigationView {
+        bookmarkViewModel.getFavArticle()
+       return NavigationView {
             List {
                 ForEach(bookmarkViewModel.bookmarks) { item in
-                    ArticleView(article: item)
+                    ArticleView(article: item, newsFeedViewModel: NewsFeedViewModel())
                 }
             }
+            //MARK: ajout du swipe vers la gauche pour supprimer l'article
+            .swipeActions(edge: .trailing, content: {
+                Button {
+                    bookmarkViewModel.articleRepository.remove(self.body as! Article)
+                } label: {
+                    Label("Unfollow", systemImage: "star")
+                }
+            })
+            //MARK: Fin du swipe
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("My Favorite Articles").font(.title)
                 }
             }
-        } .navigationBarHidden(true)
+        } .navigationBarHidden(false)
     }
 }
 

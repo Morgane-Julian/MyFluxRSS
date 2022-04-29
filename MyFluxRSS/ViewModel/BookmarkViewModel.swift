@@ -7,8 +7,18 @@
 
 import Foundation
 
-class BookmarkViewModel: ObservableObject {
+class BookmarkViewModel: ObservableObject, Identifiable {
     
     @Published var bookmarks : [Article] = []
+    @Published var articleRepository = ArticleRepository()
+    var id = ""
     
+    func getFavArticle() {
+        articleRepository.get()
+        self.bookmarks = articleRepository.articlesDatabase
+    }
+    
+    func removeArticle(article: Article) {
+        articleRepository.remove(article)
+    }
 }

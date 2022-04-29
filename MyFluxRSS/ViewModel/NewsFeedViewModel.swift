@@ -6,36 +6,43 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 class NewsFeedViewModel: ObservableObject {
     
     let model = Model()
-    let parametersViewModel = ParametersViewModel()
-    var urlString = ""
-        
+   
     @Published var articles : [Article] = []
+    @Published var articleRepository = ArticleRepository()
+    @Published var fluxRepository = FluxRepository()
     
-    var startIndex: Int { articles.startIndex }
-    var endIndex: Int { articles.endIndex }
-    func formIndex(after i: inout Int) { i += 1 }
-    func formIndex(before i: inout Int) { i -= 1 }
-    
-    subscript(index: Int) -> Article {
-        return articles[index]
+    //MARK: - Functions
+    func add(_ article: Article) {
+        articleRepository.add(article)
+      }
+   
+    //TODO: - Ne récupère que le premier ! Il nous faut tous les flux de la bdd
+    func parseArticleFromDatabase() {
+        fluxRepository.get()
+        for strings in fluxRepository.fluxDatabase {
+            guard let url = URL(string: strings.flux) else { return }
+            self.articles += model.getArticles(url: url)
+        }
+        print(articles)
     }
     
-    func parseArticle() {
-        for strings in parametersViewModel.myFlux {
-            self.urlString = strings.flux
-            guard let url = URL(string: self.urlString) else { return }
-                self.articles = model.getArticles(url: url)
+    func isFavorite() -> Bool {
+        let favorite = articleRepository.articlesDatabase.filter { self.articles.contains($0) }
+        if favorite != [] {
+            return true
         }
+        return false
     }
 }
 
-
-struct Article: Identifiable, Hashable {
-    var id: UUID = .init()
+struct Article: Identifiable, Hashable, Codable {
+    @DocumentID var id: String?
+    var userId = ""
     var title: String = "Title"
     var image = "logo"
     var description: String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
