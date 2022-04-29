@@ -56,7 +56,7 @@ class FluxRepository : ObservableObject {
     }
     
     func get() {
-        // utiliser une closure avec un callback succes -> [Flux] ou une erreur
+        // utiliser une closure avec un callback success -> [Flux] ou une erreur
         store.collection(path)
             .whereField("userId", isEqualTo: userId)
             .addSnapshotListener { querySnapshot, error in
@@ -70,9 +70,9 @@ class FluxRepository : ObservableObject {
             }
     }
     
-    func remove(_ article: Article) {
-        guard let articleId = article.id else { return }
-        store.collection(path).document(articleId).delete { error in
+    func remove(_ flux: Flux) {
+        guard let fluxId = flux.id else { return }
+        store.collection(path).document(fluxId).delete { error in
             if let error = error {
                 print("Unable to remove article: \(error.localizedDescription).")
             }
