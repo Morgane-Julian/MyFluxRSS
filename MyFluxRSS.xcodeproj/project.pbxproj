@@ -25,6 +25,8 @@
 		9183B66A281BD24900D732B6 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B668281BD24900D732B6 /* UserRepository.swift */; };
 		9183B66C281BD2D900D732B6 /* InternalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B66B281BD2D900D732B6 /* InternalUser.swift */; };
 		9183B66D281BD2D900D732B6 /* InternalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B66B281BD2D900D732B6 /* InternalUser.swift */; };
+		9196254B282D9863006DC6A0 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196254A282D9863006DC6A0 /* Article.swift */; };
+		9196254D282D98A5006DC6A0 /* Flux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196254C282D98A5006DC6A0 /* Flux.swift */; };
 		9197684127D4AD3600F2F679 /* MyFluxRSSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197684027D4AD3600F2F679 /* MyFluxRSSApp.swift */; };
 		9197684327D4AD3600F2F679 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197684227D4AD3600F2F679 /* AuthView.swift */; };
 		9197684527D4AD3700F2F679 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197684427D4AD3700F2F679 /* Assets.xcassets */; };
@@ -77,6 +79,8 @@
 		9183B666281B3BAE00D732B6 /* FluxRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxRepository.swift; sourceTree = "<group>"; };
 		9183B668281BD24900D732B6 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9183B66B281BD2D900D732B6 /* InternalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUser.swift; sourceTree = "<group>"; };
+		9196254A282D9863006DC6A0 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		9196254C282D98A5006DC6A0 /* Flux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flux.swift; sourceTree = "<group>"; };
 		9197683D27D4AD3600F2F679 /* MyFluxRSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFluxRSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9197684027D4AD3600F2F679 /* MyFluxRSSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFluxRSSApp.swift; sourceTree = "<group>"; };
 		9197684227D4AD3600F2F679 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -150,7 +154,7 @@
 		9197683F27D4AD3600F2F679 /* MyFluxRSS */ = {
 			isa = PBXGroup;
 			children = (
-				91DEAA882812CCDE003E0BC9 /* Repository */,
+				91DEAA882812CCDE003E0BC9 /* Firebase Repository */,
 				91D290EF27DB7F000079CFBD /* Model */,
 				9197686C27D4AE5300F2F679 /* ViewModel */,
 				9197686B27D4AE4500F2F679 /* Views */,
@@ -231,18 +235,20 @@
 				910DB90527F60FEE00C816A9 /* Model.swift */,
 				910DB90327F5D74A00C816A9 /* RssParser.swift */,
 				9183B66B281BD2D900D732B6 /* InternalUser.swift */,
+				9196254A282D9863006DC6A0 /* Article.swift */,
+				9196254C282D98A5006DC6A0 /* Flux.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		91DEAA882812CCDE003E0BC9 /* Repository */ = {
+		91DEAA882812CCDE003E0BC9 /* Firebase Repository */ = {
 			isa = PBXGroup;
 			children = (
 				91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */,
 				9183B668281BD24900D732B6 /* UserRepository.swift */,
 				9183B666281B3BAE00D732B6 /* FluxRepository.swift */,
 			);
-			path = Repository;
+			path = "Firebase Repository";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,6 +396,7 @@
 			files = (
 				910FFB3727E345710059D045 /* FluxListView.swift in Sources */,
 				910FFB3B27E47C300059D045 /* RegisterViewModel.swift in Sources */,
+				9196254B282D9863006DC6A0 /* Article.swift in Sources */,
 				910FFB3527E333CF0059D045 /* BookmarkViewModel.swift in Sources */,
 				91ACC4EA28002DA60028E9CB /* AppState.swift in Sources */,
 				9197687027D4AEA400F2F679 /* AuthViewModel.swift in Sources */,
@@ -399,6 +406,7 @@
 				910DB90627F60FEE00C816A9 /* Model.swift in Sources */,
 				9197684327D4AD3600F2F679 /* AuthView.swift in Sources */,
 				9183B66C281BD2D900D732B6 /* InternalUser.swift in Sources */,
+				9196254D282D98A5006DC6A0 /* Flux.swift in Sources */,
 				9197687E27D4FCEC00F2F679 /* ArticleView.swift in Sources */,
 				9197684127D4AD3600F2F679 /* MyFluxRSSApp.swift in Sources */,
 				9197687C27D4C02500F2F679 /* NewsFeedView.swift in Sources */,

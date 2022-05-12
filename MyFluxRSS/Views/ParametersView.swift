@@ -21,12 +21,12 @@ struct ParametersView: View {
                         Text("Notifications")
                     }
                     Picker(selection: $parametersViewModel.previewOptions, label: Text("Aperçus")) {
-                        ForEach(0 ..< parametersViewModel.previewOptions.count) {
+                        ForEach(0 ..< parametersViewModel.previewOptions.count, id: \.self) {
                             Text(parametersViewModel.previewOptions[$0])
                         }
                     }
                     Picker(selection: $parametersViewModel.theme, label: Text("Thème")) {
-                        ForEach(0 ..< parametersViewModel.theme.count) {
+                        ForEach(0 ..< parametersViewModel.theme.count, id: \.self) {
                             Text(parametersViewModel.theme[$0])
                         }
                     }

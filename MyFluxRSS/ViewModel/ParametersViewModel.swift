@@ -35,8 +35,4 @@ class ParametersViewModel: ObservableObject {
     }
 }
 
-class Flux: Identifiable, Codable {
-    @DocumentID var id: String?
-    var flux = "https://www.hackingwithswift.com/articles/rss"
-    var userId = ""
-}
+
