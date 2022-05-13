@@ -56,11 +56,8 @@ class ArticleRepository : ObservableObject {
     }
     
     func get() {
-        // accede à la bdd
         store.collection(path)
-        // Vérifie que l'utilisateur connecté dispose bien des droits
             .whereField("userId", isEqualTo: userId)
-        // appel à la BDD soit retourne une erreur soit le querySnapchot qui contient les "documents"
             .addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print("Error getting articles: \(error.localizedDescription)")
@@ -80,6 +77,4 @@ class ArticleRepository : ObservableObject {
             }
         }
     }
-    
-    
 }
