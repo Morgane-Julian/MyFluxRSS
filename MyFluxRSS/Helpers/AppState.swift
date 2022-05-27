@@ -8,5 +8,5 @@
 import Foundation
 
 class AppState: ObservableObject {
-    @Published var moveToDashboard: Bool = false
+    @Published var moveToAuth: Bool = false
 }

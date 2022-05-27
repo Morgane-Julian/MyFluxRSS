@@ -15,17 +15,16 @@ class Model {
     
     //MARK: - Parsing Functions
     
-    func getArticles(url: URL) -> [Article] {
+    func getArticles(url: URL, with completion: ([Article])->())  {
         var finalArticle: [Article] = []
         rssParser.startParsingWithContentsOfURL(rssUrl: url) { (result) in
-            let data = rssParser.parsedData
-            for _ in data {
-                finalArticle = rssParser.parsedData.map {
-                    Article(id: $0["id"], title: $0["title"] ?? "", image: $0["image"] ?? "https://zupimages.net/up/22/15/hcop.png", description: $0["description"] ?? "", date: $0["pubDate"] ?? "", from: $0["author"] ?? "", link: $0["link"] ?? "")
+            for _ in result {
+                finalArticle = result.map {
+                    Article(id: $0["id"] ?? UUID().uuidString, title: $0["title"] ?? "", image: $0["image"] ?? "https://zupimages.net/up/22/15/hcop.png", description: $0["description"] ?? "Aucun aperçu disponible pour cet article", date: $0["pubDate"] ?? "", from: $0["author"] ?? "", link: ($0["link"] ?? ""))
                 }
             }
         }
-        return finalArticle
+        completion(finalArticle)
     }
 
     

@@ -12,10 +12,12 @@ struct RegisterView: View {
     @StateObject var registerViewModel: RegisterViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowingDetailView = false
+    @State private var isShowingAuthView = false
     
     var body: some View {
         NavigationView {
             VStack {
+                NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingAuthView) { EmptyView() }
                 Form {
                     TextField("Nom", text: $registerViewModel.user.firstName)
                     TextField("Prénom", text: $registerViewModel.user.lastName)
@@ -29,7 +31,7 @@ struct RegisterView: View {
                     SecureField("Confirmer le mot de passe", text: $registerViewModel.user.passwordSecurity)
                 }
                 Spacer()
-                    
+                
                 NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingDetailView) { EmptyView() }
                 
                 Button("INSCRIPTION") {
@@ -37,14 +39,14 @@ struct RegisterView: View {
                     if registerViewModel.isSignedIn {
                         isShowingDetailView = true
                     }
-                } .padding(20)
+                }.padding(20)
                     .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
                     .cornerRadius(80.0)
                 Spacer()
                     .frame(width: 20, height: 50, alignment: .center)
             }
             .background(Color.gray.opacity(0.1))
-        } .navigationBarHidden(true)
+        } .navigationBarHidden(false)
     }
 }
 

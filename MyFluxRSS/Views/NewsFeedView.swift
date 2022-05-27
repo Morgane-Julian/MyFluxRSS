@@ -10,28 +10,25 @@ import SwiftUI
 struct NewsFeedView: View {
     
     @StateObject var newsFeedViewModel: NewsFeedViewModel
-    @State var isShowingAuthView = false
+    //    @State var isShowingAuthView = false
     
     var body: some View {
-         NavigationView {
+        NavigationView {
             VStack {
-                NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingAuthView) { EmptyView() }
-                List {
-                    ForEach(newsFeedViewModel.articles) { item in
-                        ArticleView(article: item, newsFeedViewModel: NewsFeedViewModel())
-                    }
+                //                NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingAuthView) { EmptyView() }
+                List(newsFeedViewModel.articles) { item in
+                    ArticleView(article: item)
                 }
-                .onAppear {
-                    newsFeedViewModel.parseArticleFromDatabase()
-                }
-                .refreshable {
-                   newsFeedViewModel.parseArticleFromDatabase()
-                }
+//                .onAppear {
+//                    newsFeedViewModel.parseArticleFromDatabaseFlux()
+//                }.refreshable {
+//                    newsFeedViewModel.parseArticleFromDatabaseFlux()
+//                }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            newsFeedViewModel.parseArticleFromDatabase()
+                            newsFeedViewModel.parseArticleFromDatabaseFlux()
                         }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                 .foregroundColor(Color.purple)
                         }
@@ -53,8 +50,12 @@ struct NewsFeedView: View {
                     }
                 }
             }
-        }.navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
+        }.navigationViewStyle(StackNavigationViewStyle())
+         .onAppear {
+                newsFeedViewModel.parseArticleFromDatabaseFlux()
+            }
+         .navigationBarBackButtonHidden(true)
+         .navigationBarHidden(true)
     }
     
 #if DEBUG

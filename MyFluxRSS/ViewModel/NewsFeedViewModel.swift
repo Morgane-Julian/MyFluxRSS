@@ -21,12 +21,15 @@ class NewsFeedViewModel: ObservableObject {
         articleRepository.add(article)
       }
    
-    //TODO: - Ne récupère que le premier ! Il nous faut tous les flux de la bdd
-    func parseArticleFromDatabase()  {
+    func parseArticleFromDatabaseFlux() {
         fluxRepository.get()
-        for strings in fluxRepository.fluxDatabase {
-            guard let url = URL(string: strings.flux) else { return }
-            self.articles += model.getArticles(url: url)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            for strings in self.fluxRepository.fluxDatabase {
+                guard let url = URL(string: strings.flux) else { return }
+                self.model.getArticles(url: url) { result in
+                    self.articles += result
+                }
+            }
         }
     }
     

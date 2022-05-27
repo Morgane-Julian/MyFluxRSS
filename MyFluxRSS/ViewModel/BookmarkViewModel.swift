@@ -17,7 +17,7 @@ class BookmarkViewModel: ObservableObject, Identifiable {
         articleRepository.get()
         self.bookmarks = articleRepository.articlesDatabase
     }
-    
+
     func removeArticle(article: Article) {
         articleRepository.remove(article)
     }

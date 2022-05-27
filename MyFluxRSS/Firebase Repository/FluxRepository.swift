@@ -56,7 +56,6 @@ class FluxRepository : ObservableObject {
     }
     
     func get() {
-        // utiliser une closure avec un callback success -> [Flux] ou une erreur
         store.collection(path)
             .whereField("userId", isEqualTo: userId)
             .addSnapshotListener { querySnapshot, error in

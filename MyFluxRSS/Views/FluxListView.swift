@@ -15,6 +15,9 @@ struct FluxListView: View {
         List {
             ForEach(parametersViewModel.fluxRepository.fluxDatabase) { item in
                 Text("\(item.flux)")
+            }.onDelete { indexSet in
+                parametersViewModel.delete(at: indexSet)
+                self.parametersViewModel.fluxRepository.fluxDatabase.remove(atOffsets: indexSet)
             }
         }
     }

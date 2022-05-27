@@ -13,19 +13,19 @@ import Combine
 
 class ArticleRepository : ObservableObject {
     
-    //MARK: - Properties
+//    //MARK: - Properties
     
     private let path: String = "articles"
     private let store = Firestore.firestore()
-    
+
     var userId = ""
     private let authService = AuthService()
     private var cancellables: Set<AnyCancellable> = []
-    
+
     @Published var articlesDatabase: [Article] = []
-    
+
     //MARK: - Init
-    
+
     init() {
         authService.$user
             .compactMap { user in
@@ -33,7 +33,7 @@ class ArticleRepository : ObservableObject {
             }
             .assign(to: \.userId, on: self)
             .store(in: &cancellables)
-        
+
         authService.$user
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -41,9 +41,9 @@ class ArticleRepository : ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
     //MARK: - CRUD Functions
-    
+
     func add(_ article: Article) {
         do {
             var newArticle = article
@@ -54,7 +54,7 @@ class ArticleRepository : ObservableObject {
             fatalError("Unable to add article: \(error.localizedDescription).")
         }
     }
-    
+
     func get() {
         store.collection(path)
             .whereField("userId", isEqualTo: userId)
@@ -68,7 +68,7 @@ class ArticleRepository : ObservableObject {
             } ?? []
         }
     }
-    
+
     func remove(_ article: Article) {
         guard let articleId = article.id else { return }
         store.collection(path).document(articleId).delete { error in

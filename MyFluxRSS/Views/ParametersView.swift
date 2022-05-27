@@ -46,11 +46,9 @@ struct ParametersView: View {
                     }
                 }
                 Section(header: Text("Flux")) {
-                    TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString, onEditingChanged: { changed in
+                    TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString, onCommit: {
                         //TODO: le flux apparait vide et se rempli seulement si on en rentre un nouveau
-                        if changed {
                             parametersViewModel.addNewFlux()
-                        }
                     }).keyboardType(.URL)
                         .disableAutocorrection(true)
                     NavigationLink("Mes flux", destination: FluxListView(parametersViewModel: parametersViewModel))
@@ -59,7 +57,7 @@ struct ParametersView: View {
             }
             Button("Déconnexion") {
                 parametersViewModel.disconnect()
-                self.appState.moveToDashboard = true
+                self.appState.moveToAuth = true
             }.padding()
             
         }  .background(Color.gray.opacity(0.1))

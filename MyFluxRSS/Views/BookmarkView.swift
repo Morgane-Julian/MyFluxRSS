@@ -12,12 +12,13 @@ struct BookmarkView: View {
     let bookmarkViewModel: BookmarkViewModel
     
     var body: some View {
-        bookmarkViewModel.getFavArticle()
-       return NavigationView {
+       NavigationView {
             List {
                 ForEach(bookmarkViewModel.bookmarks) { item in
-                    ArticleView(article: item, newsFeedViewModel: NewsFeedViewModel())
+                    ArticleView(article: item)
                 }
+            }.onAppear {
+                bookmarkViewModel.getFavArticle()
             }
             //MARK: ajout du swipe vers la gauche pour supprimer l'article
             .swipeActions(edge: .trailing, content: {

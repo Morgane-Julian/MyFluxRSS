@@ -45,11 +45,11 @@ struct AuthView: View {
                         }.isDetailLink(false)
                             .padding()
                     }
-                    .onReceive(self.appState.$moveToDashboard) { moveToDashboard in
+                    .onReceive(self.appState.$moveToAuth) { moveToDashboard in
                         if moveToDashboard {
                             print("Move to dashboard: \(moveToDashboard)")
                             self.isShowingDetailView = false
-                            self.appState.moveToDashboard = false
+                            self.appState.moveToAuth = false
                         }
                     }
                     Spacer()

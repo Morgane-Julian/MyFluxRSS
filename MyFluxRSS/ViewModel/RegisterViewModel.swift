@@ -24,10 +24,11 @@ class RegisterViewModel: ObservableObject {
                     print("Une erreur s'est produite, veuillez réessayer.")
                 } else {
                     print("Félicitations vous êtes enregistré ! Vérifiez vos mails.")
-                    
                 }
             }
+            
         }
+       
     }
     
 }
