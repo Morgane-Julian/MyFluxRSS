@@ -19,11 +19,11 @@ struct NewsFeedView: View {
                 List(newsFeedViewModel.articles) { item in
                     ArticleView(article: item)
                 }
-//                .onAppear {
-//                    newsFeedViewModel.parseArticleFromDatabaseFlux()
-//                }.refreshable {
-//                    newsFeedViewModel.parseArticleFromDatabaseFlux()
-//                }
+                .onAppear {
+                    newsFeedViewModel.parseArticleFromDatabaseFlux()
+                }.refreshable {
+                    newsFeedViewModel.parseArticleFromDatabaseFlux()
+                }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -51,9 +51,6 @@ struct NewsFeedView: View {
                 }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
-         .onAppear {
-                newsFeedViewModel.parseArticleFromDatabaseFlux()
-            }
          .navigationBarBackButtonHidden(true)
          .navigationBarHidden(true)
     }

@@ -37,10 +37,16 @@ class ParametersViewModel: ObservableObject {
         }
     }
     
+    func getFlux() {
+        fluxRepository.get { flux in
+            self.myFlux = flux
+        }
+    }
+    
     func delete(at offsets: IndexSet) {
-        let idsToDelete = offsets.map { self.fluxRepository.fluxDatabase[$0].id }
+        let idsToDelete = offsets.map { self.myFlux[$0].id }
         _ = idsToDelete.compactMap { [weak self] id in
-            self?.fluxRepository.remove(fluxRepository.fluxDatabase.first(where: {$0.id == id})!)
+            self?.fluxRepository.remove(myFlux.first(where: {$0.id == id})!)
         }
     }
     

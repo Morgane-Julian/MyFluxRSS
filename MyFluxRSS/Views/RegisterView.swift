@@ -11,7 +11,7 @@ struct RegisterView: View {
     
     @StateObject var registerViewModel: RegisterViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var isShowingDetailView = false
+    @State private var isShowingFeedView = false
     @State private var isShowingAuthView = false
     
     var body: some View {
@@ -32,13 +32,11 @@ struct RegisterView: View {
                 }
                 Spacer()
                 
-                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingDetailView) { EmptyView() }
+                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
                 
                 Button("INSCRIPTION") {
                     registerViewModel.inscription()
-                    if registerViewModel.isSignedIn {
-                        isShowingDetailView = true
-                    }
+                    isShowingFeedView = registerViewModel.isSignedIn
                 }.padding(20)
                     .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
                     .cornerRadius(80.0)
@@ -46,7 +44,7 @@ struct RegisterView: View {
                     .frame(width: 20, height: 50, alignment: .center)
             }
             .background(Color.gray.opacity(0.1))
-        } .navigationBarHidden(false)
+        } .navigationBarHidden(true)
     }
 }
 

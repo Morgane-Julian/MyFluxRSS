@@ -47,7 +47,6 @@ struct ParametersView: View {
                 }
                 Section(header: Text("Flux")) {
                     TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString, onCommit: {
-                        //TODO: le flux apparait vide et se rempli seulement si on en rentre un nouveau
                             parametersViewModel.addNewFlux()
                     }).keyboardType(.URL)
                         .disableAutocorrection(true)
@@ -59,7 +58,6 @@ struct ParametersView: View {
                 parametersViewModel.disconnect()
                 self.appState.moveToAuth = true
             }.padding()
-            
         }  .background(Color.gray.opacity(0.1))
     }
 }

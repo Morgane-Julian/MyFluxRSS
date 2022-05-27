@@ -17,18 +17,15 @@ class RegisterViewModel: ObservableObject {
     }
     
     func inscription() {
-        auth.createUser(withEmail: user.email, password: user.password) { authResult, error in
-            DispatchQueue.main.async {
+         auth.createUser(withEmail: user.email, password: user.password) { authResult, error in
+             DispatchQueue.main.async {
                 if error != nil {
-                    print(error?.localizedDescription ?? "")
+                    print(error?.localizedDescription ?? "Nos serveurs sont actuellement en maintenance merci de réassayer plus tard.")
                     print("Une erreur s'est produite, veuillez réessayer.")
                 } else {
-                    print("Félicitations vous êtes enregistré ! Vérifiez vos mails.")
+                    print("Félicitations vous êtes enregistré !")
                 }
             }
-            
         }
-       
     }
-    
 }

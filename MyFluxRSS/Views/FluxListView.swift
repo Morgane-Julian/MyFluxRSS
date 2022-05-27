@@ -13,11 +13,14 @@ struct FluxListView: View {
     
     var body: some View {
         List {
-            ForEach(parametersViewModel.fluxRepository.fluxDatabase) { item in
+            ForEach(parametersViewModel.myFlux) { item in
                 Text("\(item.flux)")
             }.onDelete { indexSet in
                 parametersViewModel.delete(at: indexSet)
                 self.parametersViewModel.fluxRepository.fluxDatabase.remove(atOffsets: indexSet)
+            }
+            .onAppear {
+                parametersViewModel.getFlux()
             }
         }
     }

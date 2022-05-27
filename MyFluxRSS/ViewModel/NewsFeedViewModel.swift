@@ -12,7 +12,11 @@ class NewsFeedViewModel: ObservableObject {
     
     let model = Model()
    
-    @Published var articles : [Article] = []
+    @Published var articles : [Article] = [] {
+        didSet {
+            print("load finished")
+        }
+    }
     @Published var articleRepository = ArticleRepository()
     @Published var fluxRepository = FluxRepository()
     
@@ -22,9 +26,8 @@ class NewsFeedViewModel: ObservableObject {
       }
    
     func parseArticleFromDatabaseFlux() {
-        fluxRepository.get()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            for strings in self.fluxRepository.fluxDatabase {
+        fluxRepository.get { flux in
+            for strings in flux {
                 guard let url = URL(string: strings.flux) else { return }
                 self.model.getArticles(url: url) { result in
                     self.articles += result

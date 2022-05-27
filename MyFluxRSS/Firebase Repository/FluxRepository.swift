@@ -37,7 +37,7 @@ class FluxRepository : ObservableObject {
         authService.$user
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.get()
+                self?.get { _ in }
             }
             .store(in: &cancellables)
     }
@@ -55,7 +55,7 @@ class FluxRepository : ObservableObject {
         }
     }
     
-    func get() {
+    func get(callback: @escaping ([Flux]) -> Void) {
         store.collection(path)
             .whereField("userId", isEqualTo: userId)
             .addSnapshotListener { querySnapshot, error in
@@ -63,9 +63,7 @@ class FluxRepository : ObservableObject {
                     print("Error getting articles: \(error.localizedDescription)")
                     return
                 }
-                self.fluxDatabase = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Flux.self)
-                } ?? []
+                callback(querySnapshot?.documents.compactMap { document in try? document.data(as: Flux.self) } ?? [])
             }
     }
     
