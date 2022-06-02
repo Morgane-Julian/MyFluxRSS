@@ -13,11 +13,11 @@ struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowingFeedView = false
     @State private var isShowingAuthView = false
+    @State private var showingAlert = false
     
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingAuthView) { EmptyView() }
                 Form {
                     TextField("Nom", text: $registerViewModel.user.firstName)
                     TextField("Prénom", text: $registerViewModel.user.lastName)
@@ -31,15 +31,19 @@ struct RegisterView: View {
                     SecureField("Confirmer le mot de passe", text: $registerViewModel.user.passwordSecurity)
                 }
                 Spacer()
-                
-                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
-                
+//                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
                 Button("INSCRIPTION") {
-                    registerViewModel.inscription()
-                    isShowingFeedView = registerViewModel.isSignedIn
-                }.padding(20)
-                    .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
-                    .cornerRadius(80.0)
+                    registerViewModel.inscription { result in
+                        self.showingAlert = result
+                    }
+                }.alert("Félicitations vous êtes bien enregistré !",isPresented: $showingAlert) {
+                    NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel())) {
+                        Text("Continuer")
+                    }
+                }
+                .padding(20)
+                .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
+                .cornerRadius(80.0)
                 Spacer()
                     .frame(width: 20, height: 50, alignment: .center)
             }

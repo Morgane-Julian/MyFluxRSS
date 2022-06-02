@@ -62,7 +62,6 @@ struct AuthView: View {
                             try await contentViewModel.connect()
                             self.isShowingDetailView = true
                         }
-                            
                     } .padding()
                         .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
                         .cornerRadius(80.0)
