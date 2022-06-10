@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ColorManager {
+struct ColorUtils {
     static let pink = Color("pink")
     static let lightGray = Color("lightGray")
     static let purple = Color("purple")

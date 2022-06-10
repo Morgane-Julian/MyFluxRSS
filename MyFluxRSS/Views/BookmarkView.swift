@@ -12,30 +12,25 @@ struct BookmarkView: View {
     let bookmarkViewModel: BookmarkViewModel
     
     var body: some View {
-       NavigationView {
-            List {
-                ForEach(bookmarkViewModel.bookmarks) { item in
-                    ArticleView(article: item)
-                }
-            }.onAppear {
-                bookmarkViewModel.getFavArticle()
+        List(bookmarkViewModel.bookmarks) { item in
+            ArticleView(article: item)
+        }.onAppear {
+            bookmarkViewModel.getFavArticle()
+        }
+        .swipeActions(edge: .trailing, content: {
+            Button {
+                bookmarkViewModel.articleRepository.remove(self.body as! Article)
+            } label: {
+                Label("Unfollow", systemImage: "star")
             }
-            //MARK: ajout du swipe vers la gauche pour supprimer l'article
-            .swipeActions(edge: .trailing, content: {
-                Button {
-                    bookmarkViewModel.articleRepository.remove(self.body as! Article)
-                } label: {
-                    Label("Unfollow", systemImage: "star")
-                }
-            })
-            //MARK: Fin du swipe
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("My Favorite Articles").font(.title)
-                }
+        })
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(false)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Text("My Favorite Articles").font(.title)
             }
-        } .navigationBarHidden(false)
+        }
     }
 }
 

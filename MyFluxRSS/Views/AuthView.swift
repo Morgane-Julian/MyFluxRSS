@@ -28,7 +28,7 @@ struct AuthView: View {
                 VStack {
                     TextField("Adresse mail", text: $contentViewModel.userMail)
                         .padding()
-                        .background(ColorManager.lightGray)
+                        .background(ColorUtils.lightGray)
                         .cornerRadius(5.0)
                         .padding()
                         .disableAutocorrection(true)
@@ -36,7 +36,7 @@ struct AuthView: View {
                         .keyboardType(.emailAddress)
                     SecureField("Mot de passe", text: $contentViewModel.password)
                         .padding()
-                        .background(ColorManager.lightGray)
+                        .background(ColorUtils.lightGray)
                         .cornerRadius(5.0)
                         .padding()
                     HStack {
@@ -63,7 +63,7 @@ struct AuthView: View {
                             self.isShowingDetailView = true
                         }
                     } .padding()
-                        .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
+                        .background(LinearGradient(gradient: Gradient(colors: [ColorUtils.purple.opacity(0.5), ColorUtils.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
                         .cornerRadius(80.0)
                     Spacer()
                         .frame(height: 20)

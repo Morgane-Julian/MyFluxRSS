@@ -14,7 +14,7 @@ struct Article: Identifiable, Hashable, Codable {
     var title: String = "Title"
     var image = "logo"
     var description: String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    var date: String = ""
-    var from: String = "Youtube"
+    var date = Date()
+    var author: String = "Morgane Julian"
     var link: String = ""
 }

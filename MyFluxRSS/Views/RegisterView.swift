@@ -31,18 +31,14 @@ struct RegisterView: View {
                     SecureField("Confirmer le mot de passe", text: $registerViewModel.user.passwordSecurity)
                 }
                 Spacer()
-//                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
+                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
                 Button("INSCRIPTION") {
                     registerViewModel.inscription { result in
-                        self.showingAlert = result
-                    }
-                }.alert("Félicitations vous êtes bien enregistré !",isPresented: $showingAlert) {
-                    NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel())) {
-                        Text("Continuer")
+                        self.isShowingFeedView = result
                     }
                 }
                 .padding(20)
-                .background(LinearGradient(gradient: Gradient(colors: [ColorManager.purple.opacity(0.5), ColorManager.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [ColorUtils.purple.opacity(0.5), ColorUtils.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
                 .cornerRadius(80.0)
                 Spacer()
                     .frame(width: 20, height: 50, alignment: .center)

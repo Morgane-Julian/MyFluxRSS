@@ -12,11 +12,7 @@ class NewsFeedViewModel: ObservableObject {
     
     let model = Model()
    
-    @Published var articles : [Article] = [] {
-        didSet {
-            print("load finished")
-        }
-    }
+    @Published var articles : [Article] = []
     @Published var articleRepository = ArticleRepository()
     @Published var fluxRepository = FluxRepository()
     
@@ -29,8 +25,13 @@ class NewsFeedViewModel: ObservableObject {
         fluxRepository.get { flux in
             for strings in flux {
                 guard let url = URL(string: strings.flux) else { return }
-                self.model.getArticles(url: url) { result in
-                    self.articles += result
+                self.model.parseArticles(url: url) { result in
+                    if self.articles == result {
+                        print("Article already parsed")
+                    } else {
+                    self.articles = result
+                    self.articles.sort(by: { $0.date.compare($1.date) == .orderedDescending})
+                    }
                 }
             }
         }

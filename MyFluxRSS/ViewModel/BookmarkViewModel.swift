@@ -11,11 +11,16 @@ class BookmarkViewModel: ObservableObject, Identifiable {
     
     @Published var bookmarks : [Article] = []
     @Published var articleRepository = ArticleRepository()
-    var id = ""
     
     func getFavArticle() {
-        articleRepository.get()
-        self.bookmarks = articleRepository.articlesDatabase
+        articleRepository.get { articles in
+            if self.bookmarks == articles {
+                print("This article is already in bookmark list")
+            } else {
+            self.bookmarks = articles
+            }
+        }
+        bookmarks.append(Article(id: "12", userId: "", title: "test", image: "test", description: "test", date: .now, author: "test", link: "test"))
     }
 
     func removeArticle(article: Article) {

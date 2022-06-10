@@ -13,18 +13,18 @@ class RegisterViewModel: ObservableObject {
     let auth = Auth.auth()
     var isSignedIn = false
     
-    func inscription(callback: (Bool) -> Void) {
+    func inscription(callback: @escaping (Bool) -> Void) {
         auth.createUser(withEmail: user.email, password: user.password) { authResult, error in
              DispatchQueue.main.async {
                 if error != nil {
                     print(error?.localizedDescription ?? "Nos serveurs sont actuellement en maintenance merci de réassayer plus tard.")
+                    callback(false)
                 } else {
                     print("Félicitations vous êtes enregistré !")
-                    self.isSignedIn = true
+                    callback(true)
                 }
             }
         }
-        callback(isSignedIn)
     }
     
     

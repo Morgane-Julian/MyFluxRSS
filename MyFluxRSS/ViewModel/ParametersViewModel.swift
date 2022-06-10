@@ -27,13 +27,13 @@ class ParametersViewModel: ObservableObject {
     func addNewFlux() {
         if self.urlString != "" && urlString != " " {
             if fluxRepository.fluxDatabase.contains(where: { $0.flux == urlString}) {
-                print("Erreur mon ami tu as déjà ce flux dans ta liste !")
+                print("Oups, you already add this flux !")
             } else {
                 myNewFlux.flux = urlString
                 fluxRepository.add(myNewFlux)
             }
         } else {
-            print("Attention ceci n'est pas un flux valide ! ")
+            print("Error, this is not a valid flux ! ")
         }
     }
     
@@ -47,6 +47,8 @@ class ParametersViewModel: ObservableObject {
         let idsToDelete = offsets.map { self.myFlux[$0].id }
         _ = idsToDelete.compactMap { [weak self] id in
             self?.fluxRepository.remove(myFlux.first(where: {$0.id == id})!)
+            guard let intID = Int(id!) else { return }
+            self?.myFlux.remove(at: intID)
         }
     }
     

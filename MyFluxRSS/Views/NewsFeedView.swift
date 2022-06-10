@@ -10,14 +10,19 @@ import SwiftUI
 struct NewsFeedView: View {
     
     @StateObject var newsFeedViewModel: NewsFeedViewModel
-    //    @State var isShowingAuthView = false
     
     var body: some View {
         NavigationView {
             VStack {
-                //                NavigationLink(destination: AuthView(contentViewModel: AuthViewModel()), isActive: $isShowingAuthView) { EmptyView() }
                 List(newsFeedViewModel.articles) { item in
                     ArticleView(article: item)
+                        .swipeActions {
+                            Button {
+                                newsFeedViewModel.add(item)
+                            } label: {
+                                Label("Favorite", systemImage: "star")
+                            }
+                        }
                 }
                 .onAppear {
                     newsFeedViewModel.parseArticleFromDatabaseFlux()
@@ -29,6 +34,7 @@ struct NewsFeedView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             newsFeedViewModel.parseArticleFromDatabaseFlux()
+                            //Revenir au déut de la liste ..
                         }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                 .foregroundColor(Color.purple)
                         }
@@ -50,8 +56,8 @@ struct NewsFeedView: View {
                     }
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
-         .navigationBarBackButtonHidden(true)
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
          .navigationBarHidden(true)
     }
     

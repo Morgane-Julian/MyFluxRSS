@@ -37,7 +37,7 @@ class ArticleRepository : ObservableObject {
         authService.$user
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.get()
+                self?.get { _ in }
             }
             .store(in: &cancellables)
     }
@@ -55,7 +55,7 @@ class ArticleRepository : ObservableObject {
         }
     }
 
-    func get() {
+    func get(callback: @escaping ([Article]) -> Void) {
         store.collection(path)
             .whereField("userId", isEqualTo: userId)
             .addSnapshotListener { querySnapshot, error in
@@ -63,9 +63,8 @@ class ArticleRepository : ObservableObject {
                 print("Error getting articles: \(error.localizedDescription)")
                 return
             }
-             self.articlesDatabase = querySnapshot?.documents.compactMap { document in
-                try? document.data(as: Article.self)
-            } ?? []
+             callback(querySnapshot?.documents.compactMap { document in
+                 try? document.data(as: Article.self) } ?? [])
         }
     }
 

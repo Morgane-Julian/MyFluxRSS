@@ -60,7 +60,7 @@ class FluxRepository : ObservableObject {
             .whereField("userId", isEqualTo: userId)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
-                    print("Error getting articles: \(error.localizedDescription)")
+                    print("Error getting flux: \(error.localizedDescription)")
                     return
                 }
                 callback(querySnapshot?.documents.compactMap { document in try? document.data(as: Flux.self) } ?? [])
