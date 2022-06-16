@@ -15,11 +15,9 @@ struct BookmarkView: View {
         List(bookmarkViewModel.bookmarks) { item in
             ArticleView(article: item)
                 .swipeActions {
-                    Button {
-                        bookmarkViewModel.removeArticle(article: item)
-                    } label: {
+                    Button(role: .destructive, action: { bookmarkViewModel.removeArticle(article: item) } ) {
                         Label("Delete", systemImage: "trash")
-                    }
+                    }.tint(.purple)
                 }
         }.onAppear {
             bookmarkViewModel.getFavArticle()

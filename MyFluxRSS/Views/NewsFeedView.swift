@@ -22,6 +22,7 @@ struct NewsFeedView: View {
                             } label: {
                                 Label("Favorite", systemImage: "star")
                             }
+                            .tint(.purple)
                         }
                 }
                 .onAppear {
