@@ -75,6 +75,4 @@ class FluxRepository : ObservableObject {
             }
         }
     }
-    
-    
 }

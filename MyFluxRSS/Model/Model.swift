@@ -36,7 +36,7 @@ class Model {
                     self.articleProv.date = article.pubDate ?? .now
                     
                     if self.finalArticle.contains(where: { $0.link == self.articleProv.link }) {
-                        print("Oups, article already in feed")
+                        
                     } else {
                         self.finalArticle.append(self.articleProv)
                     }
@@ -47,8 +47,4 @@ class Model {
         }
         completion(finalArticle)
     }
-    
-    
-    
-    
 }

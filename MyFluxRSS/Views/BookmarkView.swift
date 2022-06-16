@@ -14,16 +14,16 @@ struct BookmarkView: View {
     var body: some View {
         List(bookmarkViewModel.bookmarks) { item in
             ArticleView(article: item)
+                .swipeActions {
+                    Button {
+                        bookmarkViewModel.removeArticle(article: item)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
         }.onAppear {
             bookmarkViewModel.getFavArticle()
         }
-        .swipeActions(edge: .trailing, content: {
-            Button {
-                bookmarkViewModel.articleRepository.remove(self.body as! Article)
-            } label: {
-                Label("Unfollow", systemImage: "star")
-            }
-        })
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(false)
         .toolbar {

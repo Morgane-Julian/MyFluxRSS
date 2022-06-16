@@ -18,8 +18,12 @@ class NewsFeedViewModel: ObservableObject {
     
     //MARK: - Functions
     func add(_ article: Article) {
-        articleRepository.add(article)
-      }
+        if isFavorite(final: article) {
+            print("article déjà dans les favoris")
+        } else {
+            articleRepository.add(article)
+        }
+    }
    
     func parseArticleFromDatabaseFlux() {
         fluxRepository.get { flux in
@@ -37,12 +41,16 @@ class NewsFeedViewModel: ObservableObject {
         }
     }
     
-    func isFavorite() -> Bool {
-        let favorite = articleRepository.articlesDatabase.filter { self.articles.contains($0) }
-        if favorite != [] {
-            return true
+    func isFavorite(final: Article) -> Bool {
+        var isFavorite = Bool()
+        articleRepository.get { article in
+            if article.contains(final) {
+                isFavorite = true
+            } else {
+                isFavorite = false
+            }
         }
-        return false
+        return isFavorite
     }
 }
 

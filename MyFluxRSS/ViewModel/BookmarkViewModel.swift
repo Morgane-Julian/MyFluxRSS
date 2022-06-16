@@ -14,16 +14,16 @@ class BookmarkViewModel: ObservableObject, Identifiable {
     
     func getFavArticle() {
         articleRepository.get { articles in
-            if self.bookmarks == articles {
-                print("This article is already in bookmark list")
-            } else {
-            self.bookmarks = articles
+            if self.bookmarks != articles {
+                self.bookmarks = articles
             }
         }
-        bookmarks.append(Article(id: "12", userId: "", title: "test", image: "test", description: "test", date: .now, author: "test", link: "test"))
     }
 
     func removeArticle(article: Article) {
         articleRepository.remove(article)
+        if let index = self.bookmarks.firstIndex(of: article) {
+            self.bookmarks.remove(at: index)
+        }
     }
 }

@@ -17,7 +17,6 @@ struct FluxListView: View {
                 Text("\(item.flux)")
             }.onDelete { indexSet in
                 parametersViewModel.delete(at: indexSet)
-//                self.parametersViewModel.fluxRepository.fluxDatabase.remove(atOffsets: indexSet)
             }
             .onAppear {
                 parametersViewModel.getFlux()
