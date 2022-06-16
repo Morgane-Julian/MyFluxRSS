@@ -12,16 +12,19 @@ class NewsFeedViewModel: ObservableObject {
     
     let model = Model()
    
-    @Published var articles : [Article] = []
+    @Published var articles = [Article]()
     @Published var articleRepository = ArticleRepository()
     @Published var fluxRepository = FluxRepository()
     
     //MARK: - Functions
     func add(_ article: Article) {
-        if isFavorite(final: article) {
-            print("article déjà dans les favoris")
-        } else {
-            articleRepository.add(article)
+        articleRepository.get { articlesBDD in
+            self.articleRepository.articlesDatabase = articlesBDD
+            if self.articleRepository.articlesDatabase.contains(where: { $0.link == article.link}) {
+                print("Article already in fav list BDD!")
+            } else {
+                self.articleRepository.add(article)
+            }
         }
     }
    
@@ -40,17 +43,4 @@ class NewsFeedViewModel: ObservableObject {
             }
         }
     }
-    
-    func isFavorite(final: Article) -> Bool {
-        var isFavorite = Bool()
-        articleRepository.get { article in
-            if article.contains(final) {
-                isFavorite = true
-            } else {
-                isFavorite = false
-            }
-        }
-        return isFavorite
-    }
 }
-

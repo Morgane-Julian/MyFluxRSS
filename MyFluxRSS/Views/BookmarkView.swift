@@ -9,16 +9,15 @@ import SwiftUI
 
 struct BookmarkView: View {
     
-    let bookmarkViewModel: BookmarkViewModel
+    @ObservedObject var bookmarkViewModel = BookmarkViewModel()
     
     var body: some View {
-        List(bookmarkViewModel.bookmarks) { item in
-            ArticleView(article: item)
-                .swipeActions {
-                    Button(role: .destructive, action: { bookmarkViewModel.removeArticle(article: item) } ) {
-                        Label("Delete", systemImage: "trash")
-                    }.tint(.purple)
-                }
+        List {
+            ForEach(bookmarkViewModel.bookmarks) { item in
+                ArticleView(article: item)
+            }.onDelete { indexSet in
+                bookmarkViewModel.removeArticle(article: indexSet)
+            }
         }.onAppear {
             bookmarkViewModel.getFavArticle()
         }
@@ -26,6 +25,7 @@ struct BookmarkView: View {
         .navigationBarBackButtonHidden(false)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
+                // Mettre une bouton retour personnalisé
                 Text("My Favorite Articles").font(.title)
             }
         }
