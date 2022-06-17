@@ -42,6 +42,7 @@
 		91A3C500282F13DB00EC4A07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91A3C4FF282F13DB00EC4A07 /* GoogleService-Info.plist */; };
 		91ACC4EA28002DA60028E9CB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ACC4E928002DA60028E9CB /* AppState.swift */; };
 		91B798022853D3C400D8F15F /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B798012853D3C400D8F15F /* StringUtils.swift */; };
+		91CE8F20285C75EA006072AE /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE8F1F285C75EA006072AE /* ViewUtils.swift */; };
 		91DEAA832812CCC8003E0BC9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA822812CCC8003E0BC9 /* FirebaseFirestore */; };
 		91DEAA852812CCC8003E0BC9 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA842812CCC8003E0BC9 /* FirebaseFirestoreCombine-Community */; };
 		91DEAA872812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA862812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta */; };
@@ -99,6 +100,7 @@
 		91A3C4FF282F13DB00EC4A07 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		91ACC4E928002DA60028E9CB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		91B798012853D3C400D8F15F /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		91CE8F1F285C75EA006072AE /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +202,7 @@
 				9197687527D4BBD100F2F679 /* ColorUtils.swift */,
 				91ACC4E928002DA60028E9CB /* AppState.swift */,
 				91B798012853D3C400D8F15F /* StringUtils.swift */,
+				91CE8F1F285C75EA006072AE /* ViewUtils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				910FFB3527E333CF0059D045 /* BookmarkViewModel.swift in Sources */,
 				91ACC4EA28002DA60028E9CB /* AppState.swift in Sources */,
 				9197687027D4AEA400F2F679 /* AuthViewModel.swift in Sources */,
+				91CE8F20285C75EA006072AE /* ViewUtils.swift in Sources */,
 				910FFB3927E479C20059D045 /* RegisterView.swift in Sources */,
 				9197687627D4BBD100F2F679 /* ColorUtils.swift in Sources */,
 				910FFB3127E328220059D045 /* ParametersViewModel.swift in Sources */,

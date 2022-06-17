@@ -47,4 +47,8 @@ class Model {
         }
         completion(finalArticle)
     }
+    
+    func colorTheme() {
+        
+    }
 }
