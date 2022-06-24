@@ -162,6 +162,7 @@
 		9197683F27D4AD3600F2F679 /* MyFluxRSS */ = {
 			isa = PBXGroup;
 			children = (
+				91E5DDCA2865ED2B00B946B2 /* Services */,
 				91DEAA882812CCDE003E0BC9 /* Firebase Repository */,
 				91D290EF27DB7F000079CFBD /* Model */,
 				9197686C27D4AE5300F2F679 /* ViewModel */,
@@ -243,7 +244,6 @@
 		91D290EF27DB7F000079CFBD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				916F4F3527F73BA700A71152 /* AuthService.swift */,
 				910DB90527F60FEE00C816A9 /* Model.swift */,
 				9183B66B281BD2D900D732B6 /* InternalUser.swift */,
 				9196254A282D9863006DC6A0 /* Article.swift */,
@@ -260,6 +260,14 @@
 				9183B666281B3BAE00D732B6 /* FluxRepository.swift */,
 			);
 			path = "Firebase Repository";
+			sourceTree = "<group>";
+		};
+		91E5DDCA2865ED2B00B946B2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				916F4F3527F73BA700A71152 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
