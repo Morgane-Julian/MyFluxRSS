@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import SwiftUI
 
 class ParametersViewModel: ObservableObject {
     
@@ -22,7 +23,10 @@ class ParametersViewModel: ObservableObject {
     @Published var twitter = true
     @Published var notifications = true
     @Published var previewOptions = ["Always", "When Unlocked", "Never"]
+    
     var myNewFlux : Flux = Flux()
+    
+    //MARK: DB Functions
     
     func addNewFlux() {
         if self.urlString != "" && urlString != " " {
@@ -56,6 +60,9 @@ class ParametersViewModel: ObservableObject {
         do { try Auth.auth().signOut() }
         catch { print("already logged out") }
     }
+    
+    
+    
 }
 
 

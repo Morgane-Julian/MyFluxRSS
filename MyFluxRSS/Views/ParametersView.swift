@@ -12,6 +12,20 @@ struct ParametersView: View {
     @StateObject var parametersViewModel: ParametersViewModel
     @State private var isShowingDetailView = false
     @EnvironmentObject var appState: AppState
+    @State private var isDarkModeOn = false
+    
+    
+    //Theme functions
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    func setAppTheme() {
+        isDarkModeOn = UserDefaultsUtils.shared.getDarkMode()
+        changeDarkMode(state: isDarkModeOn)
+    }
+    
+    func changeDarkMode(state: Bool) {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = state ? .dark : .light
+        UserDefaultsUtils.shared.setDarkMode(enable: state)
+    }
     
     var body: some View {
         VStack {
@@ -25,12 +39,19 @@ struct ParametersView: View {
                             Text(parametersViewModel.previewOptions[$0])
                         }
                     }
-                    Picker(selection: $parametersViewModel.theme, label: Text("Thème")) {
-                        ForEach(0 ..< parametersViewModel.theme.count, id: \.self) {
-                            Text(parametersViewModel.theme[$0])
-                        }
+                }
+                
+                Section(header: Text("Thème")) {
+                    Toggle("Dark Mode", isOn: $isDarkModeOn).onChange(of: self.isDarkModeOn) { state in
+                        changeDarkMode(state: state)
+                        UserDefaults.standard.set(self.isDarkModeOn, forKey: "themeToggle")
+                        
+                    }
+                    .onAppear {
+                        self.isDarkModeOn = UserDefaults.standard.bool(forKey: "themeToggle")
                     }
                 }
+                
                 Section(header: Text("Réseaux")) {
                     Toggle(isOn: $parametersViewModel.reddit) {
                         Text("Reddit")

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewsFeedView: View {
     
-    @StateObject var newsFeedViewModel: NewsFeedViewModel
+    @ObservedObject var newsFeedViewModel: NewsFeedViewModel
     
     var body: some View {
         NavigationView {
