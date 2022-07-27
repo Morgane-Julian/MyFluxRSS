@@ -14,48 +14,53 @@ struct NewsFeedView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List(newsFeedViewModel.articles) { item in
-                    ArticleView(article: item)
-                        .swipeActions {
-                            Button {
-                                newsFeedViewModel.add(item)
-                            } label: {
-                                Label("Favorite", systemImage: "star")
+                ScrollViewReader { scrollView in
+                    List(newsFeedViewModel.articles) { item in
+                        ArticleView(article: item)
+                            .swipeActions {
+                                Button {
+                                    newsFeedViewModel.add(item)
+                                } label: {
+                                    Label("Favorite", systemImage: "star")
+                                }
+                                .tint(.purple)
+                            } .id(newsFeedViewModel.articles.firstIndex(of: item))
+                    }
+                    .onAppear {
+                        newsFeedViewModel.parseArticleFromDatabaseFlux()
+                    }.refreshable {
+                        newsFeedViewModel.parseArticleFromDatabaseFlux()
+                        scrollView.scrollTo(0)
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                newsFeedViewModel.parseArticleFromDatabaseFlux()
+                                //Revenir au déut de la liste ..
+                                scrollView.scrollTo(0)
+                            }) { Label("", systemImage: "arrow.triangle.2.circlepath")
+                                    .foregroundColor(Color.purple)
                             }
-                            .tint(.purple)
                         }
-                }
-                .onAppear {
-                    newsFeedViewModel.parseArticleFromDatabaseFlux()
-                }.refreshable {
-                    newsFeedViewModel.parseArticleFromDatabaseFlux()
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            newsFeedViewModel.parseArticleFromDatabaseFlux()
-                            //Revenir au déut de la liste ..
-                        }) { Label("", systemImage: "arrow.triangle.2.circlepath")
-                                .foregroundColor(Color.purple)
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: BookmarkView(bookmarkViewModel: BookmarkViewModel())) {
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(Color.purple)
+                            }
                         }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: BookmarkView(bookmarkViewModel: BookmarkViewModel())) {
-                            Image(systemName: "star.fill")
-                                .foregroundColor(Color.purple)
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: ParametersView(parametersViewModel: ParametersViewModel())) {
+                                Image(systemName: "gear")
+                                    .foregroundColor(Color.purple)
+                            }
                         }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: ParametersView(parametersViewModel: ParametersViewModel())) {
-                            Image(systemName: "gear")
-                                .foregroundColor(Color.purple)
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Text("MyFluxRSS").font(.title)
                         }
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("MyFluxRSS").font(.title)
                     }
                 }
+            
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
