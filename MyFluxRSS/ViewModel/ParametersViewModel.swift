@@ -17,10 +17,6 @@ class ParametersViewModel: ObservableObject {
     @Published var theme = ["dark", "light", "system"]
     @Published var myFlux = [Flux()]
     @Published var urlString = ""
-    @Published var facebook = true
-    @Published var reddit = false
-    @Published var youtube = true
-    @Published var twitter = true
     @Published var notifications = true
     @Published var previewOptions = ["Always", "When Unlocked", "Never"]
     
@@ -62,6 +58,13 @@ class ParametersViewModel: ObservableObject {
     }
     
     
+    //MARK: - Theme Functions
+    func changeDarkMode(state: Bool) {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = state ? .dark : .light
+        UserDefaultsUtils.shared.setDarkMode(enable: state)
+    }
+    
+   
     
 }
 

@@ -29,7 +29,6 @@ struct ArticleView: View {
                         Text("\(article.title)")
                             .font(.headline)
                             .fontWeight(.bold)
-                        // trouver un moyen de scale la font pour que le titre ne prenne pas toute la place s'il est long
                     }
                 }
                 Text("\(article.description)")
@@ -38,6 +37,7 @@ struct ArticleView: View {
                     .onTapGesture {
                         openURL(URL(string: article.link)!)
                     }
+                    .multilineTextAlignment(.leading)
             }
         }
         .padding()

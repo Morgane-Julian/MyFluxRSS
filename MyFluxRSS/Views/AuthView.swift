@@ -28,7 +28,7 @@ struct AuthView: View {
                 VStack {
                     TextField("Adresse mail", text: $contentViewModel.userMail)
                         .padding()
-                        .background(ColorUtils.lightGray)
+                        .background(Color("BackgroundColorTextfield"))
                         .cornerRadius(5.0)
                         .padding()
                         .disableAutocorrection(true)
@@ -36,7 +36,7 @@ struct AuthView: View {
                         .keyboardType(.emailAddress)
                     SecureField("Mot de passe", text: $contentViewModel.password)
                         .padding()
-                        .background(ColorUtils.lightGray)
+                        .background(Color("BackgroundColorTextfield"))
                         .cornerRadius(5.0)
                         .padding()
                     HStack {
@@ -44,6 +44,7 @@ struct AuthView: View {
                             Text("Pas encore inscrit ? C'est par ici")
                         }.isDetailLink(false)
                             .padding()
+                            .foregroundColor(.gray)
                     }
                     .onReceive(self.appState.$moveToAuth) { moveToDashboard in
                         if moveToDashboard {
@@ -56,6 +57,7 @@ struct AuthView: View {
                 }
                 VStack {
                     NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingDetailView) { EmptyView() }
+                        
                     
                     Button("CONNEXION") {
                         Task {
@@ -63,10 +65,13 @@ struct AuthView: View {
                             self.isShowingDetailView = true
                         }
                     } .padding()
-                        .background(LinearGradient(gradient: Gradient(colors: [ColorUtils.purple.opacity(0.5), ColorUtils.turquoise.opacity(0.5)]), startPoint: .top, endPoint: .bottom))
+                        .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
                         .cornerRadius(80.0)
+                        .foregroundColor(.black)
+                        .font(.title2)
                     Spacer()
                         .frame(height: 20)
+                        
                 }
             }
         }.onAppear {
@@ -83,6 +88,7 @@ struct ContentView_Previews: PreviewProvider {
             AuthView(contentViewModel: AuthViewModel.init())
                 .previewDevice(.init(rawValue: $0))
                 .previewDisplayName($0)
+                .environmentObject(AppState())
             //                .preferredColorScheme(.dark)
         }
     }

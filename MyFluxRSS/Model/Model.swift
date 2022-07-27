@@ -34,9 +34,9 @@ class Model {
                     self.articleProv.author = article.author ?? ""
                     self.articleProv.id = UUID().uuidString
                     self.articleProv.date = article.pubDate ?? .now
-                    
+
                     if self.finalArticle.contains(where: { $0.link == self.articleProv.link }) {
-                        
+
                     } else {
                         self.finalArticle.append(self.articleProv)
                     }
@@ -46,9 +46,5 @@ class Model {
             print(error)
         }
         completion(finalArticle)
-    }
-    
-    func colorTheme() {
-        
     }
 }

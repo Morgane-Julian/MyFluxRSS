@@ -16,7 +16,6 @@ struct RegisterView: View {
     @State private var showingAlert = false
     
     var body: some View {
-        NavigationView {
             VStack {
                 Form {
                     TextField("Nom", text: $registerViewModel.user.firstName)
@@ -38,15 +37,14 @@ struct RegisterView: View {
                     }
                 }
                 .padding(20)
-                .background(LinearGradient(gradient: Gradient(colors: [ColorUtils.purple.opacity(0.5), ColorUtils.turquoise.opacity(0.5)]), startPoint:  .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(80.0)
                 Spacer()
                     .frame(width: 20, height: 50, alignment: .center)
             }
             .background(Color.gray.opacity(0.1))
-        } .navigationBarHidden(true)
+        }
     }
-}
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
