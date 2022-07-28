@@ -16,8 +16,8 @@ class AuthViewModel: ObservableObject {
         return authService.auth.currentUser != nil
     }
     
-    @Published public var userMail: String = ""
-    @Published public var password: String = ""
+   var userMail: String = ""
+   var password: String = ""
     
     func connect() async throws {
         do { try await authService.connect(userMail: userMail, password: password)

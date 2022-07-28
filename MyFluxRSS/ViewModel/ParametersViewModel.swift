@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestoreSwift
 import SwiftUI
 
+
 class ParametersViewModel: ObservableObject {
     
     var model = Model()
@@ -19,11 +20,17 @@ class ParametersViewModel: ObservableObject {
     @Published var urlString = ""
     @Published var notifications = true
     @Published var previewOptions = ["Always", "When Unlocked", "Never"]
+    var authService = AuthService()
+    let user = Auth.auth().currentUser
+    var credential: AuthCredential?
+    var password = ""
+    var confirmPassword = ""
+    var email = ""
+    var actualPassword = ""
     
     var myNewFlux : Flux = Flux()
     
     //MARK: DB Functions
-    
     func addNewFlux() {
         if self.urlString != "" && urlString != " " {
             if fluxRepository.fluxDatabase.contains(where: { $0.flux == urlString}) {
@@ -52,20 +59,56 @@ class ParametersViewModel: ObservableObject {
         }
     }
     
-    func disconnect() {
-        do { try Auth.auth().signOut() }
-        catch { print("already logged out") }
+    //MARK: Manage account functions
+    func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
+        self.credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        if let credential = self.credential {
+            user?.reauthenticate(with: credential) { authDataResult, error  in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("GG reauth done !")
+                    callback(true)
+                }
+            }
+        }
     }
     
+    func disconnect(callback: @escaping (Bool) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            callback(true)
+        }
+        catch { print("already logged out")
+        }
+    }
+    
+    func changePassword(password: String) {
+        Auth.auth().currentUser?.updatePassword(to: password) { error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                print("wp password changed")
+            }
+        }
+    }
+    
+    func deleteAcount() {
+        let user = Auth.auth().currentUser
+        user?.delete { error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+            } else {
+                print("account deleted successfully")
+            }
+        }
+    }
     
     //MARK: - Theme Functions
     func changeDarkMode(state: Bool) {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = state ? .dark : .light
         UserDefaultsUtils.shared.setDarkMode(enable: state)
     }
-    
-   
-    
 }
 
 

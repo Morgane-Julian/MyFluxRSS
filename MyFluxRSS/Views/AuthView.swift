@@ -43,7 +43,6 @@ struct AuthView: View {
                         NavigationLink(destination: RegisterView(registerViewModel: RegisterViewModel())) {
                             Text("Pas encore inscrit ? C'est par ici")
                         }.isDetailLink(false)
-                            .padding()
                             .foregroundColor(.gray)
                     }
                     .onReceive(self.appState.$moveToAuth) { moveToDashboard in
@@ -58,7 +57,6 @@ struct AuthView: View {
                 VStack {
                     NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingDetailView) { EmptyView() }
                         
-                    
                     Button("CONNEXION") {
                         Task {
                             try await contentViewModel.connect()
@@ -71,7 +69,6 @@ struct AuthView: View {
                         .font(.title2)
                     Spacer()
                         .frame(height: 20)
-                        
                 }
             }
         }.onAppear {

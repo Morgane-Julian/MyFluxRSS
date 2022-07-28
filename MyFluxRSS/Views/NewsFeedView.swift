@@ -37,7 +37,6 @@ struct NewsFeedView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
                                 newsFeedViewModel.parseArticleFromDatabaseFlux()
-                                //Revenir au déut de la liste ..
                                 scrollView.scrollTo(0)
                             }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                     .foregroundColor(Color.purple)

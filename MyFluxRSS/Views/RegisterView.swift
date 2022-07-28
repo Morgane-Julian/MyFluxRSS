@@ -32,8 +32,12 @@ struct RegisterView: View {
                 Spacer()
                 NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
                 Button("INSCRIPTION") {
-                    registerViewModel.inscription { result in
-                        self.isShowingFeedView = result
+                    if registerViewModel.user.password == registerViewModel.user.passwordSecurity {
+                        registerViewModel.inscription { result in
+                            self.isShowingFeedView = result
+                        }
+                    } else {
+                        print("Erreur les mots de passe ne sont pas identiques !")
                     }
                 }
                 .padding(20)

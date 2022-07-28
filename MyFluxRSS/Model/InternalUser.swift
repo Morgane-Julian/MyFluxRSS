@@ -18,6 +18,4 @@ class InternalUser: Codable {
     var birthday : Date = .init()
      var passwordSecurity = ""
      var userId = ""
-    
-    
 }
