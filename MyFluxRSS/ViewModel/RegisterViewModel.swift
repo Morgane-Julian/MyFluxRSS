@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 class RegisterViewModel: ObservableObject {
-    var user = InternalUser()
+    @Published var user = InternalUser()
     let auth = Auth.auth()
     var isSignedIn = false
     

@@ -16,11 +16,14 @@ class AuthViewModel: ObservableObject {
         return authService.auth.currentUser != nil
     }
     
-   var userMail: String = ""
-   var password: String = ""
+  @Published var userMail: String = ""
+  @Published var password: String = ""
     
-    func connect() async throws {
+    //MARK: - Login and security login functions
+    
+    func connect() async throws -> Bool {
         do { try await authService.connect(userMail: userMail, password: password)
+            return true
         } catch {
             throw error
         }
@@ -32,7 +35,6 @@ class AuthViewModel: ObservableObject {
         }
         return false
     }
-   
 }
 
 

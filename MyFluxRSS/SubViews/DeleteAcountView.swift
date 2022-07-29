@@ -21,12 +21,17 @@ struct DeleteAcountView: View {
                 Text("Nous sommes navrés de te voir partir.")
                     .padding()
                     .font(.headline)
-                Text("Merci de confirmer tes identifiants afin de procéder à la suppression de ton compte. Attention cette action est irremédiable la suppression sera définite")
+                Text("Merci de confirmer tes identifiants afin de procéder à la suppression de ton compte. Attention cette action est irremédiable la suppression sera définitive")
                     .padding()
                     .font(.body)
             
             TextField("Adresse email", text: $parametersViewModel.email)
+                .padding()
+                .background(Color("BackgroundColorTextfield"))
+                .padding()
             SecureField("Mot de passe", text: $parametersViewModel.actualPassword)
+                .padding()
+                .background(Color("BackgroundColorTextfield"))
                 .padding()
             
             Button("Valider") {
@@ -36,7 +41,12 @@ struct DeleteAcountView: View {
                         self.appState.moveToAuth = true
                     }
                 })
-            }
+            }.padding()
+                .frame(width: 150, height: 50, alignment: .center)
+                .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(20.0)
+                .foregroundColor(.black)
+                .font(.title2)
         }
     }
 }

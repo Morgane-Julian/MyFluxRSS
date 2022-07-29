@@ -25,7 +25,6 @@ struct BookmarkView: View {
         .navigationBarBackButtonHidden(false)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                // Mettre une bouton retour personnalisé
                 Text("My Favorite Articles").font(.title)
             }
         }

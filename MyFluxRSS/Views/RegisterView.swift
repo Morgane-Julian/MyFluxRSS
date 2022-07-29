@@ -41,10 +41,10 @@ struct RegisterView: View {
                     }
                 }
                 .padding(20)
+                .frame(width: 150, height: 50, alignment: .center)
                 .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-                .cornerRadius(80.0)
+                .cornerRadius(20.0)
                 Spacer()
-                    .frame(width: 20, height: 50, alignment: .center)
             }
             .background(Color.gray.opacity(0.1))
         }

@@ -46,11 +46,10 @@ struct ParametersView: View {
                 }
                 Section(header: Text("Gestion du compte")) {
                     Button("Réinitialiser le mot de passe") {
-                        // l'utilisateur doit se ré authentifier
                         showingPopover = true
-                    }.foregroundColor(.black)
+                    }.foregroundColor(ColorUtils.purple)
                     NavigationLink("Supprimer mon compte", destination: DeleteAcountView(parametersViewModel: ParametersViewModel()))
-                }.foregroundColor(.black)
+                }
                 
                 .navigationTitle("Paramètres")
             }
@@ -61,8 +60,9 @@ struct ParametersView: View {
                     }
                 })
             }.padding()
+                .frame(width: 175, height: 50, alignment: .center)
                 .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-                .cornerRadius(80.0)
+                .cornerRadius(20.0)
                 .foregroundColor(.black)
                 .font(.title2)
             
@@ -70,25 +70,41 @@ struct ParametersView: View {
                 .frame(height: 20)
         }.background(Color.gray.opacity(0.1))
             .popover(isPresented: $showingPopover) {
-                Text("Merci de confirmer vos identifiants")
+                Image("logo")
+                    .resizable()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .padding()
+                Text("Veuillez confirmer vos identifiants")
                     .padding()
                     .font(.headline)
                 TextField("Adresse email", text: $parametersViewModel.email)
                     .padding()
                     .disableAutocorrection(true)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .background(Color("BackgroundColorTextfield"))
+                    .cornerRadius(5.0)
+                    .padding()
                 SecureField("Mot de passe actuel", text: $parametersViewModel.actualPassword)
                     .padding()
                     .disableAutocorrection(true)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .background(Color("BackgroundColorTextfield"))
+                    .cornerRadius(5.0)
+                    .padding()
                 SecureField("Nouveau mot de passe", text: $parametersViewModel.password)
                     .padding()
                     .disableAutocorrection(true)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .background(Color("BackgroundColorTextfield"))
+                    .cornerRadius(5.0)
+                    .padding()
                 SecureField("Confirmer le mot de passe", text: $parametersViewModel.confirmPassword)
                     .padding()
                     .disableAutocorrection(true)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .background(Color("BackgroundColorTextfield"))
+                    .cornerRadius(5.0)
+                    .padding()
                 Button("Valider") {
                     parametersViewModel.reauthenticate(email:parametersViewModel.email, password: parametersViewModel.actualPassword, callback: { result in
                         if result {
@@ -97,6 +113,13 @@ struct ParametersView: View {
                         }
                     })
                 }
+                .frame(width: 150, height: 50, alignment: .center)
+                .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(20.0)
+                .foregroundColor(.black)
+                .font(.title2)
+                
+               
             }
     }
 }

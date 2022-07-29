@@ -59,12 +59,15 @@ struct AuthView: View {
                         
                     Button("CONNEXION") {
                         Task {
-                            try await contentViewModel.connect()
-                            self.isShowingDetailView = true
+                            let success = try await contentViewModel.connect()
+                            if success {
+                                self.isShowingDetailView = true
+                            }
                         }
                     } .padding()
+                        .frame(width: 175, height: 50, alignment: .center)
                         .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(80.0)
+                        .cornerRadius(20.0)
                         .foregroundColor(.black)
                         .font(.title2)
                     Spacer()
