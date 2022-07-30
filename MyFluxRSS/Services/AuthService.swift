@@ -10,19 +10,10 @@ import Firebase
 
 class AuthService: ObservableObject {
     
-    static let shared: AuthService = {
-            let instance = AuthService()
-            return instance
-        }()
-    
     //MARK: - Properties
     let auth = Auth.auth()
-    @Published var user: User?
+    var user: User?
     private var authenticationStateHandler: AuthStateDidChangeListenerHandle?
-    
-    private init() {
-        addListeners()
-    }
     
     //MARK: - Sign in Functions
     func connect(userMail: String, password: String) async throws {

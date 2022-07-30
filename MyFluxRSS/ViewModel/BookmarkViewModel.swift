@@ -17,7 +17,7 @@ class BookmarkViewModel: ObservableObject, Identifiable {
     
     //Get the bookmarks from DB in our local table of bookmarks
     func getFavArticle() {
-        ArticleRepository.shared.get { articles in
+        ArticleRepository.shared.get(userID: FIRUser.shared.userID) { articles in
             self.bookmarks = articles
         }
     }

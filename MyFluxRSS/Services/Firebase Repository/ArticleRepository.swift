@@ -24,12 +24,10 @@ class ArticleRepository : ObservableObject {
     
     //MARK: - CRUD Functions
     
-    func add(_ article: Article) {
+    func add(_ article: Article, userID: String) {
         do {
             var newArticle = article
-            if let userID = AuthService.shared.user?.providerID {
                 newArticle.userId = userID
-            }
             _ = try store.collection(path).addDocument(from: newArticle)
             print("successfully add article")
         } catch {
@@ -37,9 +35,9 @@ class ArticleRepository : ObservableObject {
         }
     }
     
-    func get(callback: @escaping ([Article]) -> Void) {
+    func get(userID: String, callback: @escaping ([Article]) -> Void) {
         store.collection(path)
-            .whereField("userId", isEqualTo: AuthService.shared.user?.providerID as Any)
+            .whereField("userId", isEqualTo: userID)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")

@@ -24,7 +24,7 @@ class NewsFeedViewModel: ObservableObject {
     
     //Add an article in bookmark DB
     func add(_ article: Article) {
-        ArticleRepository.shared.add(article)
+        ArticleRepository.shared.add(article, userID: FIRUser.shared.userID)
     }
    
     //Get bookmark articles from DB

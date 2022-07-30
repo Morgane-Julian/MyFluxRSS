@@ -11,17 +11,26 @@ class AuthViewModel: ObservableObject {
     
     //MARK: - Properties
     
+    var authService = AuthService()
     var isSignedIn : Bool {
-        return AuthService.shared.auth.currentUser?.getIDToken() != nil
+        return self.authService.auth.currentUser?.getIDToken() != nil
     }
     
   @Published var userMail: String = ""
   @Published var password: String = ""
     
+    //MARK: - Init
+    init() {
+        self.authService.addListeners()
+        if let userID = self.authService.user?.providerID {
+            self.getUserID(userID: userID)
+        }
+    }
+    
     //MARK: - Login and security login functions
     
     func connect() async throws -> Bool {
-        do { try await AuthService.shared.connect(userMail: userMail, password: password)
+        do { try await self.authService.connect(userMail: userMail, password: password)
             return true
         } catch {
             throw error
@@ -33,6 +42,10 @@ class AuthViewModel: ObservableObject {
             return true
         }
         return false
+    }
+    
+    func getUserID(userID: String) {
+        FIRUser.shared.userID = userID
     }
 }
 

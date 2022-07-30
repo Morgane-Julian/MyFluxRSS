@@ -23,9 +23,7 @@ class FluxRepository : ObservableObject {
     func add(_ flux: Flux) {
         do {
             let newFlux = flux
-            if let userID = AuthService.shared.user?.providerID {
-                newFlux.userId = userID
-            }
+                newFlux.userId = FIRUser.shared.userID
             _ = try store.collection(path).addDocument(from: newFlux)
             print("successfully add flux")
         } catch {
@@ -35,7 +33,7 @@ class FluxRepository : ObservableObject {
     
     func get(callback: @escaping ([Flux]) -> Void) {
         store.collection(path)
-            .whereField("userId", isEqualTo: AuthService.shared.user?.providerID as Any)
+            .whereField("userId", isEqualTo: FIRUser.shared.userID)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     print("Error getting flux: \(error.localizedDescription)")

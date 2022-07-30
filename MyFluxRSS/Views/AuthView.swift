@@ -86,7 +86,7 @@ struct AuthView: View {
                 }
             }
         }.onAppear {
-            isShowingDetailView = AuthService.shared.user != nil
+            isShowingDetailView = FIRUser.shared.userID != ""
         }
         .navigationBarHidden(true)
     }
