@@ -39,7 +39,7 @@ class ParametersViewModel: ObservableObject {
     //Add a new flux url in DB
     func addNewFlux() {
         if self.urlString != "" && urlString != " " {
-            if fluxRepository.fluxDatabase.contains(where: { $0.flux == urlString}) {
+            if FIRUser.shared.fluxDatabase.contains(where: { $0.flux == urlString}) {
                 print("Oups, you already add this flux !")
             } else {
                 myNewFlux.flux = urlString

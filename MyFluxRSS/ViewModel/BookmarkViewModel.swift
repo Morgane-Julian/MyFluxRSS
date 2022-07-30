@@ -12,23 +12,23 @@ class BookmarkViewModel: ObservableObject, Identifiable {
     //MARK: - Properties
     
     @Published var bookmarks = [Article]()
+    var articleRepository = ArticleRepository()
     
     //MARK: - DB Functions
     
-    //Get the bookmarks from DB in our local table of bookmarks
+    //Get the DB bookmarks in our local table of bookmarks
     func getFavArticle() {
-        ArticleRepository.shared.get(userID: FIRUser.shared.userID) { articles in
-            self.bookmarks = articles
-        }
+        self.bookmarks = FIRUser.shared.articleDatabase
     }
     
-    //Remove a bookmark article in DB and local table of bookmarks
-    func removeArticle(article: IndexSet) {
-        let idToDelete = article.map { self.bookmarks[$0].id }
-        _ = idToDelete.compactMap { [weak self] id in
-            ArticleRepository.shared.remove(bookmarks.first(where: {$0.id == id})!)
-            guard let intID = Int(id!) else { return }
-            self?.bookmarks.remove(at: intID)
-        }
+    //Remove a bookmark article in DB and local tables of bookmarks
+    func removeArticle(indexSet: IndexSet) {
+        indexSet.forEach({ i in
+            let article = bookmarks[i]
+            if self.articleRepository.remove(article) {
+                self.bookmarks.remove(at: i)
+                FIRUser.shared.articleDatabase.remove(at: i)
+            }
+        })
     }
 }

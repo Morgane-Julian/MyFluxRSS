@@ -16,7 +16,7 @@ class FluxRepository : ObservableObject {
     private let path: String = "flux"
     private let store = Firestore.firestore()
     
-   var fluxDatabase: [Flux] = []
+//   var fluxDatabase: [Flux] = []
     
     //MARK: - CRUD Functions
     

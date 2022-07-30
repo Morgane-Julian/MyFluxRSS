@@ -15,6 +15,8 @@ class FIRUser: ObservableObject {
     }()
     
     var userID = ""
+    var fluxDatabase = [Flux]()
+    var articleDatabase = [Article]()
     
     private init() {
         

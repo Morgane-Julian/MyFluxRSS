@@ -9,9 +9,5 @@ import Foundation
 
 class Model {
     
-    var fluxDatabase = [Flux]()
-    var articleDatabase = [Article]()
-    
-    
     
 }

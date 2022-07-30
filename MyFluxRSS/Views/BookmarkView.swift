@@ -21,7 +21,7 @@ struct BookmarkView: View {
             ForEach(bookmarkViewModel.bookmarks) { item in
                 ArticleView(article: item)
             }.onDelete { indexSet in
-                bookmarkViewModel.removeArticle(article: indexSet)
+                bookmarkViewModel.removeArticle(indexSet: indexSet)
             }
         }.onAppear {
             bookmarkViewModel.getFavArticle()
