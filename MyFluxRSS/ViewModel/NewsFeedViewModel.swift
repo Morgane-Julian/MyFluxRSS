@@ -10,37 +10,33 @@ import Foundation
 
 class NewsFeedViewModel: ObservableObject {
     
-    let model = Model()
+    //MARK: - Properties
    
     @Published var articles = [Article]()
-    @Published var articleRepository = ArticleRepository()
-    @Published var fluxRepository = FluxRepository()
+    var fluxRepository = FluxRepository()
+    
+    init() {
+        self.parseArticleFromDatabaseFlux()
+        // fait un GET sur articleRepo et FluxRepo
+    }
     
     //MARK: - Functions
+    
+    //Add an article in bookmark DB
     func add(_ article: Article) {
-        articleRepository.get { articlesBDD in
-            self.articleRepository.articlesDatabase = articlesBDD
-            if self.articleRepository.articlesDatabase.contains(where: { $0.link == article.link}) {
-                print("Article already in fav list BDD!")
-            } else {
-                self.articleRepository.add(article)
-            }
-        }
+        ArticleRepository.shared.add(article)
     }
    
+    //Get bookmark articles from DB
     func parseArticleFromDatabaseFlux() {
         fluxRepository.get { flux in
+            self.articles.removeAll()
             for strings in flux {
                 guard let url = URL(string: strings.flux) else { return }
-                self.model.parseArticles(url: url) { result in
-                    if self.articles == result {
-                        print("Article already parsed")
-                    } else {
-                    self.articles = result
-                    self.articles.sort(by: { $0.date.compare($1.date) == .orderedDescending})
-                    }
-                }
+                let articleParsed = ArticleParser.parseArticles(url: url)
+                self.articles.append(contentsOf: articleParsed)
             }
+            self.articles.sort(by: { $0.date.compare($1.date) == .orderedDescending})
         }
     }
 }

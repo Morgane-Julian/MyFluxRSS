@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RegisterView: View {
     
+    //MARK: - Properties
+    
     @StateObject var registerViewModel: RegisterViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowingFeedView = false
@@ -17,6 +19,9 @@ struct RegisterView: View {
     
     var body: some View {
             VStack {
+                
+                //MARK: - USER IDENTIFICATION
+                
                 Form {
                     TextField("Nom", text: $registerViewModel.user.firstName)
                     TextField("Prénom", text: $registerViewModel.user.lastName)
@@ -30,6 +35,9 @@ struct RegisterView: View {
                     SecureField("Confirmer le mot de passe", text: $registerViewModel.user.passwordSecurity)
                 }
                 Spacer()
+                
+                //MARK: - MOOVE TO NEWSFEEDVIEW
+                
                 NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
                 Button("INSCRIPTION") {
                     if registerViewModel.user.password == registerViewModel.user.passwordSecurity {

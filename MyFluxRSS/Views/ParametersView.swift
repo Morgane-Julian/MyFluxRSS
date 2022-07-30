@@ -9,12 +9,16 @@ import SwiftUI
 
 struct ParametersView: View {
     
+    //MARK: - Properties
+    
     @StateObject var parametersViewModel: ParametersViewModel
     @State private var isShowingDetailView = false
     @State private var showingPopover = false
     @EnvironmentObject var appState: AppState
     @State private var isDarkModeOn = false
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    //MARK: - THEME FUNCTION
     
     func setAppTheme() {
         isDarkModeOn = UserDefaultsUtils.shared.getDarkMode()
@@ -24,6 +28,9 @@ struct ParametersView: View {
     var body: some View {
         VStack {
             Form {
+                
+                //MARK: - THEME
+                
                 Section(header: Text("Thème")) {
                     Toggle("Dark Mode", isOn: $isDarkModeOn).onChange(of: self.isDarkModeOn) { state in
                         parametersViewModel.changeDarkMode(state: state)
@@ -34,6 +41,9 @@ struct ParametersView: View {
                         self.isDarkModeOn = UserDefaults.standard.bool(forKey: "themeToggle")
                     }
                 }
+                
+                //MARK: - FLUX MANAGEMENT
+                
                 Section(header: Text("Flux")) {
                     TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString, onCommit: {
                         parametersViewModel.addNewFlux()
@@ -44,6 +54,9 @@ struct ParametersView: View {
                         .submitLabel(.done)
                     NavigationLink("Mes flux", destination: FluxListView(parametersViewModel: parametersViewModel))
                 }
+                
+                //MARK: - ACCOUNT MANAGEMENT
+                
                 Section(header: Text("Gestion du compte")) {
                     Button("Réinitialiser le mot de passe") {
                         showingPopover = true
@@ -53,6 +66,9 @@ struct ParametersView: View {
                 
                 .navigationTitle("Paramètres")
             }
+            
+            //MARK: - DISCONNECT
+            
             Button("Déconnexion") {
                 parametersViewModel.disconnect(callback: { result in
                     if result {
@@ -69,6 +85,9 @@ struct ParametersView: View {
             Spacer()
                 .frame(height: 20)
         }.background(Color.gray.opacity(0.1))
+        
+        //MARK: - CHANGE PASSWORD POP-UP
+        
             .popover(isPresented: $showingPopover) {
                 Image("logo")
                     .resizable()
@@ -118,8 +137,6 @@ struct ParametersView: View {
                 .cornerRadius(20.0)
                 .foregroundColor(.black)
                 .font(.title2)
-                
-               
             }
     }
 }

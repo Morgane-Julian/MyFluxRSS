@@ -13,16 +13,20 @@ import SwiftUI
 
 class ParametersViewModel: ObservableObject {
     
-    var model = Model()
+    //MARK: - Properties
+    
+    
     @Published var fluxRepository = FluxRepository()
     @Published var theme = ["dark", "light", "system"]
     @Published var myFlux = [Flux()]
     @Published var urlString = ""
     @Published var notifications = true
     @Published var previewOptions = ["Always", "When Unlocked", "Never"]
-    var authService = AuthService()
+    
+    var model = ArticleParser()
     let user = Auth.auth().currentUser
     var credential: AuthCredential?
+    
     var password = ""
     var confirmPassword = ""
     var email = ""
@@ -31,6 +35,8 @@ class ParametersViewModel: ObservableObject {
     var myNewFlux : Flux = Flux()
     
     //MARK: DB Functions
+    
+    //Add a new flux url in DB
     func addNewFlux() {
         if self.urlString != "" && urlString != " " {
             if fluxRepository.fluxDatabase.contains(where: { $0.flux == urlString}) {
@@ -44,12 +50,14 @@ class ParametersViewModel: ObservableObject {
         }
     }
     
+    //Get the flux url from DB
     func getFlux() {
         fluxRepository.get { flux in
             self.myFlux = flux
         }
     }
     
+    //Delete a flux url in DB
     func delete(at offsets: IndexSet) {
         let idToDelete = offsets.map { self.myFlux[$0].id }
         _ = idToDelete.compactMap { [weak self] id in
@@ -60,6 +68,7 @@ class ParametersViewModel: ObservableObject {
     }
     
     //MARK: Manage account functions
+    
     func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
         self.credential = EmailAuthProvider.credential(withEmail: email, password: password)
         if let credential = self.credential {
@@ -105,6 +114,7 @@ class ParametersViewModel: ObservableObject {
     }
     
     //MARK: - Theme Functions
+    
     func changeDarkMode(state: Bool) {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = state ? .dark : .light
         UserDefaultsUtils.shared.setDarkMode(enable: state)

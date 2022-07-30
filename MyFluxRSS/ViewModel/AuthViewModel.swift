@@ -11,9 +11,8 @@ class AuthViewModel: ObservableObject {
     
     //MARK: - Properties
     
-    let authService = AuthService()
     var isSignedIn : Bool {
-        return authService.auth.currentUser != nil
+        return AuthService.shared.auth.currentUser?.getIDToken() != nil
     }
     
   @Published var userMail: String = ""
@@ -22,7 +21,7 @@ class AuthViewModel: ObservableObject {
     //MARK: - Login and security login functions
     
     func connect() async throws -> Bool {
-        do { try await authService.connect(userMail: userMail, password: password)
+        do { try await AuthService.shared.connect(userMail: userMail, password: password)
             return true
         } catch {
             throw error

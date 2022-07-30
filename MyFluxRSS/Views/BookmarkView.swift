@@ -9,9 +9,14 @@ import SwiftUI
 
 struct BookmarkView: View {
     
+    //MARK: - Properties
+    
     @ObservedObject var bookmarkViewModel = BookmarkViewModel()
     
     var body: some View {
+        
+        //MARK: - DISPLAY BOOKMARKS 
+        
         List {
             ForEach(bookmarkViewModel.bookmarks) { item in
                 ArticleView(article: item)

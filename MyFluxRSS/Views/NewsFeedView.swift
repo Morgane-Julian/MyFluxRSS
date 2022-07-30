@@ -9,10 +9,15 @@ import SwiftUI
 
 struct NewsFeedView: View {
     
-    @ObservedObject var newsFeedViewModel: NewsFeedViewModel
+    //MARK: - Properties
+    
+    @StateObject var newsFeedViewModel = NewsFeedViewModel()
     
     var body: some View {
         NavigationView {
+            
+            //MARK: - FEED ITEMS
+            
             VStack {
                 ScrollViewReader { scrollView in
                     List(newsFeedViewModel.articles) { item in
@@ -26,13 +31,14 @@ struct NewsFeedView: View {
                                 .tint(.purple)
                             } .id(newsFeedViewModel.articles.firstIndex(of: item))
                     }
-                    .onAppear {
-                        newsFeedViewModel.parseArticleFromDatabaseFlux()
-                    }.refreshable {
+                    .refreshable {
                         newsFeedViewModel.parseArticleFromDatabaseFlux()
                         scrollView.scrollTo(0)
                     }
                     .navigationBarTitleDisplayMode(.inline)
+                    
+                    //MARK: - TOOLBAR ITEMS
+                    
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {

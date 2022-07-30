@@ -8,8 +8,6 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import Combine
-
 
 class FluxRepository : ObservableObject {
     
@@ -18,36 +16,16 @@ class FluxRepository : ObservableObject {
     private let path: String = "flux"
     private let store = Firestore.firestore()
     
-    var userId = ""
-    private let authService = AuthService()
-    private var cancellables: Set<AnyCancellable> = []
-    
-    @Published var fluxDatabase: [Flux] = []
-    
-    //MARK: - Init
-    
-    init() {
-        authService.$user
-            .compactMap { user in
-                user?.uid
-            }
-            .assign(to: \.userId, on: self)
-            .store(in: &cancellables)
-        
-        authService.$user
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.get { _ in }
-            }
-            .store(in: &cancellables)
-    }
+   var fluxDatabase: [Flux] = []
     
     //MARK: - CRUD Functions
     
     func add(_ flux: Flux) {
         do {
             let newFlux = flux
-            newFlux.userId = userId
+            if let userID = AuthService.shared.user?.providerID {
+                newFlux.userId = userID
+            }
             _ = try store.collection(path).addDocument(from: newFlux)
             print("successfully add flux")
         } catch {
@@ -57,7 +35,7 @@ class FluxRepository : ObservableObject {
     
     func get(callback: @escaping ([Flux]) -> Void) {
         store.collection(path)
-            .whereField("userId", isEqualTo: userId)
+            .whereField("userId", isEqualTo: AuthService.shared.user?.providerID as Any)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     print("Error getting flux: \(error.localizedDescription)")

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ArticleView: View {
     
+    //MARK: - Properties
+    
     var article = Article()
     @Environment(\.openURL) var openURL
     

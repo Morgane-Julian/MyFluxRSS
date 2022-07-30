@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AuthView: View {
     
+    //MARK: - Properties
+    
     @StateObject var contentViewModel: AuthViewModel
     @State private var isShowingDetailView = false
     @EnvironmentObject var appState: AppState
@@ -16,6 +18,9 @@ struct AuthView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
+                //MARK: - LOGO
+                
                 VStack {
                     Image("logo")
                         .resizable()
@@ -25,6 +30,9 @@ struct AuthView: View {
                     Spacer()
                 }
                 .padding(50)
+                
+                //MARK: - USER IDENTIFICATION
+                
                 VStack {
                     TextField("Adresse mail", text: $contentViewModel.userMail)
                         .padding()
@@ -54,8 +62,11 @@ struct AuthView: View {
                     }
                     Spacer()
                 }
+                
+                //MARK: - MOOVE TO NEWSFEEDVIEW
+                
                 VStack {
-                    NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingDetailView) { EmptyView() }
+                    NavigationLink(destination: NewsFeedView(), isActive: $isShowingDetailView) { EmptyView() }
                         
                     Button("CONNEXION") {
                         Task {
@@ -75,7 +86,7 @@ struct AuthView: View {
                 }
             }
         }.onAppear {
-            isShowingDetailView = contentViewModel.isUserAlreadyLog()
+            isShowingDetailView = AuthService.shared.user != nil
         }
         .navigationBarHidden(true)
     }

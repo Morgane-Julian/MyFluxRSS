@@ -9,9 +9,14 @@ import Foundation
 import Firebase
 
 class RegisterViewModel: ObservableObject {
+    
+    //MARK: - Properties
+    
     @Published var user = InternalUser()
     let auth = Auth.auth()
     var isSignedIn = false
+    
+    //MARK: - Register function
     
     func inscription(callback: @escaping (Bool) -> Void) {
         auth.createUser(withEmail: user.email, password: user.password) { authResult, error in
@@ -26,8 +31,4 @@ class RegisterViewModel: ObservableObject {
             }
         }
     }
-    
-    
-    
-    
 }
