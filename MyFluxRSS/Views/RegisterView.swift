@@ -38,13 +38,12 @@ struct RegisterView: View {
                 
                 //MARK: - MOOVE TO NEWSFEEDVIEW
                 
-                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $isShowingFeedView) { EmptyView() }
+                NavigationLink(destination: NewsFeedView(newsFeedViewModel: NewsFeedViewModel()), isActive: $registerViewModel.isSignedIn) { EmptyView() }
+                
                 Button("INSCRIPTION") {
-                    if registerViewModel.user.password == registerViewModel.user.passwordSecurity {
-                        registerViewModel.inscription { result in
-                            self.isShowingFeedView = result
-                        }
-                    } else {
+                    if self.registerViewModel.user.password == self.registerViewModel.user.passwordSecurity {
+                        self.registerViewModel.inscription()
+                        } else {
                         print("Erreur les mots de passe ne sont pas identiques !")
                     }
                 }
