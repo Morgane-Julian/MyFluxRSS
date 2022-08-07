@@ -18,7 +18,7 @@ class ParametersViewModel: ObservableObject {
     
     @Published var fluxRepository = FluxRepository()
     @Published var theme = ["dark", "light", "system"]
-    @Published var myFlux = [Flux()]
+    @Published var myFlux = [Flux]()
     @Published var urlString = ""
     @Published var notifications = true
     @Published var previewOptions = ["Always", "When Unlocked", "Never"]
@@ -32,7 +32,7 @@ class ParametersViewModel: ObservableObject {
     var email = ""
     var actualPassword = ""
     
-    var myNewFlux : Flux = Flux()
+    var myNewFlux: Flux = Flux()
     
     //MARK: DB Functions
     

@@ -39,11 +39,5 @@ class AuthService: ObservableObject {
 //        if let handle = authenticationStateHandler {
 //            Auth.auth().removeStateDidChangeListener(handle)
 //        }
-//        authenticationStateHandler = Auth.auth()
-//            .addStateDidChangeListener { _, user in
-//                if let user = user {
-//                    FIRUser.shared.userID = user.uid
-//                }
-//            }
     }
 }

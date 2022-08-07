@@ -10,6 +10,6 @@ import FirebaseFirestoreSwift
 
 class Flux: Identifiable, Codable {
     @DocumentID var id: String?
-    var flux = "https://www.hackingwithswift.com/articles/rss"
+    var flux = ""
     var userId = ""
 }

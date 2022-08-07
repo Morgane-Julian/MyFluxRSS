@@ -13,7 +13,7 @@ class RegisterViewModel: ObservableObject {
     //MARK: - Properties
     
     @Published var user = InternalUser()
-    var isSignedIn = false
+    @Published var isSignedIn = false
     var registerService = RegisterService()
     
     //MARK: - Register function
