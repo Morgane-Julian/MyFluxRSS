@@ -86,7 +86,7 @@ struct AuthView: View {
                 }
             }
         }.onAppear {
-            isShowingDetailView = FIRUser.shared.userID != ""
+            isShowingDetailView = contentViewModel.isSignedIn
         }
         .navigationBarHidden(true)
     }

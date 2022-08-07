@@ -20,12 +20,12 @@ class AuthViewModel: ObservableObject {
   @Published var password: String = ""
     
     //MARK: - Init
-    init() {
-        self.authService.addListeners()
-        if let userID = self.authService.user?.providerID {
-            self.getUserID(userID: userID)
-        }
-    }
+//    init() {
+//        self.authService.addListeners()
+//        if let userID = self.authService.user?.providerID {
+//            self.getUserID(userID: userID)
+//        }
+//    }
     
     //MARK: - Login and security login functions
     
@@ -44,9 +44,9 @@ class AuthViewModel: ObservableObject {
         return false
     }
     
-    func getUserID(userID: String) {
-        FIRUser.shared.userID = userID
-    }
+//    func getUserID(userID: String) {
+//        FIRUser.shared.userID = userID
+//    }
 }
 
 

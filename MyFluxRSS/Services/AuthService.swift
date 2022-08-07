@@ -12,9 +12,8 @@ class AuthService: ObservableObject {
     
     //MARK: - Properties
     let auth = Auth.auth()
-    var user: User?
-    private var authenticationStateHandler: AuthStateDidChangeListenerHandle?
-    
+//    private var authenticationStateHandler: AuthStateDidChangeListenerHandle?
+
     //MARK: - Sign in Functions
     func connect(userMail: String, password: String) async throws {
         if auth.currentUser?.email != userMail {
@@ -29,12 +28,22 @@ class AuthService: ObservableObject {
     }
     
     func addListeners() {
-        if let handle = authenticationStateHandler {
-            Auth.auth().removeStateDidChangeListener(handle)
-        }
-        authenticationStateHandler = Auth.auth()
-            .addStateDidChangeListener { _, user in
-                self.user = user
+        auth.addStateDidChangeListener() { _, user in
+            if let user = user {
+                FIRUser.shared.userID = user.uid
+            } else {
+                print("no user log")
             }
+        }
+        
+//        if let handle = authenticationStateHandler {
+//            Auth.auth().removeStateDidChangeListener(handle)
+//        }
+//        authenticationStateHandler = Auth.auth()
+//            .addStateDidChangeListener { _, user in
+//                if let user = user {
+//                    FIRUser.shared.userID = user.uid
+//                }
+//            }
     }
 }
