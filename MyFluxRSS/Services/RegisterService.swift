@@ -10,8 +10,12 @@ import Firebase
 
 class RegisterService {
     
+    //MARK: - Properties
     let auth = Auth.auth()
     
+    //MARK: - Functions
+    
+    //Create a new user in FB
     func inscription(userMail: String, userPassword: String, callback: @escaping (Bool) -> Void) {
         auth.createUser(withEmail: userMail, password: userPassword) { authResult, error in
              DispatchQueue.main.async {

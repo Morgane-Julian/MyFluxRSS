@@ -11,10 +11,12 @@ import Firebase
 class AuthService: ObservableObject {
     
     //MARK: - Properties
+    
     let auth = Auth.auth()
-//    private var authenticationStateHandler: AuthStateDidChangeListenerHandle?
-
+    
     //MARK: - Sign in Functions
+    
+    //Connect user to DB
     func connect(userMail: String, password: String) async throws {
         if auth.currentUser?.email != userMail {
             do { try Auth.auth().signOut() }
@@ -27,17 +29,14 @@ class AuthService: ObservableObject {
         }
     }
     
+    // Add lsiteners from FB for auth persistence
     func addListeners() {
         auth.addStateDidChangeListener() { _, user in
             if let user = user {
-                FIRUser.shared.userID = user.uid
+                InternalUser.shared.userID = user.uid
             } else {
                 print("no user log")
             }
         }
-        
-//        if let handle = authenticationStateHandler {
-//            Auth.auth().removeStateDidChangeListener(handle)
-//        }
     }
 }

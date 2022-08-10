@@ -32,7 +32,7 @@ struct NewsFeedView: View {
                             } .id(newsFeedViewModel.articles.firstIndex(of: item))
                     }
                     .refreshable {
-                        newsFeedViewModel.parseArticleFromDatabaseFlux()
+                        newsFeedViewModel.refreshArticleFeed()
                         scrollView.scrollTo(0)
                     }
                     .navigationBarTitleDisplayMode(.inline)
@@ -42,7 +42,7 @@ struct NewsFeedView: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
-                                newsFeedViewModel.parseArticleFromDatabaseFlux()
+                                newsFeedViewModel.refreshArticleFeed()
                                 scrollView.scrollTo(0)
                             }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                     .foregroundColor(Color.purple)
@@ -65,7 +65,8 @@ struct NewsFeedView: View {
                         }
                     }
                 }
-            
+            }.onAppear {
+                newsFeedViewModel.refreshArticleFeed()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())

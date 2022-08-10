@@ -12,12 +12,13 @@ class RegisterViewModel: ObservableObject {
     
     //MARK: - Properties
     
-    @Published var user = InternalUser()
+    @Published var user = InternalUser.shared
     @Published var isSignedIn = false
     var registerService = RegisterService()
     
     //MARK: - Register function
     
+    //register a new account
     func inscription() {
         self.registerService.inscription(userMail: self.user.email, userPassword: self.user.password, callback: { success in
             if success {

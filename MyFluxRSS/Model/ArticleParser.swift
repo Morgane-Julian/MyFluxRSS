@@ -1,5 +1,5 @@
 //
-//  Model.swift
+//  ArticleParser.swift
 //  MyFluxRSS
 //
 //  Created by Morgane Julian on 31/03/2022.
@@ -10,8 +10,9 @@ import FeedKit
 
 class ArticleParser {
     
-    //MARK: - Function for parse articles from RSS
+    //MARK: - Functions
     
+    // Function for parse articles from RSS link with Feedkit
     static func parseArticles(url: URL) -> [Article] {
         let parser = FeedParser(URL: url)
         let result = parser.parse()
@@ -26,15 +27,15 @@ class ArticleParser {
                     } else {
                         articleProv.description = article.description ?? "Aucun aperçu disponible"
                     }
-                   articleProv.link = article.link!
+                    articleProv.link = article.link!
                     articleProv.image = final.image?.url ?? "https://zupimages.net/up/22/15/hcop.png"
                     articleProv.title = article.title!
                     articleProv.author = article.author ?? ""
                     articleProv.id = UUID().uuidString
                     articleProv.date = article.pubDate ?? .now
-
+                    
                     if finalArticle.contains(where: { $0.link == articleProv.link }) {
-
+                        
                     } else {
                         finalArticle.append(articleProv)
                     }

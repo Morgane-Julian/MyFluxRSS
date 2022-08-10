@@ -8,16 +8,21 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-class InternalUser: Codable {
+class InternalUser: Codable, ObservableObject {
     
-    // Sert à stocker un objet user lors de l'enregistrement pour ensuite le passer à Firebase
+    // Create a singleton instance of app user
+    static let shared: InternalUser = {
+        let instance = InternalUser()
+        return instance
+    }()
     
+    //MARK: - Properties
     @DocumentID var id: String?
-     var firstName = ""
-     var lastName = ""
-     var email = ""
-     var password = ""
-     var birthday : Date = .init()
-     var passwordSecurity = ""
-     var userId = ""
+    var firstName = ""
+    var lastName = ""
+    var email = ""
+    var password = ""
+    var birthday : Date = .init()
+    var passwordSecurity = ""
+    var userID = ""
 }

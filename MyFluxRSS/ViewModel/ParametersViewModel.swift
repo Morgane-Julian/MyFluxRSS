@@ -15,15 +15,10 @@ class ParametersViewModel: ObservableObject {
     
     //MARK: - Properties
     
-    
-    @Published var fluxRepository = FluxRepository()
     @Published var theme = ["dark", "light", "system"]
     @Published var myFlux = [Flux]()
     @Published var urlString = ""
-    @Published var notifications = true
-    @Published var previewOptions = ["Always", "When Unlocked", "Never"]
     
-    var model = ArticleParser()
     let user = Auth.auth().currentUser
     var credential: AuthCredential?
     
@@ -39,11 +34,16 @@ class ParametersViewModel: ObservableObject {
     //Add a new flux url in DB
     func addNewFlux() {
         if self.urlString != "" && urlString != " " {
-            if FIRUser.shared.fluxDatabase.contains(where: { $0.flux == urlString}) {
+            self.getFlux()
+            if self.myFlux.contains(where: { $0.flux == urlString}) {
                 print("Oups, you already add this flux !")
             } else {
                 myNewFlux.flux = urlString
-                fluxRepository.add(myNewFlux)
+                FluxRepository.shared.add(myNewFlux, callback: { success in
+                    if success {
+                        self.myFlux.append(self.myNewFlux)
+                    }
+                })
             }
         } else {
             print("Error, this is not a valid flux ! ")
@@ -52,7 +52,7 @@ class ParametersViewModel: ObservableObject {
     
     //Get the flux url from DB
     func getFlux() {
-        fluxRepository.get { flux in
+        FluxRepository.shared.get { flux in
             self.myFlux = flux
         }
     }
@@ -61,7 +61,7 @@ class ParametersViewModel: ObservableObject {
     func delete(at offsets: IndexSet) {
         let idToDelete = offsets.map { self.myFlux[$0].id }
         _ = idToDelete.compactMap { [weak self] id in
-            self?.fluxRepository.remove(myFlux.first(where: {$0.id == id})!)
+            FluxRepository.shared.remove(myFlux.first(where: {$0.id == id})!)
             guard let intID = Int(id!) else { return }
             self?.myFlux.remove(at: intID)
         }

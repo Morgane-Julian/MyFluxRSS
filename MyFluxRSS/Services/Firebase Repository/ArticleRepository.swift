@@ -12,6 +12,12 @@ import FirebaseFirestoreSwift
 
 class ArticleRepository : ObservableObject {
     
+    //Create a singleton instance of article repository
+    static let shared: ArticleRepository = {
+        let instance = ArticleRepository()
+        return instance
+    }()
+    
     //MARK: - Properties
     
     private let path: String = "articles"
@@ -19,18 +25,19 @@ class ArticleRepository : ObservableObject {
     
     //MARK: - CRUD Functions
     
-    func add(_ article: Article, userID: String) -> Bool {
+    // add a bookmark article in DB
+    func add(_ article: Article, userID: String) {
         do {
             var newArticle = article
-                newArticle.userId = userID
+            newArticle.userId = userID
             _ = try store.collection(path).addDocument(from: newArticle)
             print("successfully add article")
-            return true
         } catch {
             fatalError("Unable to add article: \(error.localizedDescription).")
         }
     }
     
+    // get the bookmark articles from DB
     func get(userID: String, callback: @escaping ([Article]) -> Void) {
         store.collection(path)
             .whereField("userId", isEqualTo: userID)
@@ -50,6 +57,7 @@ class ArticleRepository : ObservableObject {
             }
     }
     
+    //Delete a bookmark article in DB
     func remove(_ article: Article) -> Bool {
         guard let articleId = article.id else { return false }
         store.collection(path).document(articleId).delete { error in

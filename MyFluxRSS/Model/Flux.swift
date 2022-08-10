@@ -9,6 +9,9 @@ import Foundation
 import FirebaseFirestoreSwift
 
 class Flux: Identifiable, Codable {
+    
+    //MARK: - Properties
+    
     @DocumentID var id: String?
     var flux = ""
     var userId = ""

@@ -9,6 +9,9 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Article: Identifiable, Hashable, Codable {
+    
+    //MARK: - Properties
+    
     @DocumentID var id: String?
     var userId = ""
     var title: String = "Title"
