@@ -17,6 +17,7 @@ struct ParametersView: View {
     @EnvironmentObject var appState: AppState
     @State private var isDarkModeOn = false
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    @State private var showingAlert = false
     
     //MARK: - THEME FUNCTION
     
@@ -129,8 +130,12 @@ struct ParametersView: View {
                         if result {
                             parametersViewModel.changePassword(password: parametersViewModel.password)
                             self.showingPopover = false
+                        } else {
+                            self.showingAlert = true
                         }
                     })
+                }.alert(AuthService.shared.changePasswordError, isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) { }
                 }
                 .frame(width: 150, height: 50, alignment: .center)
                 .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))

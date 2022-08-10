@@ -21,6 +21,9 @@ class AuthService: ObservableObject {
     let auth = Auth.auth()
     let user = Auth.auth().currentUser
     var credential: AuthCredential?
+    var authError = ""
+    var changePasswordError = ""
+    var deleteAccountError = ""
     
     //MARK: - Sign in Functions
     
@@ -32,6 +35,7 @@ class AuthService: ObservableObject {
             do {
                 _ = try await auth.signIn(withEmail: userMail, password: password)
             } catch {
+                self.authError = error.localizedDescription
                 throw error
             }
         }
@@ -57,7 +61,6 @@ class AuthService: ObservableObject {
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    print("GG reauth done !")
                     callback(true)
                 }
             }
@@ -69,7 +72,7 @@ class AuthService: ObservableObject {
             try Auth.auth().signOut()
             callback(true)
         }
-        catch { print("already logged out")
+        catch { print(error.localizedDescription)
         }
     }
     
@@ -78,7 +81,7 @@ class AuthService: ObservableObject {
             if error != nil {
                 print(error?.localizedDescription as Any)
             } else {
-                print("wp password changed")
+                self.changePasswordError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer."
             }
         }
     }
@@ -89,7 +92,7 @@ class AuthService: ObservableObject {
             if let error = error {
                 print("\(error.localizedDescription)")
             } else {
-                print("account deleted successfully")
+                self.deleteAccountError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer."
             }
         }
     }

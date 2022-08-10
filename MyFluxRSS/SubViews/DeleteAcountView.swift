@@ -10,6 +10,7 @@ import SwiftUI
 struct DeleteAcountView: View {
     @StateObject var parametersViewModel: ParametersViewModel
     @EnvironmentObject var appState: AppState
+    @State private var showingAlert = false
     
     var body: some View {
         VStack {
@@ -39,8 +40,12 @@ struct DeleteAcountView: View {
                     if result {
                         parametersViewModel.deleteAcount()
                         self.appState.moveToAuth = true
+                    } else {
+                        self.showingAlert = true
                     }
                 })
+            }.alert(AuthService.shared.deleteAccountError, isPresented: $showingAlert) {
+                Button("OK", role: .cancel) { }
             }.padding()
                 .frame(width: 150, height: 50, alignment: .center)
                 .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))

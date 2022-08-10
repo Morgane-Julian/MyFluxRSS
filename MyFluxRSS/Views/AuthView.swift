@@ -14,6 +14,7 @@ struct AuthView: View {
     @StateObject var contentViewModel: AuthViewModel
     @State private var isShowingDetailView = false
     @EnvironmentObject var appState: AppState
+    @State private var isShowingAlert = false
     
     var body: some View {
         NavigationView {
@@ -73,14 +74,20 @@ struct AuthView: View {
                             let success = try await contentViewModel.connect()
                             if success {
                                 self.isShowingDetailView = true
+                            } else {
+                                self.isShowingAlert = true
                             }
                         }
-                    } .padding()
-                        .frame(width: 175, height: 50, alignment: .center)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(20.0)
-                        .foregroundColor(.black)
-                        .font(.title2)
+                    }.alert(AuthService.shared.authError, isPresented: $isShowingAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
+                    .padding()
+                    .frame(width: 175, height: 50, alignment: .center)
+                    .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))
+                    .cornerRadius(20.0)
+                    .foregroundColor(.black)
+                    .font(.title2)
+                    
                     Spacer()
                         .frame(height: 20)
                 }
