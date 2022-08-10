@@ -70,7 +70,7 @@ struct NewsFeedView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-         .navigationBarHidden(true)
+        .navigationBarHidden(true)
     }
     
 #if DEBUG

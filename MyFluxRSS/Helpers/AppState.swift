@@ -8,5 +8,6 @@
 import Foundation
 
 class AppState: ObservableObject {
+    
     @Published var moveToAuth: Bool = false
 }

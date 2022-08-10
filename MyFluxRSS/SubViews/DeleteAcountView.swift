@@ -13,17 +13,17 @@ struct DeleteAcountView: View {
     
     var body: some View {
         VStack {
-                Image("logo")
-                    .resizable()
-                    .frame(width: 200, height: 200, alignment: .center)
-                    .padding()
-                    
-                Text("Nous sommes navrés de te voir partir.")
-                    .padding()
-                    .font(.headline)
-                Text("Merci de confirmer tes identifiants afin de procéder à la suppression de ton compte. Attention cette action est irremédiable la suppression sera définitive")
-                    .padding()
-                    .font(.body)
+            Image("logo")
+                .resizable()
+                .frame(width: 200, height: 200, alignment: .center)
+                .padding()
+            
+            Text("Nous sommes navrés de te voir partir.")
+                .padding()
+                .font(.headline)
+            Text("Merci de confirmer tes identifiants afin de procéder à la suppression de ton compte. Attention cette action est irremédiable et la suppression sera définitive.")
+                .padding()
+                .font(.body)
             
             TextField("Adresse email", text: $parametersViewModel.email)
                 .padding()

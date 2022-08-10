@@ -67,7 +67,7 @@ struct AuthView: View {
                 
                 VStack {
                     NavigationLink(destination: NewsFeedView(), isActive: $isShowingDetailView) { EmptyView() }
-                        
+                    
                     Button("CONNEXION") {
                         Task {
                             let success = try await contentViewModel.connect()

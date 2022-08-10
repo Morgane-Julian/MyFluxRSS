@@ -10,9 +10,17 @@ import Firebase
 
 class AuthService: ObservableObject {
     
+    //Create a singleton instance of article repository
+    static let shared: AuthService = {
+        let instance = AuthService()
+        return instance
+    }()
+    
     //MARK: - Properties
     
     let auth = Auth.auth()
+    let user = Auth.auth().currentUser
+    var credential: AuthCredential?
     
     //MARK: - Sign in Functions
     
@@ -36,6 +44,52 @@ class AuthService: ObservableObject {
                 InternalUser.shared.userID = user.uid
             } else {
                 print("no user log")
+            }
+        }
+    }
+    
+    //MARK: - Manage account functions
+    
+    func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
+        self.credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        if let credential = self.credential {
+            user?.reauthenticate(with: credential) { authDataResult, error  in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("GG reauth done !")
+                    callback(true)
+                }
+            }
+        }
+    }
+    
+    func disconnect(callback: @escaping (Bool) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            callback(true)
+        }
+        catch { print("already logged out")
+        }
+    }
+    
+    func changePassword(password: String) {
+        Auth.auth().currentUser?.updatePassword(to: password) { error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                print("wp password changed")
+            }
+        }
+    }
+    
+    func deleteAcount() {
+        let user = Auth.auth().currentUser
+        user?.delete { error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+            } else {
+                print("account deleted successfully")
             }
         }
     }

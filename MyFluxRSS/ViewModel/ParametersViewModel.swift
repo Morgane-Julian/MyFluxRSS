@@ -18,15 +18,10 @@ class ParametersViewModel: ObservableObject {
     @Published var theme = ["dark", "light", "system"]
     @Published var myFlux = [Flux]()
     @Published var urlString = ""
-    
-    let user = Auth.auth().currentUser
-    var credential: AuthCredential?
-    
-    var password = ""
-    var confirmPassword = ""
-    var email = ""
-    var actualPassword = ""
-    
+    @Published var password = ""
+    @Published var confirmPassword = ""
+    @Published var email = ""
+    @Published var actualPassword = ""
     var myNewFlux: Flux = Flux()
     
     //MARK: DB Functions
@@ -69,52 +64,44 @@ class ParametersViewModel: ObservableObject {
     
     //MARK: Manage account functions
     
+    //Reauthenticate user for token before account changes
     func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
-        self.credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        if let credential = self.credential {
-            user?.reauthenticate(with: credential) { authDataResult, error  in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("GG reauth done !")
-                    callback(true)
-                }
+        AuthService.shared.reauthenticate(email: email, password: password, callback: { success in
+            if success {
+                print("youpi")
+            } else {
+                print("fuck off")
             }
-        }
+            callback(success)
+        })
     }
     
+    //Disconnect actual user
     func disconnect(callback: @escaping (Bool) -> Void) {
-        do {
-            try Auth.auth().signOut()
-            callback(true)
-        }
-        catch { print("already logged out")
-        }
+        AuthService.shared.disconnect(callback: { success in
+            if success {
+                print("youpi")
+            } else {
+                print("fuck off")
+            }
+            callback(success)
+        })
     }
     
+    //Change the password for the current user
     func changePassword(password: String) {
-        Auth.auth().currentUser?.updatePassword(to: password) { error in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-            } else {
-                print("wp password changed")
-            }
-        }
+        AuthService.shared.changePassword(password: password)
     }
     
+    //Delete account for current user
     func deleteAcount() {
-        let user = Auth.auth().currentUser
-        user?.delete { error in
-            if let error = error {
-                print("\(error.localizedDescription)")
-            } else {
-                print("account deleted successfully")
-            }
-        }
+        AuthService.shared.deleteAcount()
     }
+    
     
     //MARK: - Theme Functions
     
+    //Override system theme information to pass dark mode in app
     func changeDarkMode(state: Bool) {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = state ? .dark : .light
         UserDefaultsUtils.shared.setDarkMode(enable: state)
