@@ -69,7 +69,13 @@ final class AuthFirebase: AuthType {
     }
     
     func isUserConnected() {
-        
+        Auth.auth().addStateDidChangeListener() { _, user in
+            if let user = user {
+                InternalUser.shared.userID = user.uid
+            } else {
+                print("no user log")
+            }
+        }
     }
     
     func reauthenticate(credential: AuthCredential, callback: @escaping (Bool) -> Void) {
