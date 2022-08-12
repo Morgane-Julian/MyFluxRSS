@@ -14,7 +14,7 @@ protocol AuthType {
     func signIn(email: String, password: String, callback: @escaping (Bool, Error?) -> Void)
     func signOut(callback: @escaping (Bool) -> Void)
     func isUserConnected()
-    func reauthenticate(credential: AuthCredential, callback: @escaping (Bool) -> Void)
+    func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void)
     func changePassword(password: String, callback: @escaping (Bool, Error?) -> Void)
     func deleteAccount(callback: @escaping (Bool, Error?) -> Void)
 }
@@ -78,7 +78,8 @@ final class AuthFirebase: AuthType {
         }
     }
     
-    func reauthenticate(credential: AuthCredential, callback: @escaping (Bool) -> Void) {
+    func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         if let currentUser = Auth.auth().currentUser {
             currentUser.reauthenticate(with: credential) { authDataResult, error  in
                 if let error = error {
@@ -102,7 +103,5 @@ final class AuthFirebase: AuthType {
             guard error != nil else { return }
         }
     }
-
-   
 }
 

@@ -50,19 +50,20 @@ class AuthService: ObservableObject {
         auth.isUserConnected()
     }
     
+    func inscription(userMail: String, userPassword: String, callback: @escaping (Bool) -> Void) {
+        auth.createUser(userMail: userMail, userPassword: userPassword, callback: callback)
+        }
+    
     //MARK: - Manage account functions
     
     func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
-        self.credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        if let credential = self.credential {
-            auth.reauthenticate(credential: credential, callback: { success in
+            auth.reauthenticate(email: email, password: password, callback: { success in
                 if success {
                     callback(true)
                 } else {
                     callback(false)
                 }
             })
-        }
     }
     
     func disconnect(callback: @escaping (Bool) -> Void) {
