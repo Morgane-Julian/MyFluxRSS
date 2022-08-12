@@ -130,6 +130,7 @@ struct ParametersView: View {
                         if result {
                             parametersViewModel.changePassword(password: parametersViewModel.password)
                             self.showingPopover = false
+                            self.showingAlert = true
                         } else {
                             self.showingAlert = true
                         }

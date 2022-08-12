@@ -18,38 +18,36 @@ class AuthService: ObservableObject {
     
     //MARK: - Properties
     
-    let auth = Auth.auth()
-    let user = Auth.auth().currentUser
     var credential: AuthCredential?
     var authError = ""
     var changePasswordError = ""
     var deleteAccountError = ""
     
+    let auth: AuthType
+    var currentUID: String? { return auth.currentUID }
+    
+    // MARK: - Initializer
+
+    init(auth: AuthType = AuthFirebase()) {
+        self.auth = auth
+    }
+    
     //MARK: - Sign in Functions
     
     //Connect user to DB
-    func connect(userMail: String, password: String) async throws {
-        if auth.currentUser?.email != userMail {
-            do { try Auth.auth().signOut() }
-            catch { print("already logged out") }
-            do {
-                _ = try await auth.signIn(withEmail: userMail, password: password)
-            } catch {
-                self.authError = error.localizedDescription
-                throw error
+    func connect(userMail: String, password: String, callback: @escaping (Bool) -> Void) {
+        auth.signIn(email: userMail, password: password, callback: { success, error in
+            if error != nil {
+                self.authError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer"
+            } else {
+                callback(success)
             }
-        }
+        })
     }
     
     // Add lsiteners from FB for auth persistence
     func addListeners() {
-        auth.addStateDidChangeListener() { _, user in
-            if let user = user {
-                InternalUser.shared.userID = user.uid
-            } else {
-                print("no user log")
-            }
-        }
+        auth.isUserConnected()
     }
     
     //MARK: - Manage account functions
@@ -57,43 +55,37 @@ class AuthService: ObservableObject {
     func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
         self.credential = EmailAuthProvider.credential(withEmail: email, password: password)
         if let credential = self.credential {
-            user?.reauthenticate(with: credential) { authDataResult, error  in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
+            auth.reauthenticate(credential: credential, callback: { success in
+                if success {
                     callback(true)
+                } else {
+                    callback(false)
                 }
-            }
+            })
         }
     }
     
     func disconnect(callback: @escaping (Bool) -> Void) {
-        do {
-            try Auth.auth().signOut()
-            callback(true)
-        }
-        catch { print(error.localizedDescription)
-        }
+        auth.signOut(callback: callback)
     }
     
     func changePassword(password: String) {
-        Auth.auth().currentUser?.updatePassword(to: password) { error in
-            if error != nil {
-                print(error?.localizedDescription as Any)
+        auth.changePassword(password: password, callback: { success, error in
+            if success {
+                self.changePasswordError = "Le mot de passe a été mis à jour"
             } else {
-                self.changePasswordError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer."
+                self.changePasswordError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer"
+                return
             }
-        }
+        })
     }
     
     func deleteAcount() {
-        let user = Auth.auth().currentUser
-        user?.delete { error in
-            if let error = error {
-                print("\(error.localizedDescription)")
-            } else {
-                self.deleteAccountError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer."
+        auth.deleteAccount(callback: { success, error in
+            guard success else {
+                self.deleteAccountError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer"
+                return
             }
-        }
+        })
     }
 }

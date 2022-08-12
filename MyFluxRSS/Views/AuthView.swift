@@ -70,14 +70,13 @@ struct AuthView: View {
                     NavigationLink(destination: NewsFeedView(), isActive: $isShowingDetailView) { EmptyView() }
                     
                     Button("CONNEXION") {
-                        Task {
-                            let success = try await contentViewModel.connect()
+                        contentViewModel.connect(callback: { success in
                             if success {
                                 self.isShowingDetailView = true
                             } else {
                                 self.isShowingAlert = true
                             }
-                        }
+                        })
                     }.alert(AuthService.shared.authError, isPresented: $isShowingAlert) {
                         Button("OK", role: .cancel) { }
                     }

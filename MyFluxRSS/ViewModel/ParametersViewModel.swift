@@ -68,9 +68,9 @@ class ParametersViewModel: ObservableObject {
     func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
         AuthService.shared.reauthenticate(email: email, password: password, callback: { success in
             if success {
-                print("youpi")
+                print("Password changed")
             } else {
-                print("fuck off")
+                print("Password error, try again")
             }
             callback(success)
         })
@@ -80,9 +80,9 @@ class ParametersViewModel: ObservableObject {
     func disconnect(callback: @escaping (Bool) -> Void) {
         AuthService.shared.disconnect(callback: { success in
             if success {
-                print("youpi")
+                print("Disconnected")
             } else {
-                print("fuck off")
+                print("Disconnect failed")
             }
             callback(success)
         })

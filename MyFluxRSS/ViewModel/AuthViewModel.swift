@@ -12,7 +12,7 @@ class AuthViewModel: ObservableObject {
     //MARK: - Properties
     
     var isSignedIn : Bool {
-        return AuthService.shared.auth.currentUser?.getIDToken() != nil
+        return AuthService.shared.auth.currentUID != nil
     }
     @Published var userMail: String = ""
     @Published var password: String = ""
@@ -20,12 +20,14 @@ class AuthViewModel: ObservableObject {
     //MARK: - Functions
     
     // Connect the user
-    func connect() async throws -> Bool {
-        do { try await AuthService.shared.connect(userMail: userMail, password: password)
-            return true
-        } catch {
-            throw error
-        }
+    func connect(callback: @escaping (Bool) -> Void) {
+        AuthService.shared.connect(userMail: self.userMail, password: self.password, callback: { success in
+            if success {
+                callback(true)
+            } else {
+                callback(false)
+            }
+        })
     }
     
     //Verify if user already log

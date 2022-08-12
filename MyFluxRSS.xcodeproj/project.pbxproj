@@ -50,6 +50,7 @@
 		91DEAA872812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA862812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta */; };
 		91DEAA8A2812CCF5003E0BC9 /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */; };
 		91F57394289281420065C3FE /* DeleteAcountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F57393289281420065C3FE /* DeleteAcountView.swift */; };
+		91FFD9CF28A43473002D6BF9 /* AuthFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FFD9CE28A43473002D6BF9 /* AuthFirebase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
 		91F57393289281420065C3FE /* DeleteAcountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAcountView.swift; sourceTree = "<group>"; };
 		91F573952893228C0065C3FE /* MyFluxRSS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyFluxRSS.entitlements; sourceTree = "<group>"; };
+		91FFD9CE28A43473002D6BF9 /* AuthFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFirebase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +270,7 @@
 		91E5DDCA2865ED2B00B946B2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				91FFD9CE28A43473002D6BF9 /* AuthFirebase.swift */,
 				916F4F3527F73BA700A71152 /* AuthService.swift */,
 				91A1024F28A005B800BAA617 /* RegisterService.swift */,
 				91DEAA882812CCDE003E0BC9 /* Firebase Repository */,
@@ -440,6 +443,7 @@
 				9174557D2895184500C63B4D /* Model.swift in Sources */,
 				91CE8F20285C75EA006072AE /* ViewUtils.swift in Sources */,
 				91CE8F22285C77CD006072AE /* Constants.swift in Sources */,
+				91FFD9CF28A43473002D6BF9 /* AuthFirebase.swift in Sources */,
 				910FFB3927E479C20059D045 /* RegisterView.swift in Sources */,
 				9197687627D4BBD100F2F679 /* ColorUtils.swift in Sources */,
 				910FFB3127E328220059D045 /* ParametersViewModel.swift in Sources */,
