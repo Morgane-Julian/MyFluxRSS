@@ -29,7 +29,6 @@
 		9197684327D4AD3600F2F679 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197684227D4AD3600F2F679 /* AuthView.swift */; };
 		9197684527D4AD3700F2F679 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197684427D4AD3700F2F679 /* Assets.xcassets */; };
 		9197684827D4AD3700F2F679 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197684727D4AD3700F2F679 /* Preview Assets.xcassets */; };
-		9197685227D4AD3700F2F679 /* MyFluxRSSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197685127D4AD3700F2F679 /* MyFluxRSSTests.swift */; };
 		9197687027D4AEA400F2F679 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197686F27D4AEA400F2F679 /* AuthViewModel.swift */; };
 		9197687427D4BAC400F2F679 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197687327D4BAC400F2F679 /* Colors.xcassets */; };
 		9197687627D4BBD100F2F679 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687527D4BBD100F2F679 /* ColorUtils.swift */; };
@@ -47,8 +46,13 @@
 		91DEAA872812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA862812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta */; };
 		91DEAA8A2812CCF5003E0BC9 /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */; };
 		91F57394289281420065C3FE /* DeleteAcountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F57393289281420065C3FE /* DeleteAcountView.swift */; };
+		91FA6A6B28AFA538003D2D4B /* FirebaseRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A6A28AFA538003D2D4B /* FirebaseRepositoryTests.swift */; };
+		91FA6A6E28AFA5DE003D2D4B /* ArticleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A6D28AFA5DE003D2D4B /* ArticleTest.swift */; };
+		91FA6A7028AFA5E6003D2D4B /* FluxTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A6F28AFA5E6003D2D4B /* FluxTest.swift */; };
+		91FA6A7828AFE76E003D2D4B /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A7728AFE76E003D2D4B /* ModelTests.swift */; };
 		91FFD9CF28A43473002D6BF9 /* AuthFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FFD9CE28A43473002D6BF9 /* AuthFirebase.swift */; };
 		91FFD9D128A6398A002D6BF9 /* AuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FFD9D028A6398A002D6BF9 /* AuthServiceTests.swift */; };
+		91FFD9D328A64CF4002D6BF9 /* RepositoryFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FFD9D228A64CF4002D6BF9 /* RepositoryFirebase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +86,6 @@
 		9197684427D4AD3700F2F679 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9197684727D4AD3700F2F679 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9197684D27D4AD3700F2F679 /* MyFluxRSSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFluxRSSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9197685127D4AD3700F2F679 /* MyFluxRSSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFluxRSSTests.swift; sourceTree = "<group>"; };
 		9197686F27D4AEA400F2F679 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		9197687327D4BAC400F2F679 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9197687527D4BBD100F2F679 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
@@ -98,8 +101,13 @@
 		91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
 		91F57393289281420065C3FE /* DeleteAcountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAcountView.swift; sourceTree = "<group>"; };
 		91F573952893228C0065C3FE /* MyFluxRSS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyFluxRSS.entitlements; sourceTree = "<group>"; };
+		91FA6A6A28AFA538003D2D4B /* FirebaseRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepositoryTests.swift; sourceTree = "<group>"; };
+		91FA6A6D28AFA5DE003D2D4B /* ArticleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTest.swift; sourceTree = "<group>"; };
+		91FA6A6F28AFA5E6003D2D4B /* FluxTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxTest.swift; sourceTree = "<group>"; };
+		91FA6A7728AFE76E003D2D4B /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		91FFD9CE28A43473002D6BF9 /* AuthFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFirebase.swift; sourceTree = "<group>"; };
 		91FFD9D028A6398A002D6BF9 /* AuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTests.swift; sourceTree = "<group>"; };
+		91FFD9D228A64CF4002D6BF9 /* RepositoryFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFirebase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,8 +177,10 @@
 		9197685027D4AD3700F2F679 /* MyFluxRSSTests */ = {
 			isa = PBXGroup;
 			children = (
-				9197685127D4AD3700F2F679 /* MyFluxRSSTests.swift */,
 				91FFD9D028A6398A002D6BF9 /* AuthServiceTests.swift */,
+				91FA6A6A28AFA538003D2D4B /* FirebaseRepositoryTests.swift */,
+				91FA6A7728AFE76E003D2D4B /* ModelTests.swift */,
+				91FA6A6C28AFA5C3003D2D4B /* FakeData */,
 			);
 			path = MyFluxRSSTests;
 			sourceTree = "<group>";
@@ -234,6 +244,7 @@
 			children = (
 				91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */,
 				9183B666281B3BAE00D732B6 /* FluxRepository.swift */,
+				91FFD9D228A64CF4002D6BF9 /* RepositoryFirebase.swift */,
 			);
 			path = "Firebase Repository";
 			sourceTree = "<group>";
@@ -256,6 +267,15 @@
 				91F57393289281420065C3FE /* DeleteAcountView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		91FA6A6C28AFA5C3003D2D4B /* FakeData */ = {
+			isa = PBXGroup;
+			children = (
+				91FA6A6D28AFA5DE003D2D4B /* ArticleTest.swift */,
+				91FA6A6F28AFA5E6003D2D4B /* FluxTest.swift */,
+			);
+			path = FakeData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +395,7 @@
 			files = (
 				910FFB3727E345710059D045 /* FluxListView.swift in Sources */,
 				910FFB3B27E47C300059D045 /* RegisterViewModel.swift in Sources */,
+				91FFD9D328A64CF4002D6BF9 /* RepositoryFirebase.swift in Sources */,
 				9196254B282D9863006DC6A0 /* Article.swift in Sources */,
 				910FFB3527E333CF0059D045 /* BookmarkViewModel.swift in Sources */,
 				91ACC4EA28002DA60028E9CB /* AppState.swift in Sources */,
@@ -409,9 +430,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9197685227D4AD3700F2F679 /* MyFluxRSSTests.swift in Sources */,
+				91FA6A6B28AFA538003D2D4B /* FirebaseRepositoryTests.swift in Sources */,
 				9183B66D281BD2D900D732B6 /* InternalUser.swift in Sources */,
 				91FFD9D128A6398A002D6BF9 /* AuthServiceTests.swift in Sources */,
+				91FA6A7828AFE76E003D2D4B /* ModelTests.swift in Sources */,
+				91FA6A7028AFA5E6003D2D4B /* FluxTest.swift in Sources */,
+				91FA6A6E28AFA5DE003D2D4B /* ArticleTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

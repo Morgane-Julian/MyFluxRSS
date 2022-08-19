@@ -61,7 +61,7 @@ struct ParametersView: View {
                 Section(header: Text("Gestion du compte")) {
                     Button("Réinitialiser le mot de passe") {
                         showingPopover = true
-                    }.foregroundColor(ColorUtils.purple)
+                    }.foregroundColor(.purple)
                     NavigationLink("Supprimer mon compte", destination: DeleteAcountView(parametersViewModel: ParametersViewModel()))
                 }
                 
@@ -135,7 +135,7 @@ struct ParametersView: View {
                             self.showingAlert = true
                         }
                     })
-                }.alert(AuthService.shared.changePasswordError, isPresented: $showingAlert) {
+                }.alert(AuthService.shared.changePasswordMessage, isPresented: $showingAlert) {
                     Button("OK", role: .cancel) { }
                 }
                 .frame(width: 150, height: 50, alignment: .center)

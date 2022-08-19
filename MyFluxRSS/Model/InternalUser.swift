@@ -16,6 +16,8 @@ class InternalUser: Codable, ObservableObject {
         return instance
     }()
     
+    private init() {}
+    
     //MARK: - Properties
     @DocumentID var id: String?
     var firstName = ""

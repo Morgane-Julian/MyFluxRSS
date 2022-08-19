@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 
-class ArticleRepository : ObservableObject {
+final class ArticleRepository : ObservableObject {
     
     //Create a singleton instance of article repository
     static let shared: ArticleRepository = {
@@ -19,52 +19,41 @@ class ArticleRepository : ObservableObject {
     }()
     
     //MARK: - Properties
+    private let repository: Repository
     
-    private let path: String = "articles"
-    private let store = Firestore.firestore()
+    //MARK: - Init
+    private init(repository: Repository = RepositoryFirebase(path: "articles")) {
+        self.repository = repository
+    }
     
     //MARK: - CRUD Functions
     
     // add a bookmark article in DB
     func add(_ article: Article, userID: String) {
-        do {
             var newArticle = article
             newArticle.userId = userID
-            _ = try store.collection(path).addDocument(from: newArticle)
-            print("successfully add article")
-        } catch {
-            fatalError("Unable to add article: \(error.localizedDescription).")
-        }
+        self.repository.addDocument(document: newArticle, userID: userID,callback: { success in
+            if success {
+                print("Article add in db")
+            } else {
+                print("No article inserted in db")
+            }
+        })
     }
     
     // get the bookmark articles from DB
+    
     func get(userID: String, callback: @escaping ([Article]) -> Void) {
-        store.collection(path)
-            .whereField("userId", isEqualTo: userID)
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    var articles = [Article]()
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        if let article = try? document.data(as: Article.self) {
-                            articles.append(article)
-                        }
-                    }
-                    callback(articles)
-                }
-            }
+        self.repository.getDocument(userID: userID, callback: callback)
     }
     
     //Delete a bookmark article in DB
     func remove(_ article: Article) -> Bool {
+        var successDeleteArticle = false
         guard let articleId = article.id else { return false }
-        store.collection(path).document(articleId).delete { error in
-            if let error = error {
-                print("Unable to remove article: \(error.localizedDescription).")
-            }
-        }
-        return true
+        self.repository.deleteDocument(documentID: articleId, callback: { success in
+            successDeleteArticle = true
+        })
+        return successDeleteArticle
     }
 }

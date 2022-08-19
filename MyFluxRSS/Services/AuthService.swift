@@ -18,9 +18,8 @@ class AuthService: ObservableObject {
     
     //MARK: - Properties
     
-    var credential: AuthCredential?
     var authError = ""
-    var changePasswordError = ""
+    var changePasswordMessage = ""
     var deleteAccountError = ""
     
     let auth: AuthType
@@ -37,10 +36,11 @@ class AuthService: ObservableObject {
     //Connect user to DB
     func connect(userMail: String, password: String, callback: @escaping (Bool) -> Void) {
         auth.signIn(email: userMail, password: password, callback: { success, error in
-            if error != nil {
-                self.authError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer"
+            if success {
+                callback(true)
             } else {
-                callback(success)
+                callback(false)
+                self.authError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer"
             }
         })
     }
@@ -73,9 +73,9 @@ class AuthService: ObservableObject {
     func changePassword(password: String) {
         auth.changePassword(password: password, callback: { success, error in
             if success {
-                self.changePasswordError = "Le mot de passe a été mis à jour"
+                self.changePasswordMessage = "Le mot de passe a été mis à jour"
             } else {
-                self.changePasswordError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer"
+                self.changePasswordMessage = "Une erreur s'est produite, veuillez réassayer"
                 return
             }
         })
@@ -84,7 +84,7 @@ class AuthService: ObservableObject {
     func deleteAcount() {
         auth.deleteAccount(callback: { success, error in
             guard success else {
-                self.deleteAccountError = error?.localizedDescription ?? "Une erreur s'est produite, veuillez réassayer"
+                self.deleteAccountError = "Une erreur s'est produite, veuillez réassayer"
                 return
             }
         })

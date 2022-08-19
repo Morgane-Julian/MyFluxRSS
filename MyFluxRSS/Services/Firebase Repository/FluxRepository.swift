@@ -18,48 +18,39 @@ class FluxRepository : ObservableObject {
     }()
     
     //MARK: - Properties
+    private let repository: Repository
     
-    private let path: String = "flux"
-    private let store = Firestore.firestore()
+    //MARK: - Init
+    private init(repository: Repository = RepositoryFirebase(path: "flux")) {
+        self.repository = repository
+    }
     
     
     //MARK: - CRUD Functions
     
     // Add a flux in DB
     func add(_ flux: Flux, callback: @escaping (Bool) -> Void) {
-        var success = false
-        do {
-            let newFlux = flux
-            newFlux.userId = InternalUser.shared.userID
-            _ = try store.collection(path).addDocument(from: newFlux)
-            print("successfully add flux")
-            success = true
-        } catch {
-            fatalError("Unable to add flux: \(error.localizedDescription).")
-        }
-        callback(success)
+        let newFlux = flux
+        newFlux.userId = InternalUser.shared.userID
+        self.repository.addDocument(document: flux, userID: InternalUser.shared.userID, callback: { success in
+            callback(success)
+        })
     }
     
     // Get the flux list in DB
     func get(callback: @escaping ([Flux]) -> Void) {
-        store.collection(path)
-            .whereField("userId", isEqualTo: InternalUser.shared.userID)
-            .addSnapshotListener { querySnapshot, error in
-                if let error = error {
-                    print("Error getting flux: \(error.localizedDescription)")
-                    return
-                }
-                callback(querySnapshot?.documents.compactMap { document in try? document.data(as: Flux.self) } ?? [])
-            }
+        self.repository.getDocument(userID: InternalUser.shared.userID, callback: callback)
     }
     
     // Remove a flux in DB
     func remove(_ flux: Flux) {
         guard let fluxId = flux.id else { return }
-        store.collection(path).document(fluxId).delete { error in
-            if let error = error {
-                print("Unable to remove article: \(error.localizedDescription).")
+        self.repository.deleteDocument(documentID: fluxId , callback: { success in
+            if success {
+                print("successfully remove flux")
+            } else {
+                print("Flux can't be delete")
             }
-        }
+        })
     }
 }
