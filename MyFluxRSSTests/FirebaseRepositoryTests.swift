@@ -15,6 +15,7 @@ final class FirebaseRepositoryTests: XCTestCase {
     private class RepositoryTest: Repository {
         var path: String
         private let isSuccess: Bool
+        typealias T = ArticleTest
         
         
         init(path: String, isSuccess: Bool) {
@@ -27,7 +28,11 @@ final class FirebaseRepositoryTests: XCTestCase {
         }
         
         func getDocument<T>(userID: String, callback: @escaping ([T]) -> Void) where T : Decodable, T : Encodable {
-           callback([])
+            if userID == "NyeVduglGkQAgldAgG5durdJAer2" {
+                callback([ArticleTest()] as! [T])
+            } else {
+                callback([])
+            }
         }
         
         func deleteDocument(documentID: String, callback: @escaping (Bool) -> Void) {
@@ -39,6 +44,28 @@ final class FirebaseRepositoryTests: XCTestCase {
     
     let article = ArticleTest()
     var articles = [ArticleTest]()
+    
+    func testGetDocumentMethod_WhenTheUIDIsCorrect_ThenShouldGetTheDocument() {
+        let sut = RepositoryTest(path: "articles", isSuccess: true)
+        let uid: String = "NyeVduglGkQAgldAgG5durdJAer2"
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.getDocument(userID: uid, callback: { (result: [ArticleTest]) in
+            XCTAssertTrue(result.first?.title == "WWDC22: Wrap up and recommended talks")
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    func testGetDocumentMethod_WhenTheUIDIsIncorrect_ThenShouldReturnAnError() {
+        let sut = RepositoryTest(path: "article", isSuccess: false)
+        let uid: String = "NyeVduglGkQAgld"
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        sut.getDocument(userID: uid, callback: { (result: [ArticleTest]) in
+            XCTAssertTrue(result == [])
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.01)
+    }
 
     func testAddDocumentMethod_WhenTheUIDIsCorrect_ThenShouldAddTheDocumentInDB() {
         let sut = RepositoryTest(path: "articles", isSuccess: true)
