@@ -14,7 +14,7 @@ struct Article: Identifiable, Hashable, Codable {
     
     @DocumentID var id: String?
     var userId = ""
-    var title: String = "Title"
+    var title: String = "WWDC22: Wrap up and recommended talks"
     var image = "logo"
     var description: String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     var date = Date()

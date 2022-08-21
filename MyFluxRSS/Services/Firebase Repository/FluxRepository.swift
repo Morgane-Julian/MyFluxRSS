@@ -21,7 +21,7 @@ class FluxRepository : ObservableObject {
     private let repository: Repository
     
     //MARK: - Init
-    private init(repository: Repository = RepositoryFirebase(path: "flux")) {
+    init(repository: Repository = RepositoryFirebase(path: "flux")) {
         self.repository = repository
     }
     

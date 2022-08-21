@@ -13,6 +13,6 @@ class Flux: Identifiable, Codable {
     //MARK: - Properties
     
     @DocumentID var id: String?
-    var flux = ""
+    var flux = "https://www.hackingwithswift.com/articles/rss"
     var userId = ""
 }

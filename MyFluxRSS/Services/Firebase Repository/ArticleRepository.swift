@@ -22,7 +22,7 @@ final class ArticleRepository : ObservableObject {
     private let repository: Repository
     
     //MARK: - Init
-    private init(repository: Repository = RepositoryFirebase(path: "articles")) {
+    init(repository: Repository = RepositoryFirebase(path: "articles")) {
         self.repository = repository
     }
     

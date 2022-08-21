@@ -14,4 +14,10 @@ final class ModelTests: XCTestCase {
         let articles = ArticleParser.parseArticles(url: url)
         XCTAssertTrue(articles.first?.title == "WWDC22: Wrap up and recommended talks")
     }
+    
+    func testParseArticleMethod_WhenPassABAdFlux_ThenShouldReturnAnError() {
+        let url = URL(string: "https://www.wift.com/")!
+        let articles = ArticleParser.parseArticles(url: url)
+        XCTAssertTrue(articles.isEmpty)
+    }
 }

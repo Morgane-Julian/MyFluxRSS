@@ -174,8 +174,4 @@ final class AuthServiceTests: XCTestCase {
         sut.deleteAcount()
         XCTAssertEqual(sut.deleteAccountError , "Une erreur s'est produite, veuillez réassayer")
     }
-    
-    
-    
 }
-

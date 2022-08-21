@@ -18,6 +18,7 @@
 		9134180127EDB58C00C1E9E0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9134180027EDB58C00C1E9E0 /* FirebaseAuth */; };
 		9134180327EDB58C00C1E9E0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9134180227EDB58C00C1E9E0 /* FirebaseDatabase */; };
 		915670A42848A76300BC53CC /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 915670A32848A76300BC53CC /* FeedKit */; };
+		91589FBD28B28A8E003D6E26 /* FirebaseFluxRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91589FBC28B28A8E003D6E26 /* FirebaseFluxRepositoryTests.swift */; };
 		916F4F3627F73BA700A71152 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916F4F3527F73BA700A71152 /* AuthService.swift */; };
 		9174557D2895184500C63B4D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9174557C2895184500C63B4D /* Model.swift */; };
 		9183B667281B3BAE00D732B6 /* FluxRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9183B666281B3BAE00D732B6 /* FluxRepository.swift */; };
@@ -46,9 +47,7 @@
 		91DEAA872812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA862812CCC8003E0BC9 /* FirebaseFirestoreSwift-Beta */; };
 		91DEAA8A2812CCF5003E0BC9 /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */; };
 		91F57394289281420065C3FE /* DeleteAcountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F57393289281420065C3FE /* DeleteAcountView.swift */; };
-		91FA6A6B28AFA538003D2D4B /* FirebaseRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A6A28AFA538003D2D4B /* FirebaseRepositoryTests.swift */; };
-		91FA6A6E28AFA5DE003D2D4B /* ArticleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A6D28AFA5DE003D2D4B /* ArticleTest.swift */; };
-		91FA6A7028AFA5E6003D2D4B /* FluxTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A6F28AFA5E6003D2D4B /* FluxTest.swift */; };
+		91FA6A6B28AFA538003D2D4B /* FirebaseArticleRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A6A28AFA538003D2D4B /* FirebaseArticleRepositoryTests.swift */; };
 		91FA6A7828AFE76E003D2D4B /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA6A7728AFE76E003D2D4B /* ModelTests.swift */; };
 		91FFD9CF28A43473002D6BF9 /* AuthFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FFD9CE28A43473002D6BF9 /* AuthFirebase.swift */; };
 		91FFD9D128A6398A002D6BF9 /* AuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FFD9D028A6398A002D6BF9 /* AuthServiceTests.swift */; };
@@ -74,6 +73,7 @@
 		910FFB3627E345710059D045 /* FluxListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxListView.swift; sourceTree = "<group>"; };
 		910FFB3827E479C20059D045 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		910FFB3A27E47C300059D045 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		91589FBC28B28A8E003D6E26 /* FirebaseFluxRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFluxRepositoryTests.swift; sourceTree = "<group>"; };
 		916F4F3527F73BA700A71152 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		9174557C2895184500C63B4D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		9183B666281B3BAE00D732B6 /* FluxRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxRepository.swift; sourceTree = "<group>"; };
@@ -101,9 +101,7 @@
 		91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
 		91F57393289281420065C3FE /* DeleteAcountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAcountView.swift; sourceTree = "<group>"; };
 		91F573952893228C0065C3FE /* MyFluxRSS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyFluxRSS.entitlements; sourceTree = "<group>"; };
-		91FA6A6A28AFA538003D2D4B /* FirebaseRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepositoryTests.swift; sourceTree = "<group>"; };
-		91FA6A6D28AFA5DE003D2D4B /* ArticleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTest.swift; sourceTree = "<group>"; };
-		91FA6A6F28AFA5E6003D2D4B /* FluxTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxTest.swift; sourceTree = "<group>"; };
+		91FA6A6A28AFA538003D2D4B /* FirebaseArticleRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseArticleRepositoryTests.swift; sourceTree = "<group>"; };
 		91FA6A7728AFE76E003D2D4B /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		91FFD9CE28A43473002D6BF9 /* AuthFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFirebase.swift; sourceTree = "<group>"; };
 		91FFD9D028A6398A002D6BF9 /* AuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTests.swift; sourceTree = "<group>"; };
@@ -178,9 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				91FFD9D028A6398A002D6BF9 /* AuthServiceTests.swift */,
-				91FA6A6A28AFA538003D2D4B /* FirebaseRepositoryTests.swift */,
+				91FA6A6A28AFA538003D2D4B /* FirebaseArticleRepositoryTests.swift */,
 				91FA6A7728AFE76E003D2D4B /* ModelTests.swift */,
-				91FA6A6C28AFA5C3003D2D4B /* FakeData */,
+				91589FBC28B28A8E003D6E26 /* FirebaseFluxRepositoryTests.swift */,
 			);
 			path = MyFluxRSSTests;
 			sourceTree = "<group>";
@@ -267,15 +265,6 @@
 				91F57393289281420065C3FE /* DeleteAcountView.swift */,
 			);
 			path = SubViews;
-			sourceTree = "<group>";
-		};
-		91FA6A6C28AFA5C3003D2D4B /* FakeData */ = {
-			isa = PBXGroup;
-			children = (
-				91FA6A6D28AFA5DE003D2D4B /* ArticleTest.swift */,
-				91FA6A6F28AFA5E6003D2D4B /* FluxTest.swift */,
-			);
-			path = FakeData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,12 +419,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91FA6A6B28AFA538003D2D4B /* FirebaseRepositoryTests.swift in Sources */,
+				91FA6A6B28AFA538003D2D4B /* FirebaseArticleRepositoryTests.swift in Sources */,
+				91589FBD28B28A8E003D6E26 /* FirebaseFluxRepositoryTests.swift in Sources */,
 				9183B66D281BD2D900D732B6 /* InternalUser.swift in Sources */,
 				91FFD9D128A6398A002D6BF9 /* AuthServiceTests.swift in Sources */,
 				91FA6A7828AFE76E003D2D4B /* ModelTests.swift in Sources */,
-				91FA6A7028AFA5E6003D2D4B /* FluxTest.swift in Sources */,
-				91FA6A6E28AFA5DE003D2D4B /* ArticleTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
