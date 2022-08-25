@@ -77,7 +77,7 @@ struct AuthView: View {
                                 self.isShowingAlert = true
                             }
                         })
-                    }.alert(AuthService.shared.authError, isPresented: $isShowingAlert) {
+                    }.alert(self.contentViewModel.authService.authError, isPresented: $isShowingAlert) {
                         Button("OK", role: .cancel) { }
                     }
                     .padding()

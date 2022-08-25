@@ -10,14 +10,19 @@ import Foundation
 class BookmarkViewModel: ObservableObject, Identifiable {
     
     //MARK: - Properties
-    
     @Published var bookmarks = [Article]()
+    let articleRepository: ArticleRepository
+    
+    //MARK: Init
+    init(articleRepository: ArticleRepository = ArticleRepository(repository: RepositoryFirebase(path: "articles"))) {
+        self.articleRepository = articleRepository
+    }
     
     //MARK: - DB Functions
     
     //Get the DB bookmarks in our local table of bookmarks
     func getFavArticle() {
-        ArticleRepository.shared.get(userID: InternalUser.shared.userID, callback: { articles in
+        self.articleRepository.get(userID: InternalUser.shared.userID, callback: { articles in
             self.bookmarks = articles
         })
     }
@@ -26,7 +31,7 @@ class BookmarkViewModel: ObservableObject, Identifiable {
     func removeArticle(indexSet: IndexSet) {
         indexSet.forEach({ i in
             let article = bookmarks[i]
-            if ArticleRepository.shared.remove(article) {
+            if self.articleRepository.remove(article) {
                 self.bookmarks.remove(at: i)
             }
         })

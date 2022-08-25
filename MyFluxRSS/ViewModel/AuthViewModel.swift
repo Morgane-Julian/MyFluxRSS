@@ -9,10 +9,16 @@ import Foundation
 
 class AuthViewModel: ObservableObject {
     
+    let authService: AuthService
+    
+    init(authService: AuthService = AuthService(auth: AuthFirebase())) {
+        self.authService = authService
+    }
+    
     //MARK: - Properties
     
     var isSignedIn : Bool {
-        return AuthService.shared.auth.currentUID != nil
+        return self.authService.auth.currentUID != nil
     }
     @Published var userMail: String = ""
     @Published var password: String = ""
@@ -21,7 +27,7 @@ class AuthViewModel: ObservableObject {
     
     // Connect the user
     func connect(callback: @escaping (Bool) -> Void) {
-        AuthService.shared.connect(userMail: self.userMail, password: self.password, callback: { success in
+        self.authService.connect(userMail: self.userMail, password: self.password, callback: { success in
             if success {
                 callback(true)
             } else {

@@ -23,40 +23,48 @@ class ParametersViewModel: ObservableObject {
     @Published var email = ""
     @Published var actualPassword = ""
     var myNewFlux: Flux = Flux()
+    let fluxRepository: FluxRepository
+    let authService: AuthService
+    
+    //MARK: - Init
+    init(fluxRepository: FluxRepository = FluxRepository(repository: RepositoryFirebase(path: "flux")), authService: AuthService = AuthService(auth: AuthFirebase())) {
+        self.fluxRepository = fluxRepository
+        self.authService = authService
+    }
     
     //MARK: DB Functions
     
     //Add a new flux url in DB
-    func addNewFlux() {
+    func addNewFlux(userID: String) {
         if self.urlString != "" && urlString != " " {
-            self.getFlux()
+            self.getFlux(userID: userID)
             if self.myFlux.contains(where: { $0.flux == urlString}) {
                 print("Oups, you already add this flux !")
             } else {
                 myNewFlux.flux = urlString
-                FluxRepository.shared.add(myNewFlux, callback: { success in
+                self.fluxRepository.add(myNewFlux, callback: { success in
                     if success {
                         self.myFlux.append(self.myNewFlux)
                     }
                 })
             }
         } else {
-            print("Error, this is not a valid flux ! ")
+            print("Error, this is not a valid flux !")
         }
     }
     
     //Get the flux url from DB
-    func getFlux() {
-        FluxRepository.shared.get { flux in
+    func getFlux(userID: String) {
+        self.fluxRepository.get(userId: userID, callback: { flux in
             self.myFlux = flux
-        }
+        })
     }
     
     //Delete a flux url in DB
     func delete(at offsets: IndexSet) {
         let idToDelete = offsets.map { self.myFlux[$0].id }
         _ = idToDelete.compactMap { [weak self] id in
-            FluxRepository.shared.remove(myFlux.first(where: {$0.id == id})!)
+            self?.fluxRepository.remove(myFlux.first(where: {$0.id == id})!)
             guard let intID = Int(id!) else { return }
             self?.myFlux.remove(at: intID)
         }
@@ -66,7 +74,7 @@ class ParametersViewModel: ObservableObject {
     
     //Reauthenticate user for token before account changes
     func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
-        AuthService.shared.reauthenticate(email: email, password: password, callback: { success in
+        self.authService.reauthenticate(email: email, password: password, callback: { success in
             if success {
                 print("Password changed")
             } else {
@@ -78,7 +86,7 @@ class ParametersViewModel: ObservableObject {
     
     //Disconnect actual user
     func disconnect(callback: @escaping (Bool) -> Void) {
-        AuthService.shared.disconnect(callback: { success in
+        self.authService.disconnect(callback: { success in
             if success {
                 print("Disconnected")
             } else {
@@ -89,13 +97,17 @@ class ParametersViewModel: ObservableObject {
     }
     
     //Change the password for the current user
-    func changePassword(password: String) {
-        AuthService.shared.changePassword(password: password)
+    func changePassword(password: String, callback: @escaping (Bool) -> Void) {
+        self.authService.changePassword(password: password, callback: { success in
+                callback(success)
+        })
     }
     
     //Delete account for current user
-    func deleteAcount() {
-        AuthService.shared.deleteAcount()
+    func deleteAcount(callback: @escaping (Bool) -> Void) {
+        self.authService.deleteAcount(callback: { success in
+            callback(success)
+        })
     }
     
     

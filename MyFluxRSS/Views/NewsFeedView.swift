@@ -12,6 +12,8 @@ struct NewsFeedView: View {
     //MARK: - Properties
     
     @StateObject var newsFeedViewModel = NewsFeedViewModel()
+    @State private var isShowingAlert = false
+    @State private var isShowingAlertAddBookmark = false
     
     var body: some View {
         NavigationView {
@@ -24,15 +26,25 @@ struct NewsFeedView: View {
                         ArticleView(article: item)
                             .swipeActions {
                                 Button {
-                                    newsFeedViewModel.add(item)
+                                    newsFeedViewModel.add(item, userID: InternalUser.shared.userID, callback: { success in
+                                        if !success {
+                                            self.isShowingAlertAddBookmark = success
+                                        }
+                                    })
                                 } label: {
                                     Label("Favorite", systemImage: "star")
+                                }.alert("Impossible d'ajouter l'article en favoris, veuillez réessayer", isPresented: $isShowingAlert) {
+                                    Button("OK", role: .cancel) { }
                                 }
                                 .tint(.purple)
                             } .id(newsFeedViewModel.articles.firstIndex(of: item))
                     }
                     .refreshable {
-                        newsFeedViewModel.refreshArticleFeed()
+                        newsFeedViewModel.refreshArticleFeed(userId: InternalUser.shared.userID, callback: { success in
+                            if !success {
+                                self.isShowingAlert = true
+                            }
+                        })
                         scrollView.scrollTo(0)
                     }
                     .navigationBarTitleDisplayMode(.inline)
@@ -42,10 +54,16 @@ struct NewsFeedView: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
-                                newsFeedViewModel.refreshArticleFeed()
+                                newsFeedViewModel.refreshArticleFeed(userId: InternalUser.shared.userID, callback: { success in
+                                    if !success {
+                                        self.isShowingAlert = true
+                                    }
+                                })
                                 scrollView.scrollTo(0)
                             }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                     .foregroundColor(Color.purple)
+                            }.alert("Une erreur s'est produite lors du chargement des articles, vérifiez votre connexion internet", isPresented: $isShowingAlert) {
+                                Button("OK", role: .cancel) { }
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -66,7 +84,7 @@ struct NewsFeedView: View {
                     }
                 }
             }.onAppear {
-                newsFeedViewModel.refreshArticleFeed()
+                newsFeedViewModel.refreshArticleFeed(userId: InternalUser.shared.userID, callback: { _ in })
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())

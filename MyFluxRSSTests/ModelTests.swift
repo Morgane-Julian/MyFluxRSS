@@ -16,7 +16,7 @@ final class ModelTests: XCTestCase {
     }
     
     func testParseArticleMethod_WhenPassABAdFlux_ThenShouldReturnAnError() {
-        let url = URL(string: "https://www.wift.com/")!
+        let url = URL(string: "https://www.swift.com/")!
         let articles = ArticleParser.parseArticles(url: url)
         XCTAssertTrue(articles.isEmpty)
     }

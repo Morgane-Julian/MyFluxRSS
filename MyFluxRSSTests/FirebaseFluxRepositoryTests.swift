@@ -10,44 +10,12 @@ import XCTest
 
 final class FirebaseFluxRepositoryTests: XCTestCase {
     
-    // MARK: - Helpers
-
-    private class RepositoryTest: Repository {
-        var path: String
-        private let isSuccess: Bool
-        typealias T = Flux
-        
-        
-        init(path: String, isSuccess: Bool) {
-            self.path = path
-            self.isSuccess = isSuccess
-        }
-    
-        func addDocument<T>(document: T, userID: String, callback: @escaping (Bool) -> Void) where T : Decodable, T : Encodable {
-                callback(isSuccess)
-        }
-        
-        func getDocument<T>(userID: String, callback: @escaping ([T]) -> Void) where T : Decodable, T : Encodable {
-            if isSuccess {
-            callback([Flux()] as! [T])
-            } else {
-                callback([])
-            }
-        }
-        
-        func deleteDocument(documentID: String, callback: @escaping (Bool) -> Void) {
-            callback(isSuccess)
-        }
-    }
-    
-    //MARK: - Flux Repository Tests
-    
     let flux = Flux()
     
     func testGetFluxMethod_WhenTheDBAnswerCorrect_ThenShouldGetTheDocument() {
-        let sut : FluxRepository = FluxRepository(repository: RepositoryTest(path: "flux", isSuccess: true))
+        let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.get(callback: { result in
+        sut.get(userId: "NyeVduglGkQAgldAgG5durdJAer2", callback: { result in
             XCTAssertTrue(result.first?.flux == "https://www.hackingwithswift.com/articles/rss")
             expectation.fulfill()
         })
@@ -55,9 +23,9 @@ final class FirebaseFluxRepositoryTests: XCTestCase {
     }
     
     func testGetFluxMethod_WhenTheDBAnswerIncorrect_ThenShouldReturnAnError() {
-        let sut : FluxRepository = FluxRepository(repository: RepositoryTest(path: "flux", isSuccess: false))
+        let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        sut.get(callback: { result in
+        sut.get(userId: "NyeVduglGkQAgldAgG5durdJAer2", callback: { result in
             XCTAssertTrue(result.isEmpty)
                 expectation.fulfill()
         })
@@ -65,7 +33,7 @@ final class FirebaseFluxRepositoryTests: XCTestCase {
     }
 
     func testAddFluxMethod_WhenTheDBAnswerIsCorrect_ThenShouldAddTheDocumentInDB() {
-        let sut : FluxRepository = FluxRepository(repository: RepositoryTest(path: "flux", isSuccess: true))
+        let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.add(flux, callback: { result in
             XCTAssertTrue(result)
@@ -75,7 +43,7 @@ final class FirebaseFluxRepositoryTests: XCTestCase {
     }
     
     func testAddFluxMethod_WhenTheDBAnswerIsIncorrect_ThenShouldReturnAnError() {
-        let sut : FluxRepository = FluxRepository(repository: RepositoryTest(path: "flux", isSuccess: false))
+        let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false))
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.add(flux, callback: { result in
             XCTAssertFalse(result)
@@ -85,12 +53,12 @@ final class FirebaseFluxRepositoryTests: XCTestCase {
     }
     
     func testDeleteFluxMethod_WhenTheDocumentIDIsCorrect_ThenShouldDeleteDocumentInDB() {
-        let sut : FluxRepository = FluxRepository(repository: RepositoryTest(path: "flux", isSuccess: true))
+        let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true))
         sut.remove(flux)
     }
     
     func testDeleteFluxMethod_WhenTheDocumentIDIsIncorrect_ThenShoulReturnAnError() {
-        let sut : FluxRepository = FluxRepository(repository: RepositoryTest(path: "flux", isSuccess: false))
+        let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false))
         sut.remove(flux)
     }
 }

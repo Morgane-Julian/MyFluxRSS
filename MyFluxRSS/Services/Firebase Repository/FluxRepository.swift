@@ -11,12 +11,6 @@ import FirebaseFirestoreSwift
 
 class FluxRepository : ObservableObject {
     
-    //Create a singleton instance of flux repository
-    static let shared: FluxRepository = {
-        let instance = FluxRepository()
-        return instance
-    }()
-    
     //MARK: - Properties
     private let repository: Repository
     
@@ -24,7 +18,6 @@ class FluxRepository : ObservableObject {
     init(repository: Repository = RepositoryFirebase(path: "flux")) {
         self.repository = repository
     }
-    
     
     //MARK: - CRUD Functions
     
@@ -38,8 +31,8 @@ class FluxRepository : ObservableObject {
     }
     
     // Get the flux list in DB
-    func get(callback: @escaping ([Flux]) -> Void) {
-        self.repository.getDocument(userID: InternalUser.shared.userID, callback: callback)
+    func get(userId: String, callback: @escaping ([Flux]) -> Void) {
+        self.repository.getDocument(userID: userId, callback: callback)
     }
     
     // Remove a flux in DB

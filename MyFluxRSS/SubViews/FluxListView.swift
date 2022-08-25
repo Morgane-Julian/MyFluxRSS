@@ -18,7 +18,7 @@ struct FluxListView: View {
             }.onDelete { indexSet in
                 parametersViewModel.delete(at: indexSet)
             }
-        }.onAppear { parametersViewModel.getFlux() }
+        }.onAppear { parametersViewModel.getFlux(userID: InternalUser.shared.userID) }
     }
 }
 

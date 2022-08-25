@@ -13,20 +13,33 @@ class NewsFeedViewModel: ObservableObject {
     //MARK: - Properties
     
     @Published var articles = [Article]()
+    let articleRepository : ArticleRepository
     let model = Model()
+    
+    //MARK: - Init
+    
+    init(articleRepository: ArticleRepository = ArticleRepository(repository: RepositoryFirebase(path: "articles"))) {
+        self.articleRepository = articleRepository
+    }
     
     //MARK: - Functions
     
     //Add an article in bookmark DB
-    func add(_ article: Article) {
-        ArticleRepository.shared.add(article, userID: InternalUser.shared.userID)
+    func add(_ article: Article, userID: String, callback: @escaping (Bool) -> Void) {
+        self.articleRepository.add(article, userID: userID, callback: { success in
+            callback(success)
+        })
     }
     
     //Refresh article feed
-    func refreshArticleFeed() {
-        self.model.parseArticleFromDatabaseFlux(callback: { articles in
-            self.articles = articles
-            self.articles.sort(by: { $0.date.compare($1.date) == .orderedDescending})
+    func refreshArticleFeed(userId: String, callback: @escaping (Bool) -> Void) {
+        self.model.parseArticleFromDatabaseFlux(userId: userId, callback: { articles in
+            if articles != [] {
+                self.articles = articles
+                self.articles.sort(by: { $0.date.compare($1.date) == .orderedDescending})
+                callback(true)
+            }
+            callback(false)
         })
     }
 }

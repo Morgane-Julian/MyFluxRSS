@@ -10,12 +10,6 @@ import Firebase
 
 class AuthService: ObservableObject {
     
-    //Create a singleton instance of article repository
-    static let shared: AuthService = {
-        let instance = AuthService()
-        return instance
-    }()
-    
     //MARK: - Properties
     
     var authError = ""
@@ -45,7 +39,7 @@ class AuthService: ObservableObject {
         })
     }
     
-    // Add lsiteners from FB for auth persistence
+    // Add listeners from FB for auth persistence
     func addListeners() {
         auth.isUserConnected()
     }
@@ -70,22 +64,25 @@ class AuthService: ObservableObject {
         auth.signOut(callback: callback)
     }
     
-    func changePassword(password: String) {
+    func changePassword(password: String, callback: @escaping (Bool) -> Void) {
         auth.changePassword(password: password, callback: { success, error in
             if success {
                 self.changePasswordMessage = "Le mot de passe a été mis à jour"
+                callback(success)
             } else {
                 self.changePasswordMessage = "Une erreur s'est produite, veuillez réassayer"
-                return
+                callback(success)
             }
         })
     }
     
-    func deleteAcount() {
+    func deleteAcount(callback: @escaping (Bool) -> Void) {
         auth.deleteAccount(callback: { success, error in
-            guard success else {
+            if success {
+                callback(success)
+            } else {
                 self.deleteAccountError = "Une erreur s'est produite, veuillez réassayer"
-                return
+                callback(success)
             }
         })
     }

@@ -12,12 +12,6 @@ import FirebaseFirestoreSwift
 
 final class ArticleRepository : ObservableObject {
     
-    //Create a singleton instance of article repository
-    static let shared: ArticleRepository = {
-        let instance = ArticleRepository()
-        return instance
-    }()
-    
     //MARK: - Properties
     private let repository: Repository
     
@@ -29,14 +23,16 @@ final class ArticleRepository : ObservableObject {
     //MARK: - CRUD Functions
     
     // add a bookmark article in DB
-    func add(_ article: Article, userID: String) {
+    func add(_ article: Article, userID: String, callback: @escaping (Bool) -> Void) {
             var newArticle = article
             newArticle.userId = userID
         self.repository.addDocument(document: newArticle, userID: userID,callback: { success in
             if success {
                 print("Article add in db")
+                callback(true)
             } else {
                 print("No article inserted in db")
+                callback(false)
             }
         })
     }

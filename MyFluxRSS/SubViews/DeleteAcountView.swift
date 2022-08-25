@@ -38,13 +38,14 @@ struct DeleteAcountView: View {
             Button("Valider") {
                 parametersViewModel.reauthenticate(email: parametersViewModel.email, password: parametersViewModel.actualPassword, callback: { result in
                     if result {
-                        parametersViewModel.deleteAcount()
-                        self.appState.moveToAuth = true
+                        parametersViewModel.deleteAcount(callback: { success in
+                            self.appState.moveToAuth = success
+                        })
                     } else {
                         self.showingAlert = true
                     }
                 })
-            }.alert(AuthService.shared.deleteAccountError, isPresented: $showingAlert) {
+            }.alert(self.parametersViewModel.authService.deleteAccountError, isPresented: $showingAlert) {
                 Button("OK", role: .cancel) { }
             }.padding()
                 .frame(width: 150, height: 50, alignment: .center)

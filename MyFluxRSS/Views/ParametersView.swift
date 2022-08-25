@@ -47,7 +47,7 @@ struct ParametersView: View {
                 
                 Section(header: Text("Flux")) {
                     TextField("Saisir un nouveau flux", text: $parametersViewModel.urlString, onCommit: {
-                        parametersViewModel.addNewFlux()
+                        parametersViewModel.addNewFlux(userID: InternalUser.shared.userID)
                         parametersViewModel.urlString = ""
                     }).keyboardType(.URL)
                         .disableAutocorrection(true)
@@ -128,14 +128,15 @@ struct ParametersView: View {
                 Button("Valider") {
                     parametersViewModel.reauthenticate(email:parametersViewModel.email, password: parametersViewModel.actualPassword, callback: { result in
                         if result {
-                            parametersViewModel.changePassword(password: parametersViewModel.password)
                             self.showingPopover = false
-                            self.showingAlert = true
+                            parametersViewModel.changePassword(password: parametersViewModel.password, callback: { success in
+                                self.showingAlert = success
+                            })
                         } else {
                             self.showingAlert = true
                         }
                     })
-                }.alert(AuthService.shared.changePasswordMessage, isPresented: $showingAlert) {
+                }.alert(self.parametersViewModel.authService.changePasswordMessage, isPresented: $showingAlert) {
                     Button("OK", role: .cancel) { }
                 }
                 .frame(width: 150, height: 50, alignment: .center)
