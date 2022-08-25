@@ -70,13 +70,6 @@ final class ViewModelsTests: XCTestCase {
         })
     }
     
-    func testRefreshArticleFeedMethodWhenPassAnArticleThenShoudlReturnSuccess() {
-        let sut = NewsFeedViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
-        sut.refreshArticleFeed(userId: "NyeVduglGkQAgldAgG5durdJAer2", callback: { success in
-            XCTAssertTrue(success)
-        })
-    }
-    
     func testRefreshArticleFeedMethodWhenPassIncorrectArticleThenShoudlReturnError() {
         let sut = NewsFeedViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
         sut.refreshArticleFeed(userId: "NyeVduglGkQAgldAgG5durdJAer2", callback: { success in
@@ -109,7 +102,7 @@ final class ViewModelsTests: XCTestCase {
         XCTAssertFalse(sut.myFlux.isEmpty)
     }
     
-    func testGetNewFluxMethodWhenPassInorrectDataThenShouldReturnError() {
+    func testGetFluxMethodWhenPassInorrectDataThenShouldReturnError() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false)), authService: AuthService(auth: FakeAuth(false, error: .error)))
         sut.myFlux.removeAll()
         sut.getFlux(userID: "NyeVduglGkQAgldAgG5durdJAer2")
