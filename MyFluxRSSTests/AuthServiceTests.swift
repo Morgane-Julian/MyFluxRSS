@@ -122,14 +122,14 @@ final class AuthServiceTests: XCTestCase {
     func testDeleteAccountMethod_WhenTheUserWantDeleteAccount_ThenAccountIsDeleted() {
         let sut: AuthService = AuthService(auth: FakeAuth(true, error: .noError))
         sut.deleteAcount(callback: { success in
-          XCTAssertTrue(success)
+            XCTAssertTrue(success)
         })
     }
     
     func testDeleteAccountMethod_WhenTheUserWantDeleteAccount_ThenAccountIsNotDeleted() {
         let sut: AuthService = AuthService(auth: FakeAuth(false, error: .error))
         sut.deleteAcount(callback: { success in
-          XCTAssertFalse(success)
+            XCTAssertFalse(success)
         })
     }
     
