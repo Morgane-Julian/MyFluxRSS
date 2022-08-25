@@ -62,8 +62,6 @@ struct NewsFeedView: View {
                                 scrollView.scrollTo(0)
                             }) { Label("", systemImage: "arrow.triangle.2.circlepath")
                                     .foregroundColor(Color.purple)
-                            }.alert("Une erreur s'est produite lors du chargement des articles, vérifiez votre connexion internet", isPresented: $isShowingAlert) {
-                                Button("OK", role: .cancel) { }
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {

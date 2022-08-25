@@ -20,12 +20,14 @@ class Model {
     //MARK: - Functions
     //Get bookmark articles from DB and parse articles from these bookmars into Articles
     func parseArticleFromDatabaseFlux(userId: String, callback: @escaping ([Article]) -> Void) {
+        self.articles.removeAll()
         self.fluxRepository.get(userId: userId) { flux in
             for strings in flux {
                 guard let url = URL(string: strings.flux) else { return }
                 let articleParsed = ArticleParser.parseArticles(url: url)
-                callback(articleParsed)
+                self.articles.append(contentsOf: articleParsed)
             }
+            callback(self.articles)
         }
     }
 }

@@ -185,12 +185,12 @@
 		9197685027D4AD3700F2F679 /* MyFluxRSSTests */ = {
 			isa = PBXGroup;
 			children = (
-				91CC429328B79904005A39F3 /* Helpers */,
 				91FFD9D028A6398A002D6BF9 /* AuthServiceTests.swift */,
 				91FA6A6A28AFA538003D2D4B /* FirebaseArticleRepositoryTests.swift */,
 				91589FBC28B28A8E003D6E26 /* FirebaseFluxRepositoryTests.swift */,
 				91FA6A7728AFE76E003D2D4B /* ModelTests.swift */,
 				91CC429428B79923005A39F3 /* ViewModelsTests.swift */,
+				91CC429328B79904005A39F3 /* Helpers */,
 			);
 			path = MyFluxRSSTests;
 			sourceTree = "<group>";
