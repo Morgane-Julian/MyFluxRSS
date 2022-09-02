@@ -13,6 +13,8 @@ class Model {
     let fluxRepository: FluxRepository
     var articles = [Article]()
     
+    //MARK: - Init
+    
     init(fluxRepository: FluxRepository = FluxRepository(repository: RepositoryFirebase(path: "flux"))) {
         self.fluxRepository = fluxRepository
     }

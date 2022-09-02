@@ -17,14 +17,20 @@ protocol Repository {
 
 class RepositoryFirebase: Repository {
 
+    //MARK: - Properties
+    
     var path: String
+    var store = Firestore.firestore()
+    
+    //MARK: Init
     
     init(path: String) {
         self.path = path
     }
     
-    var store = Firestore.firestore()
+    //MARK: - Functions
     
+    //Add a document in DB
     func addDocument<T: Codable>(document: T, userID: String, callback: @escaping (Bool) -> Void) {
         do {
             try _ = store.collection(self.path).addDocument(from: document)
@@ -33,6 +39,7 @@ class RepositoryFirebase: Repository {
         }
     }
     
+    //Get documents from DB
     func getDocument<T: Codable>(userID: String, callback: @escaping ([T]) -> Void) {
         store.collection(self.path)
             .whereField("userId", isEqualTo: userID)
@@ -45,6 +52,7 @@ class RepositoryFirebase: Repository {
             }
     }
     
+    //Delete a document in DB
     func deleteDocument(documentID: String, callback: @escaping (Bool) -> Void) {
         store.collection(self.path).document(documentID).delete { error in
             if let error = error {

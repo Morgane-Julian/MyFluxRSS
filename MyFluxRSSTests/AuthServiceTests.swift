@@ -107,30 +107,42 @@ final class AuthServiceTests: XCTestCase {
     
     func testChangePasswordMethod_WhenTheUserWantToChangePassword_ThenTheUserShouldSaveNewPassword() {
         let sut: AuthService = AuthService(auth: FakeAuth(true, error: .noError))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.changePassword(password: "NewPassword", callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testChangePasswordMethod_WhenTheUserWantToChangePassword_ThenTheUserShouldNotSaveNewPassword() {
         let sut: AuthService = AuthService(auth: FakeAuth(false, error: .error))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.changePassword(password: "NewPassword", callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testDeleteAccountMethod_WhenTheUserWantDeleteAccount_ThenAccountIsDeleted() {
         let sut: AuthService = AuthService(auth: FakeAuth(true, error: .noError))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.deleteAcount(callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testDeleteAccountMethod_WhenTheUserWantDeleteAccount_ThenAccountIsNotDeleted() {
         let sut: AuthService = AuthService(auth: FakeAuth(false, error: .error))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.deleteAcount(callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testIsUserConnectedMethod_WhenTheUserIsLog_ThenShouldReturnSuccess() {

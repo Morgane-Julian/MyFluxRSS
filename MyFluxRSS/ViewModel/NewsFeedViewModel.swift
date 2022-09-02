@@ -34,9 +34,9 @@ class NewsFeedViewModel: ObservableObject {
     //Refresh article feed
     func refreshArticleFeed(userId: String, callback: @escaping (Bool) -> Void) {
         self.model.parseArticleFromDatabaseFlux(userId: userId, callback: { articles in
-                    self.articles = articles
-                    self.articles.sort(by: { $0.date.compare($1.date) == .orderedDescending})
-                    callback(true)
+            self.articles = articles
+            self.articles.sort(by: { $0.date.compare($1.date) == .orderedDescending})
+            callback(true)
         })
         callback(false)
     }

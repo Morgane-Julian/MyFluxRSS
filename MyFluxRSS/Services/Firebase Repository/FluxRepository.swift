@@ -36,14 +36,12 @@ class FluxRepository : ObservableObject {
     }
     
     // Remove a flux in DB
-    func remove(_ flux: Flux) {
-        guard let fluxId = flux.id else { return }
+    func remove(_ flux: Flux) -> Bool {
+        var successDeleteFlux = false
+        guard let fluxId = flux.id else { return false }
         self.repository.deleteDocument(documentID: fluxId , callback: { success in
-            if success {
-                print("successfully remove flux")
-            } else {
-                print("Flux can't be delete")
-            }
+            successDeleteFlux = success
         })
+        return successDeleteFlux
     }
 }

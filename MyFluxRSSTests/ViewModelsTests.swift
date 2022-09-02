@@ -17,18 +17,24 @@ final class ViewModelsTests: XCTestCase {
     //MARK: - AuthViewModelTests
     func testConnectUserWhenUserEnterCorrectEmailAndPasswordThenShouldReturnSuccess() {
         let sut = AuthViewModel(authService: AuthService(auth: FakeAuth(true, error: .noError)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.userMail = "morgane.julian@gmail.com"
         sut.password = "password"
         sut.connect(callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testConnectUserWhenUserHaveNoEmailAndPasswordThenShouldReturnError() {
         let sut = AuthViewModel(authService: AuthService(auth: FakeAuth(false, error: .error)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.connect(callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testIsUserAlreadyLogMethodWhenPassAUserIDThenShouldReturnSuccess() {
@@ -58,23 +64,32 @@ final class ViewModelsTests: XCTestCase {
     //MARK: - NewsFeedViewModelTests
     func testAddMethodWhenPassCorrectUserIDThenShoudlReturnSuccess() {
         let sut = NewsFeedViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.add(article, userID: "NyeVduglGkQAgldAgG5durdJAer2", callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testAddMethodWhenPassIncorrectUserIDThenShoudlReturnError() {
         let sut = NewsFeedViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: false)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.add(article, userID: "BadUID", callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testRefreshArticleFeedMethodWhenPassIncorrectArticleThenShoudlReturnError() {
         let sut = NewsFeedViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.refreshArticleFeed(userId: "NyeVduglGkQAgldAgG5durdJAer2", callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     //MARK: - ParametersViewModelTests
@@ -119,58 +134,82 @@ final class ViewModelsTests: XCTestCase {
     
     func testReauthenticateMethodWhenPassCorrectDataThenShouldReturnSucces() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true)), authService: AuthService(auth: FakeAuth(true, error: .noError)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.reauthenticate(email: "correctEmail", password: "correctPassword", callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testReauthenticateMethodWhenPassInorrectDataThenShouldReturnError() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false)), authService: AuthService(auth: FakeAuth(false, error: .error)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.reauthenticate(email: "incorrectEmail", password: "incorrectPassword", callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testDisconnectMethodWhenPassCorrectDataThenShouldReturnSucces() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true)), authService: AuthService(auth: FakeAuth(true, error: .noError)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.disconnect(callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testDisconnectMethodWhenPassInorrectDataThenShouldReturnError() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false)), authService: AuthService(auth: FakeAuth(false, error: .error)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.disconnect(callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testChangePasswordMethodWhenPassCorrectDataThenShouldReturnSucces() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true)), authService: AuthService(auth: FakeAuth(true, error: .noError)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.changePassword(password: "correctPassword", callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testChangePasswordMethodWhenPassInorrectDataThenShouldReturnError() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false)), authService: AuthService(auth: FakeAuth(false, error: .error)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.changePassword(password: "correctPassword", callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testDeleteAccountMethodWhenPassCorrectDataThenShouldReturnSucces() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true)), authService: AuthService(auth: FakeAuth(true, error: .noError)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.deleteAcount(callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testDeleteAccountMethodWhenPassInorrectDataThenShouldReturnError() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false)), authService: AuthService(auth: FakeAuth(false, error: .error)))
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.deleteAcount(callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     //MARK: - BookmarkViewModelTests

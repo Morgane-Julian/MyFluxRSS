@@ -26,9 +26,11 @@ final class AuthFirebase: AuthType {
         return Auth.auth().currentUser?.uid
     }
     
+    //MARK: - Firebase Functions
+    //Create a new user in firebase
     func createUser(userMail: String, userPassword: String, callback: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: userMail, password: userPassword) { authResult, error in
-             DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 if error != nil {
                     print(error?.localizedDescription ?? "Nos serveurs sont actuellement en maintenance merci de réassayer plus tard.")
                     callback(false)
@@ -40,6 +42,7 @@ final class AuthFirebase: AuthType {
         }
     }
     
+    //connect an existing user to firebase
     func signIn(email: String, password: String, callback: @escaping (Bool, Error?) -> Void) {
         if Auth.auth().currentUser?.email != email {
             do { try Auth.auth().signOut() }
@@ -57,6 +60,7 @@ final class AuthFirebase: AuthType {
         }
     }
     
+    //signout an existing user
     func signOut(callback: @escaping (Bool) -> Void) {
         do {
             try Auth.auth().signOut()
@@ -68,6 +72,7 @@ final class AuthFirebase: AuthType {
         }
     }
     
+    //test if a user is already log
     func isUserConnected() {
         Auth.auth().addStateDidChangeListener() { _, user in
             if let user = user {
@@ -78,6 +83,7 @@ final class AuthFirebase: AuthType {
         }
     }
     
+    // reauthentication of user before managing profile
     func reauthenticate(email: String, password: String, callback: @escaping (Bool) -> Void) {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         if let currentUser = Auth.auth().currentUser {
@@ -91,12 +97,14 @@ final class AuthFirebase: AuthType {
         }
     }
     
+    //change the password for the current user
     func changePassword(password: String, callback: @escaping (Bool, Error?) -> Void) {
         Auth.auth().currentUser?.updatePassword(to: password) { error in
             guard error != nil else { return }
         }
     }
-
+    
+    //delete account of the current user
     func deleteAccount(callback: @escaping (Bool, Error?) -> Void) {
         let user = Auth.auth().currentUser
         user?.delete { error in

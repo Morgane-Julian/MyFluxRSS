@@ -32,7 +32,6 @@
 		9197684827D4AD3700F2F679 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197684727D4AD3700F2F679 /* Preview Assets.xcassets */; };
 		9197687027D4AEA400F2F679 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197686F27D4AEA400F2F679 /* AuthViewModel.swift */; };
 		9197687427D4BAC400F2F679 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197687327D4BAC400F2F679 /* Colors.xcassets */; };
-		9197687627D4BBD100F2F679 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687527D4BBD100F2F679 /* ColorUtils.swift */; };
 		9197687A27D4BF2100F2F679 /* NewsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687927D4BF2100F2F679 /* NewsFeedViewModel.swift */; };
 		9197687C27D4C02500F2F679 /* NewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687B27D4C02500F2F679 /* NewsFeedView.swift */; };
 		9197687E27D4FCEC00F2F679 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197687D27D4FCEC00F2F679 /* ArticleView.swift */; };
@@ -93,7 +92,6 @@
 		9197684D27D4AD3700F2F679 /* MyFluxRSSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFluxRSSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9197686F27D4AEA400F2F679 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		9197687327D4BAC400F2F679 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		9197687527D4BBD100F2F679 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		9197687927D4BF2100F2F679 /* NewsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewModel.swift; sourceTree = "<group>"; };
 		9197687B27D4C02500F2F679 /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
 		9197687D27D4FCEC00F2F679 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 				91A3C4FF282F13DB00EC4A07 /* GoogleService-Info.plist */,
 				9197684427D4AD3700F2F679 /* Assets.xcassets */,
 				9197687327D4BAC400F2F679 /* Colors.xcassets */,
-				9197687527D4BBD100F2F679 /* ColorUtils.swift */,
 				91ACC4E928002DA60028E9CB /* AppState.swift */,
 				91B798012853D3C400D8F15F /* StringUtils.swift */,
 				91CE8F1F285C75EA006072AE /* ViewUtils.swift */,
@@ -263,9 +260,9 @@
 		91DEAA882812CCDE003E0BC9 /* Firebase Repository */ = {
 			isa = PBXGroup;
 			children = (
+				91FFD9D228A64CF4002D6BF9 /* RepositoryFirebase.swift */,
 				91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */,
 				9183B666281B3BAE00D732B6 /* FluxRepository.swift */,
-				91FFD9D228A64CF4002D6BF9 /* RepositoryFirebase.swift */,
 			);
 			path = "Firebase Repository";
 			sourceTree = "<group>";
@@ -418,7 +415,6 @@
 				91CE8F22285C77CD006072AE /* Constants.swift in Sources */,
 				91FFD9CF28A43473002D6BF9 /* AuthFirebase.swift in Sources */,
 				910FFB3927E479C20059D045 /* RegisterView.swift in Sources */,
-				9197687627D4BBD100F2F679 /* ColorUtils.swift in Sources */,
 				910FFB3127E328220059D045 /* ParametersViewModel.swift in Sources */,
 				910DB90627F60FEE00C816A9 /* ArticleParser.swift in Sources */,
 				9197684327D4AD3600F2F679 /* AuthView.swift in Sources */,

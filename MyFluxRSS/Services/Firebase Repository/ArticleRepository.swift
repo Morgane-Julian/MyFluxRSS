@@ -24,8 +24,8 @@ final class ArticleRepository : ObservableObject {
     
     // add a bookmark article in DB
     func add(_ article: Article, userID: String, callback: @escaping (Bool) -> Void) {
-            var newArticle = article
-            newArticle.userId = userID
+        var newArticle = article
+        newArticle.userId = userID
         self.repository.addDocument(document: newArticle, userID: userID,callback: { success in
             if success {
                 print("Article add in db")
@@ -37,8 +37,7 @@ final class ArticleRepository : ObservableObject {
         })
     }
     
-    // get the bookmark articles from DB
-    
+    // get the bookmarks articles from DB
     func get(userID: String, callback: @escaping ([Article]) -> Void) {
         self.repository.getDocument(userID: userID, callback: callback)
     }
@@ -48,7 +47,7 @@ final class ArticleRepository : ObservableObject {
         var successDeleteArticle = false
         guard let articleId = article.id else { return false }
         self.repository.deleteDocument(documentID: articleId, callback: { success in
-            successDeleteArticle = true
+            successDeleteArticle = success
         })
         return successDeleteArticle
     }

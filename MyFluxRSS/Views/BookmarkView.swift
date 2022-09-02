@@ -15,7 +15,7 @@ struct BookmarkView: View {
     
     var body: some View {
         
-        //MARK: - DISPLAY BOOKMARKS 
+        //MARK: - DISPLAY BOOKMARKS
         
         List {
             ForEach(bookmarkViewModel.bookmarks) { item in

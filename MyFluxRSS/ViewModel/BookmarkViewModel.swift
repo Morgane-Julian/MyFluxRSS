@@ -10,10 +10,12 @@ import Foundation
 class BookmarkViewModel: ObservableObject, Identifiable {
     
     //MARK: - Properties
+    
     @Published var bookmarks = [Article]()
     let articleRepository: ArticleRepository
     
     //MARK: Init
+    
     init(articleRepository: ArticleRepository = ArticleRepository(repository: RepositoryFirebase(path: "articles"))) {
         self.articleRepository = articleRepository
     }

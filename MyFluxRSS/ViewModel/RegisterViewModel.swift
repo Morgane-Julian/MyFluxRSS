@@ -10,20 +10,19 @@ import Firebase
 
 class RegisterViewModel: ObservableObject {
     
-    let authService: AuthService
+    //MARK: - Properties
     
+    let authService: AuthService
+    @Published var user = InternalUser.shared
+    @Published var isSignedIn = false
+    
+    //MARK: - Init
     init(authService: AuthService = AuthService(auth: AuthFirebase())) {
         self.authService = authService
     }
     
-    //MARK: - Properties
-    
-    @Published var user = InternalUser.shared
-    @Published var isSignedIn = false
-    
     
     //MARK: - Register function
-    
     //register a new account
     func inscription() {
         self.authService.inscription(userMail: self.user.email, userPassword: self.user.password, callback: { success in

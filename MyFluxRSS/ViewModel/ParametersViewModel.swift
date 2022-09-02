@@ -64,9 +64,12 @@ class ParametersViewModel: ObservableObject {
     func delete(at offsets: IndexSet) {
         let idToDelete = offsets.map { self.myFlux[$0].id }
         _ = idToDelete.compactMap { [weak self] id in
-            self?.fluxRepository.remove(myFlux.first(where: {$0.id == id})!)
-            guard let intID = Int(id!) else { return }
-            self?.myFlux.remove(at: intID)
+            if let fluxToDelete = myFlux.first(where: {$0.id == id}) {
+                if fluxRepository.remove(fluxToDelete) {
+                    guard let intID = Int(id!) else { return }
+                    self?.myFlux.remove(at: intID)
+                }
+            }
         }
     }
     
@@ -99,7 +102,7 @@ class ParametersViewModel: ObservableObject {
     //Change the password for the current user
     func changePassword(password: String, callback: @escaping (Bool) -> Void) {
         self.authService.changePassword(password: password, callback: { success in
-                callback(success)
+            callback(success)
         })
     }
     

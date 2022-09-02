@@ -48,8 +48,8 @@ struct RegisterView: View {
                 }
             }
             .alert("Les mots de passe ne sont pas identiques", isPresented: $showingAlert) {
-                        Button("OK", role: .cancel) { }
-                    }
+                Button("OK", role: .cancel) { }
+            }
             .padding(20)
             .frame(width: 150, height: 50, alignment: .center)
             .background(LinearGradient(gradient: Gradient(colors: [Color("ButtonLightGradient").opacity(0.5), Color("ButtonDarkGradient").opacity(0.5)]), startPoint: .top, endPoint: .bottom))

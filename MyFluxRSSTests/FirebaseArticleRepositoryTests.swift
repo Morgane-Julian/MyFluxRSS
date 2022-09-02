@@ -11,7 +11,7 @@ import XCTest
 final class FirebaseArticleRepositoryTests: XCTestCase {
     
     // MARK: - Article Repository Tests
-    let article = Article()
+    var article = Article()
     
     func testGetArticleMethod_WhenTheUIDIsCorrect_ThenShouldGetTheDocument() {
         let sut : ArticleRepository = ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true))
@@ -38,21 +38,28 @@ final class FirebaseArticleRepositoryTests: XCTestCase {
     func testAddArticleMethod_WhenTheUIDIsCorrect_ThenShouldAddTheDocumentInDB() {
         let sut : ArticleRepository = ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true))
         let uid: String = "NyeVduglGkQAgldAgG5durdJAer2"
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.add(article, userID: uid, callback: { success in
             XCTAssertTrue(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testAddArticleMethod_WhenTheUIDIsIncorrect_ThenShouldReturnAnError() {
         let sut : ArticleRepository = ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: false))
         let uid: String = "Incorrect UID"
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
         sut.add(article, userID: uid, callback: { success in
             XCTAssertFalse(success)
+            expectation.fulfill()
         })
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testDeleteArticleMethod_WhenTheDocumentIDIsCorrect_ThenShouldDeleteDocumentInDB() {
         let sut : ArticleRepository = ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true))
+        article.id = "fjdlJJKN57gbjk"
         if article.id != nil {
             let success = sut.remove(article)
             XCTAssertTrue(success)
@@ -61,7 +68,7 @@ final class FirebaseArticleRepositoryTests: XCTestCase {
     
     func testDeleteArticleMethod_WhenTheDocumentIDIsIncorrect_ThenShoulReturnAnError() {
         let sut : ArticleRepository = ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: false))
-        if article.id != nil {
+        if article.id == nil {
             let success = sut.remove(article)
             XCTAssertFalse(success)
         }

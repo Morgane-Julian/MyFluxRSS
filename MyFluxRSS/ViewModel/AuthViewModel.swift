@@ -9,22 +9,20 @@ import Foundation
 
 class AuthViewModel: ObservableObject {
     
-    let authService: AuthService
-    
-    init(authService: AuthService = AuthService(auth: AuthFirebase())) {
-        self.authService = authService
-    }
-    
     //MARK: - Properties
-    
+    let authService: AuthService
     var isSignedIn : Bool {
         return self.authService.auth.currentUID != nil
     }
     @Published var userMail: String = ""
     @Published var password: String = ""
     
-    //MARK: - Functions
+    //MARK: - Init
+    init(authService: AuthService = AuthService(auth: AuthFirebase())) {
+        self.authService = authService
+    }
     
+    //MARK: - Functions
     // Connect the user
     func connect(callback: @escaping (Bool) -> Void) {
         self.authService.connect(userMail: self.userMail, password: self.password, callback: { success in

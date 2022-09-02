@@ -54,12 +54,19 @@ final class FirebaseFluxRepositoryTests: XCTestCase {
     
     func testDeleteFluxMethod_WhenTheDocumentIDIsCorrect_ThenShouldDeleteDocumentInDB() {
         let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true))
-        sut.remove(flux)
+        flux.id = "fjdlJJKN57gbjk"
+        if flux.id != nil {
+            let success = sut.remove(flux)
+            XCTAssertTrue(success)
+        }
     }
     
     func testDeleteFluxMethod_WhenTheDocumentIDIsIncorrect_ThenShoulReturnAnError() {
         let sut : FluxRepository = FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false))
-        sut.remove(flux)
+        if flux.id == nil {
+            let success = sut.remove(flux)
+            XCTAssertFalse(success)
+        }
     }
 }
 
