@@ -43,7 +43,6 @@
 		91CE8F20285C75EA006072AE /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE8F1F285C75EA006072AE /* ViewUtils.swift */; };
 		91CE8F22285C77CD006072AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE8F21285C77CD006072AE /* Constants.swift */; };
 		91CE8F24285C77F6006072AE /* UserDefaultsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE8F23285C77F6006072AE /* UserDefaultsUtils.swift */; };
-		91CEFAE328B7A39500ACBC1A /* FakeUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CEFAE228B7A39500ACBC1A /* FakeUserTest.swift */; };
 		91CEFAE528B7A59900ACBC1A /* FakeArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CEFAE428B7A59900ACBC1A /* FakeArticleRepository.swift */; };
 		91CEFAE728B7A5D900ACBC1A /* FakeFluxRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CEFAE628B7A5D900ACBC1A /* FakeFluxRepository.swift */; };
 		91DEAA832812CCC8003E0BC9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 91DEAA822812CCC8003E0BC9 /* FirebaseFirestore */; };
@@ -103,7 +102,6 @@
 		91CE8F1F285C75EA006072AE /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		91CE8F21285C77CD006072AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		91CE8F23285C77F6006072AE /* UserDefaultsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtils.swift; sourceTree = "<group>"; };
-		91CEFAE228B7A39500ACBC1A /* FakeUserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserTest.swift; sourceTree = "<group>"; };
 		91CEFAE428B7A59900ACBC1A /* FakeArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeArticleRepository.swift; sourceTree = "<group>"; };
 		91CEFAE628B7A5D900ACBC1A /* FakeFluxRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFluxRepository.swift; sourceTree = "<group>"; };
 		91DEAA892812CCF5003E0BC9 /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				91CC429128B7989D005A39F3 /* FakeAuth.swift */,
-				91CEFAE228B7A39500ACBC1A /* FakeUserTest.swift */,
 				91CEFAE428B7A59900ACBC1A /* FakeArticleRepository.swift */,
 				91CEFAE628B7A5D900ACBC1A /* FakeFluxRepository.swift */,
 			);
@@ -438,7 +435,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91CEFAE328B7A39500ACBC1A /* FakeUserTest.swift in Sources */,
 				91CEFAE528B7A59900ACBC1A /* FakeArticleRepository.swift in Sources */,
 				91FA6A6B28AFA538003D2D4B /* FirebaseArticleRepositoryTests.swift in Sources */,
 				91CC429528B79923005A39F3 /* ViewModelsTests.swift in Sources */,

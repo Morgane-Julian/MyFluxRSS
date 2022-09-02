@@ -53,12 +53,14 @@ final class ViewModelsTests: XCTestCase {
     
     func testInscriptionMethodWhenPassUserInformationThenShouldReturnSuccess() {
         let sut = RegisterViewModel(authService: AuthService(auth: FakeAuth(true, error: .noError)))
-        //        sut.user = Usertest()
         sut.inscription()
+        XCTAssertTrue(sut.isSignedIn)
     }
     
     func testInscriptionMethodWhenPassIncorrectUserInformationThenShouldReturnError() {
-        
+        let sut = RegisterViewModel(authService: AuthService(auth: FakeAuth(false, error: .error)))
+        sut.inscription()
+        XCTAssertFalse(sut.isSignedIn)
     }
     
     //MARK: - NewsFeedViewModelTests
@@ -92,23 +94,47 @@ final class ViewModelsTests: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
     
+    //MARK: - BookmarkViewModelTests
+    func testGetFavArticleMethod_WhenPassCorrectData_ThenShouldReturnSuccess() {
+        let sut = BookmarkViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
+        sut.getFavArticle()
+    }
+    
+    func testGetFavArticleMethod_WhenPassIncorrectData_ThenShouldReturnError() {
+        let sut = BookmarkViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: false)))
+        sut.getFavArticle()
+        XCTAssertTrue(sut.bookmarks.isEmpty)
+    }
+    
+    func testRemoveArticleMethod_WhenPassCorrectData_ThenShouldReturnSuccess() {
+        let sut = BookmarkViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
+        self.article.id = "0"
+        sut.bookmarks.append(self.article)
+        sut.removeArticle(indexSet: [0])
+        XCTAssertTrue(sut.bookmarks.isEmpty)
+    }
+    
     //MARK: - ParametersViewModelTests
     func testAddNewFluxMethodWhenPassCorrectDataThenShouldReturnSucces() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true)), authService: AuthService(auth: FakeAuth(true, error: .noError)))
         sut.urlString = "https://www.apple.com/articles/rss"
         sut.addNewFlux(userID: "NyeVduglGkQAgldAgG5durdJAer2")
+        XCTAssertTrue(sut.myFlux.contains(where: {$0.flux == "https://www.apple.com/articles/rss"}))
     }
     
-    func testAddNewFluxMethodWhenPassFluxAlreadyInDBDataThenShouldReturnError() {
+    func testAddNewFluxMethodWhenPassFluxAlreadyInDBThenShouldReturnError() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: true)), authService: AuthService(auth: FakeAuth(false, error: .error)))
+        sut.myFlux.append(Flux())
         sut.urlString = "https://www.hackingwithswift.com/articles/rss"
         sut.addNewFlux(userID: "NyeVduglGkQAgldAgG5durdJAer2")
+        XCTAssertTrue(sut.myFlux.count == 1)
     }
     
     func testAddNewFluxMethodWhenPassInorrectDataThenShouldReturnError() {
         let sut = ParametersViewModel(fluxRepository: FluxRepository(repository: FakeFluxRepository(path: "flux", isSuccess: false)), authService: AuthService(auth: FakeAuth(false, error: .error)))
         sut.urlString = " "
         sut.addNewFlux(userID: "NyeVduglGkQAgldAgG5durdJAer2")
+        XCTAssertTrue(sut.myFlux.isEmpty)
     }
     
     func testGetFluxMethodWhenPassCorrectDataThenShouldReturnSucces() {
@@ -210,24 +236,5 @@ final class ViewModelsTests: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: 0.01)
-    }
-    
-    //MARK: - BookmarkViewModelTests
-    func testGetFavArticleMethod_WhenPassCorrectData_ThenShouldReturnSuccess() {
-        let sut = BookmarkViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
-        sut.getFavArticle()
-    }
-    
-    func testGetFavArticleMethod_WhenPassIncorrectData_ThenShouldReturnError() {
-        let sut = BookmarkViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: false)))
-        sut.getFavArticle()
-    }
-    
-    func testRemoveArticleMethod_WhenPassCorrectData_ThenShouldReturnSuccess() {
-        let sut = BookmarkViewModel(articleRepository: ArticleRepository(repository: FakeArticleRepository(path: "articles", isSuccess: true)))
-        self.article.id = "0"
-        sut.bookmarks.append(self.article)
-        sut.removeArticle(indexSet: [0])
-        XCTAssertTrue(sut.bookmarks.isEmpty)
     }
 }
